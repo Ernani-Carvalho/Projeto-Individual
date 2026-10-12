@@ -20,22 +20,6 @@ O site junta tudo isso em um lugar só. Depois de criar uma conta, o jogador cad
 | web-data-viz (API) | Servidor do site, login, cadastro e dados da dashboard |
 | dat-acqu-ino (API) | Captura de dados para o banco |
 
-## Como rodar
-
-Antes de começar, é preciso ter o Node.js e o MySQL instalados.
-
-```
-git clone https://github.com/ernani-carvalho/projeto-individual.git
-cd projeto-individual/web-data-viz
-npm install
-```
-
-Depois:
-
-1. Execute o script `src/database/script-tabelas.sql` no MySQL Workbench.
-2. Coloque o seu usuário e senha do MySQL no arquivo `.env.dev`.
-3. Rode `npm start` e abra no navegador o endereço que aparecer no terminal.
-
 ## Organização
 
 ```
@@ -49,4 +33,4 @@ As regras de organização e de código do projeto estão no [AGENTS.md](AGENTS.
 
 ## Autor
 
-Ernani P. Carvalho, [ernani-carvalho](https://github.com/ernani-carvalho)
+Ernani P. Carvalho, [@ernani-carvalho](https://github.com/ernani-carvalho)

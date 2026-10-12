@@ -1,8 +1,21 @@
-# Jogos Indie
+<h1 align="center">Jogos Indie</h1>
 
-Site para quem gosta de jogos indie acompanhar o próprio progresso e conversar sobre os jogos com outros fãs e com os próprios desenvolvedores.
+<p align="center">
+  Um lugar para fãs de jogos indie acompanharem o próprio progresso e conversarem sobre os jogos com outros fãs e com quem desenvolve.
+</p>
 
-Projeto individual de Pesquisa e Inovação, 1º semestre de Análise e Desenvolvimento de Sistemas.
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+</p>
+
+<p align="center">
+  Projeto individual de Pesquisa e Inovação · 1º semestre de Análise e Desenvolvimento de Sistemas
+</p>
+
+---
 
 ## A ideia
 
@@ -20,17 +33,8 @@ O site junta tudo isso em um lugar só. Depois de criar uma conta, o jogador cad
 | web-data-viz (API) | Servidor do site, login, cadastro e dados da dashboard |
 | dat-acqu-ino (API) | Captura de dados para o banco |
 
-## Organização
+---
 
-```
-web-data-viz/
-  public/   páginas, CSS, JavaScript e imagens
-  src/      rotas, controllers, models e banco de dados
-dat-acqu-ino/
-```
-
-As regras de organização e de código do projeto estão no [AGENTS.md](AGENTS.md).
-
-## Autor
-
-Ernani P. Carvalho, [@ernani-carvalho](https://github.com/ernani-carvalho)
+<p align="center">
+  Feito por Ernani P. Carvalho · <a href="https://github.com/ernani-carvalho">@ernani-carvalho</a>
+</p>

@@ -1,60 +1,52 @@
-# Projeto Individual: Jogos Indie
+# Jogos Indie
 
-Projeto individual da matéria de Pesquisa e Inovação (PI), do 1º semestre de Análise e Desenvolvimento de Sistemas.
+Site para quem gosta de jogos indie acompanhar o próprio progresso e conversar sobre os jogos com outros fãs e com os próprios desenvolvedores.
 
-## Sobre o projeto
+Projeto individual de Pesquisa e Inovação, 1º semestre de Análise e Desenvolvimento de Sistemas.
 
-Um site para fãs de jogos indie registrarem o progresso nos jogos que jogam e conversarem sobre eles. Desenvolvedores indie também podem participar, interagindo com quem joga e comenta sobre os jogos deles.
+## A ideia
 
-A ideia surgiu porque quem joga indie costuma jogar muitos jogos de estúdios pequenos e não tem um lugar só para guardar o que já jogou e trocar experiências.
+Quem joga indie normalmente passa por muitos jogos de estúdios pequenos, e é fácil perder a conta de onde parou em cada um. As opiniões e dicas sobre esses jogos também ficam espalhadas pela internet.
 
-## Funcionalidades
-
-- Cadastro e login de usuários
-- Cadastro dos jogos que o usuário joga
-- Registro do progresso em cada jogo
-- Dashboard para acompanhar o progresso
-- Comentários e troca de experiências sobre os jogos
-- Participação de desenvolvedores indie nas conversas
+O site junta tudo isso em um lugar só. Depois de criar uma conta, o jogador cadastra os jogos que está jogando, registra o progresso e acompanha tudo em uma dashboard. Cada jogo tem um espaço para comentários, onde os fãs trocam experiências e os desenvolvedores indie podem responder e interagir com quem joga.
 
 ## Tecnologias
 
-- HTML
-- CSS
-- JavaScript
-- MySQL
-- web-data-viz (API da faculdade)
-- dat-acqu-ino (API da faculdade)
+| Tecnologia | Uso no projeto |
+| --- | --- |
+| HTML e CSS | Estrutura e visual das páginas |
+| JavaScript | Interação das páginas e comunicação com a API |
+| MySQL | Banco de dados |
+| web-data-viz (API) | Servidor do site, login, cadastro e dados da dashboard |
+| dat-acqu-ino (API) | Captura de dados para o banco |
 
-## Como rodar o projeto
+## Como rodar
 
-1. Clone o repositório:
+Antes de começar, é preciso ter o Node.js e o MySQL instalados.
 
 ```
 git clone https://github.com/ernani-carvalho/projeto-individual.git
-```
-
-2. Abra o arquivo `web-data-viz/src/database/script-tabelas.sql` no MySQL Workbench e execute o script.
-
-3. Confira se o usuário e a senha do seu MySQL estão certos no arquivo `.env.dev` da web-data-viz.
-
-4. Entre na pasta da web-data-viz, instale as dependências e inicie o servidor:
-
-```
-cd web-data-viz
+cd projeto-individual/web-data-viz
 npm install
-npm start
 ```
 
-5. Abra no navegador o endereço que aparecer no terminal.
+Depois:
 
-## Estrutura
+1. Execute o script `src/database/script-tabelas.sql` no MySQL Workbench.
+2. Coloque o seu usuário e senha do MySQL no arquivo `.env.dev`.
+3. Rode `npm start` e abra no navegador o endereço que aparecer no terminal.
 
-- `web-data-viz/public`: páginas HTML, CSS, JavaScript e imagens do site
-- `web-data-viz/src`: rotas, controllers, models e conexão com o banco
-- `dat-acqu-ino`: API da faculdade para captura de dados
-- `AGENTS.md`: regras e contexto do projeto para agentes de IA
+## Organização
+
+```
+web-data-viz/
+  public/   páginas, CSS, JavaScript e imagens
+  src/      rotas, controllers, models e banco de dados
+dat-acqu-ino/
+```
+
+As regras de organização e de código do projeto estão no [AGENTS.md](AGENTS.md).
 
 ## Autor
 
-Projeto feito por [ernani-carvalho](https://github.com/ernani-carvalho).
+Ernani P. Carvalho, [ernani-carvalho](https://github.com/ernani-carvalho)

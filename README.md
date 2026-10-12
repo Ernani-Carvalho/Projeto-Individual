@@ -19,9 +19,31 @@
 
 ## A ideia
 
-Quem joga indie normalmente passa por muitos jogos de estúdios pequenos, e é fácil perder a conta de onde parou em cada um. As opiniões e dicas sobre esses jogos também ficam espalhadas pela internet.
+Os jogos indie ganharam muito espaço nos últimos anos. Títulos como Hollow Knight, Celeste, Cuphead e Hades foram feitos por equipes pequenas e conquistaram uma comunidade enorme de fãs. Quem joga esse estilo costuma passar por muitos jogos diferentes, e com isso é fácil perder a conta de quanto tempo já jogou, até onde chegou e quais desafios já superou em cada um.
 
-O site junta tudo isso em um lugar só. Depois de criar uma conta, o jogador cadastra os jogos que está jogando, registra o progresso e acompanha tudo em uma dashboard. Cada jogo tem um espaço para comentários, onde os fãs trocam experiências e os desenvolvedores indie podem responder e interagir com quem joga.
+Além disso, as conversas sobre esses jogos ficam espalhadas em fóruns, vídeos e redes sociais. Não existe um lugar pensado só para essa comunidade, onde o jogador consiga guardar a própria trajetória e, ao mesmo tempo, trocar experiências com outros fãs e com quem desenvolveu o jogo.
+
+O objetivo do site é ser esse lugar.
+
+### Perfil do jogador
+
+Depois de criar uma conta, o jogador cadastra os jogos que joga e vai registrando o seu progresso. Tudo isso aparece no perfil dele:
+
+- o total de horas jogadas somando todos os jogos cadastrados;
+- as horas jogadas em cada jogo;
+- quantos bosses ele já derrotou em cada jogo e quais foram;
+- quantas tentativas ele precisou para vencer cada boss;
+- a dificuldade que ele deu para cada boss.
+
+Por exemplo, um jogador de Hollow Knight pode registrar que derrotou a Hornet na terceira tentativa e achou a luta média, enquanto o Radiance levou quarenta tentativas e foi a mais difícil do jogo.
+
+### Dashboard
+
+Os dados do perfil viram gráficos na dashboard. Assim o jogador consegue ver em quais jogos passou mais tempo, quantos bosses já derrotou e quais lutas deram mais trabalho.
+
+### Comunidade
+
+Cada jogo tem um espaço para comentários, onde os jogadores compartilham experiências, dicas e opiniões. Desenvolvedores indie também podem ter conta no site, acompanhar o que estão falando dos seus jogos e responder diretamente a quem joga.
 
 ## Tecnologias
 

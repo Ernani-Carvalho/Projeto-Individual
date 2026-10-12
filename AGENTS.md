@@ -12,6 +12,7 @@ A ideia do site é juntar isso em um lugar só. Nele o usuário pode:
 
 - se cadastrar e fazer login;
 - cadastrar os jogos que joga e registrar o progresso em cada um;
+- ter um perfil com o total de horas jogadas, as horas de cada jogo, os bosses derrotados em cada jogo, o número de tentativas para vencer cada boss e a dificuldade que ele deu para cada um;
 - acompanhar esse progresso em uma dashboard;
 - compartilhar experiências e comentar sobre os jogos.
 

@@ -29,127 +29,129 @@ O projeto é acadêmico e não vai para produção.
 - CSS: visual das páginas (cores, fontes, layout).
 - JavaScript: interação nas páginas e chamadas para a API usando `fetch`. Também é a linguagem usada dentro das APIs.
 - MySQL: banco de dados onde ficam os usuários, jogos, progresso e comentários.
-- web-data-viz: API da faculdade que serve o site e faz a comunicação entre as páginas e o banco. É nela que ficam o login, o cadastro e os dados da dashboard.
-- dat-acqu-ino: API da faculdade usada para captura de dados e envio para o banco. Faz parte da estrutura pedida no PI e deve ser mantida como foi entregue.
+- web-data-viz: API da faculdade que serve o site e faz a comunicação entre as páginas e o banco. É nela que ficam o login, o cadastro e os dados da dashboard. Roda com Node.js e já vem com as bibliotecas express, mysql2 e dotenv. Os gráficos das dashboards usam o Chart.js, que é carregado direto no HTML.
+- dat-acqu-ino: API da faculdade que lê os dados do sensor do Arduino pela porta USB, mostra esses dados em gráficos e pode gravar as leituras no banco. Faz parte da estrutura pedida no PI e deve ser mantida como foi entregue.
 
-Não use nenhuma tecnologia fora dessa lista.
+Não use nenhuma tecnologia fora dessa lista. O Chart.js pode ser usado nos gráficos porque já faz parte das APIs.
 
 ## Comandos
 
-Clonar o repositório:
+Git:
 
-git clone https://github.com/ernani-carvalho/projeto-individual.git
+- `git clone https://github.com/ernani-carvalho/projeto-individual.git` para baixar o projeto.
+- `git pull` antes de começar a mexer.
+- `git add .`, depois `git commit -m "tipo: descrição curta"` e `git push` para enviar as alterações.
 
-Atualizar o projeto antes de começar a mexer:
+Site (web-data-viz):
 
-git pull
+- Entrar na pasta com `cd web-data-viz`.
+- `npm install` na primeira vez ou quando o `package.json` mudar.
+- `npm start` para ligar o servidor. O site abre em `http://localhost:3333`.
+- `Ctrl + C` no terminal para desligar.
 
-Salvar e enviar alterações:
+Sensor (dat-acqu-ino):
 
-git add .
-git commit -m "tipo: descrição curta"
-git push
+- Entrar na pasta com `cd dat-acqu-ino`.
+- `npm install` e depois `npm start`. A API abre em `http://localhost:3300`.
+- O Monitor Serial da IDE do Arduino precisa estar fechado antes do `npm start`, senão a API não consegue usar a porta.
+- `Ctrl + C` no terminal para desligar.
 
-Rodar o site (dentro da pasta da web-data-viz):
+Banco de dados:
 
-cd web-data-viz
-npm install
-npm start
+- Abrir o arquivo `web-data-viz/src/database/script-tabelas.sql` no MySQL Workbench e executar o script inteiro.
+- Preencher o nome do banco, o usuário e a senha do MySQL no arquivo `web-data-viz/.env.dev`.
 
-O `npm install` só precisa ser rodado na primeira vez ou quando o `package.json` mudar. A dat-acqu-ino funciona do mesmo jeito: entrar na pasta dela, rodar `npm install` e depois `npm start`.
-
-Banco de dados: abrir o arquivo `web-data-viz/src/database/script-tabelas.sql` no MySQL Workbench e executar o script inteiro. Isso cria o banco e as tabelas do projeto.
+Não rode `npm audit fix`. As versões das bibliotecas foram travadas pela faculdade e esse comando muda as versões e quebra o projeto.
 
 ## Arquitetura
 
-A raiz do repositório tem as duas APIs da faculdade:
+A raiz do repositório tem as duas APIs:
 
-Projeto-Individual/
-  AGENTS.md
-  README.md
-  web-data-viz/
-    app.js
-    package.json
-    .env.dev
-    public/
-      index.html
-      login.html
-      cadastro.html
-      dashboard/
-      css/
-      js/
-      assets/
-    src/
-      routes/
-      controllers/
-      models/
-      database/
-  dat-acqu-ino/
+- `AGENTS.md` e `README.md`
+- `web-data-viz/`
+  - `app.js`: arquivo principal. Liga o servidor e registra as rotas.
+  - `package.json`: lista de bibliotecas e o comando do `npm start`.
+  - `.env.dev`: dados de acesso ao banco local (é o arquivo usado no dia a dia).
+  - `.env`: dados de acesso a um banco remoto. Não é usado neste projeto.
+  - `DOCUMENTOS_DE_APOIO/`: tutoriais e exemplos da faculdade, como o passo a passo para criar uma rota nova.
+  - `public/`: tudo que aparece no navegador.
+    - `index.html`, `login.html`, `cadastro.html` e `simulador.html`;
+    - `dashboard/`: páginas que só aparecem depois do login (`cards.html`, `dashboard.html`, `mural.html`, `edicao-aviso.html`);
+    - `css/`: `estilo.css` (geral) e `dashboards.css`;
+    - `js/`: `sessao.js` (controle de login) e `alerta.js`;
+    - `assets/`: imagens (`imgs/`), ícones (`icon/`) e gifs de carregamento.
+  - `src/`
+    - `routes/`: os caminhos da API, como `/usuarios/cadastrar`. Cada arquivo chama uma função do controller.
+    - `controllers/`: recebem os dados da requisição, fazem as validações e chamam o model.
+    - `models/`: montam o comando SQL e mandam executar no banco.
+    - `database/`: `config.js` (conexão com o MySQL) e `script-tabelas.sql` (criação das tabelas).
+- `dat-acqu-ino/`
+  - `main.js`: a API inteira. Lê o Arduino e publica os dados.
+  - `index.html`: página com os gráficos do sensor.
+  - `package.json`: lista de bibliotecas e o comando do `npm start`.
 
-
-O que fica em cada pasta da web-data-viz:
-
-- `public/`: tudo que aparece no navegador.
-  - arquivos `.html` das páginas;
-  - `css/` com os estilos;
-  - `js/` com os scripts das páginas;
-  - `assets/` com imagens e ícones;
-  - `dashboard/` com as páginas que só aparecem depois do login.
-- `src/routes/`: define os caminhos da API (por exemplo `/usuarios/cadastrar`) e diz qual função do controller vai ser chamada.
-- `src/controllers/`: recebe os dados da requisição, confere se está tudo certo e chama o model.
-- `src/models/`: monta os comandos SQL e manda para o banco.
-- `src/database/`: conexão com o MySQL e o script de criação das tabelas.
-- `app.js`: arquivo principal que liga o servidor e registra as rotas.
+Os arquivos de aquário, empresa, medida e aviso que vieram na web-data-viz são do AquaTech, o projeto de exemplo da faculdade. Eles servem de modelo para criar os arquivos do meu projeto.
 
 ### Caminho de uma requisição
 
-Exemplo usando o cadastro de usuário:
+Exemplo usando o login:
 
-1. O usuário preenche o formulário em `public/cadastro.html` e clica em cadastrar.
-2. O JavaScript da página pega os valores dos campos e faz um `fetch` para `/usuarios/cadastrar`.
-3. O `app.js` manda a requisição para a rota em `src/routes/usuarios.js`.
-4. A rota chama a função `cadastrar` do `src/controllers/usuarioController.js`.
-5. O controller confere os dados e chama o `usuarioModel.js`.
-6. O model monta o `INSERT` e executa no banco pelo arquivo de conexão em `src/database/`.
-7. A resposta volta pelo mesmo caminho até a página, que mostra uma mensagem para o usuário.
+1. O usuário preenche o formulário em `public/login.html`.
+2. O JavaScript da página faz um `fetch` com `POST` para `/usuarios/autenticar`, enviando os dados com o final `Server` no nome (`emailServer`, `senhaServer`).
+3. O `app.js` manda a requisição para `src/routes/usuarios.js`.
+4. A rota chama a função `autenticar` do `src/controllers/usuarioController.js`.
+5. O controller pega os dados em `req.body.emailServer` e `req.body.senhaServer`, confere se não estão vazios e chama o `usuarioModel.js`.
+6. O model monta o `SELECT` numa variável `instrucaoSql` e executa com `database.executar()`, do arquivo `src/database/config.js`.
+7. A resposta volta pelo mesmo caminho. Se der certo, a página guarda o nome, o email e o id do usuário no `sessionStorage` (`NOME_USUARIO`, `EMAIL_USUARIO`, `ID_USUARIO`) e manda para a área logada.
 
-Toda funcionalidade nova deve seguir esse mesmo caminho.
+As páginas da área logada chamam `validarSessao()`, do `js/sessao.js`, no `onload` do `body`. Se não tiver ninguém logado, o usuário volta para o login. O botão de sair chama `limparSessao()`.
+
+Toda funcionalidade nova deve seguir esse mesmo caminho: página, `fetch`, rota, controller, model e banco.
+
+### Caminho dos dados do sensor
+
+Sensor, Arduino, porta serial, dat-acqu-ino e, por fim, banco de dados e gráficos.
+
+- O Arduino precisa enviar cada leitura no formato `digital;analogico`, com `Serial.println` no final. Exemplo: `1;33.56`.
+- Os dados ficam disponíveis em `http://localhost:3300/sensores/analogico` e `http://localhost:3300/sensores/digital`.
+- A gravação no banco começa desligada. Ela é ligada pela constante `HABILITAR_OPERACAO_INSERIR`, no início do `main.js`.
 
 ### Onde criar arquivos novos
 
-Exemplo para uma funcionalidade de jogos:
+Seguindo o padrão da web-data-viz e o `PASSO_A_PASSO_CRIAR_ROTA_NA_API.md`, uma funcionalidade de jogos fica assim:
 
-- página: `public/jogos.html` (ou dentro de `public/dashboard/` se for uma área logada);
+- página: `public/jogos.html`, ou dentro de `public/dashboard/` se for da área logada;
 - estilo: `public/css/jogos.css`;
-- script da página: `public/js/jogos.js`;
-- rota: `src/routes/jogos.js`;
-- controller: `src/controllers/jogoController.js`;
-- model: `src/models/jogoModel.js`;
-- tabelas novas: no `script-tabelas.sql`.
+- rota: `src/routes/jogos.js` (nome no plural);
+- controller: `src/controllers/jogoController.js` (nome no singular);
+- model: `src/models/jogoModel.js` (nome no singular);
+- tabelas novas: no `src/database/script-tabelas.sql`.
 
-Depois de criar a rota, ela precisa ser registrada no `app.js`, do mesmo jeito que as rotas que já existem lá.
+Depois de criar a rota, ela precisa ser registrada no `app.js` em dois lugares, do mesmo jeito que as rotas que já existem:
 
-Antes de criar qualquer arquivo, veja os arquivos de usuário que já existem (rota, controller e model) e copie o mesmo formato.
+- junto das outras importações: `var jogosRouter = require("./src/routes/jogos");`
+- junto dos outros `app.use`: `app.use("/jogos", jogosRouter);`
+
+Rotas que só buscam dados usam `router.get` (por exemplo `/jogos/listar`). Rotas que gravam dados usam `router.post` (por exemplo `/jogos/cadastrar`).
+
+Antes de criar qualquer arquivo, veja os arquivos de usuário que já existem (rota, controller e model) e siga o mesmo formato.
 
 ## Padrões de desenvolvimento
 
-- Usar `const` por padrão e `let` só quando a variável precisar mudar de valor. Não usar `var` em código novo.
+- Usar `const` por padrão e `let` só quando a variável precisar mudar de valor. Os arquivos originais das APIs usam `var`. Não reescreva esses arquivos só para trocar isso.
 - Nomes de variáveis e funções em português e em camelCase. Exemplo: `nomeJogo`, `listarJogos`, `registrarProgresso`.
-- Nomes de arquivos em letra minúscula. Quando tiver mais de uma palavra, seguir o padrão que já existe na pasta (por exemplo `jogoController.js`).
-- Nomes de tabelas e colunas do banco em português e sem acento.
+- Nos dados enviados pelo `fetch`, manter o padrão da API de terminar o nome com `Server`. Exemplo: `nomeJogoServer`.
+- Nomes de arquivos em letra minúscula, seguindo o padrão da pasta: rotas no plural (`jogos.js`), controllers e models no singular com o tipo no final (`jogoController.js`, `jogoModel.js`).
+- Nomes de tabelas e colunas do banco em português, sem acento e no singular. Chaves estrangeiras começam com `fk_` (exemplo: `fk_usuario`), como no script da API.
 - Manter a indentação organizada, com o mesmo espaçamento em todo o arquivo.
 - Escrever comentários curtos só nas partes importantes ou que não são óbvias.
-- Um arquivo CSS e um arquivo JS por página quando fizer sentido. Estilos que se repetem em várias páginas ficam em um CSS geral.
-- Não escrever CSS dentro do HTML nem JavaScript solto no meio do HTML. Usar os arquivos separados.
+- Cada página tem o seu arquivo CSS quando fizer sentido. Estilos usados em várias páginas ficam no `estilo.css`.
+- O JavaScript da página fica numa tag `<script>` no final do HTML, como nas páginas da web-data-viz. Funções usadas em várias páginas vão para um arquivo em `public/js/`.
 - Sempre conferir no navegador se a página continua funcionando depois de uma alteração.
 
 ## Modelo de commit
 
-Os commits seguem o formato:
-
-
-tipo: descrição curta em português
-
+Os commits seguem o formato `tipo: descrição curta em português`.
 
 Tipos usados:
 
@@ -163,16 +165,14 @@ A descrição começa com letra minúscula, usa o verbo no presente e é curta.
 
 Exemplos:
 
-
-feat: cria tela de cadastro de jogos
-feat: adiciona registro de progresso por jogo
-feat: mostra horas jogadas na dashboard
-fix: corrige erro no login com email inválido
-fix: arruma comentário que não aparecia na página do jogo
-style: ajusta cores do menu da página inicial
-docs: atualiza passo a passo do README
-refactor: separa funções do jogoController
-
+- `feat: cria tela de cadastro de jogos`
+- `feat: adiciona registro de progresso por jogo`
+- `feat: mostra horas jogadas na dashboard`
+- `fix: corrige erro no login com email inválido`
+- `fix: arruma comentário que não aparecia na página do jogo`
+- `style: ajusta cores do menu da página inicial`
+- `docs: atualiza passo a passo do README`
+- `refactor: separa funções do jogoController`
 
 Cada commit deve ter uma alteração só. Se mexeu em duas coisas diferentes, faça dois commits.
 
@@ -180,17 +180,22 @@ Cada commit deve ter uma alteração só. Se mexeu em duas coisas diferentes, fa
 
 A regra mais importante: a estrutura das APIs da faculdade (web-data-viz e dat-acqu-ino) não deve ser alterada.
 
-- Não mudar a configuração, a organização das pastas nem os arquivos originais dessas APIs.
+- Não mudar a organização das pastas nem a configuração das APIs (`package.json`, `package-lock.json`, `src/database/config.js` e a escolha de ambiente no começo do `app.js`).
 - É permitido criar arquivos novos seguindo o mesmo padrão delas (rotas, controllers, models, páginas, CSS e JS).
-- As únicas alterações aceitas em arquivos que já existem são registrar novas rotas no `app.js` e adicionar as tabelas do projeto no `script-tabelas.sql`, sempre seguindo o formato que já está lá.
+- Alterações aceitas em arquivos que já existem:
+  - registrar novas rotas no `app.js`;
+  - adicionar as tabelas do projeto no `script-tabelas.sql`;
+  - adaptar o cadastro e o login (`cadastro.html`, `login.html`, `usuarioController.js` e `usuarioModel.js`) para os campos do projeto, do mesmo jeito que foi feito nas atividades de aula. Peça confirmação antes de mexer nesses arquivos.
+- Na dat-acqu-ino, só mexer nas partes que o material da aula manda: a constante `HABILITAR_OPERACAO_INSERIR`, os dados de acesso ao banco e o `INSERT` do `main.js`.
+- Não apagar os arquivos do AquaTech nem os `DOCUMENTOS_DE_APOIO`.
 
 Outros cuidados:
 
 - Não apagar, renomear ou mover arquivos sem pedir antes.
-- Não colocar senha, usuário ou dados de acesso do banco direto no código. Esses dados ficam no arquivo `.env.dev`, que é onde a web-data-viz já busca essas informações.
-- Não instalar bibliotecas ou pacotes novos com `npm install nome-do-pacote`.
+- Nunca escrever senha, usuário ou dados de acesso de verdade em nenhum arquivo. Na web-data-viz esses dados ficam no `.env.dev`, e quem preenche sou eu, na minha máquina. Não faça commit do `.env.dev` nem do `main.js` da dat-acqu-ino com a senha verdadeira.
+- Não instalar bibliotecas ou pacotes novos com `npm install nome-do-pacote` e não rodar `npm audit fix`.
+- Não mexer na pasta `node_modules`.
 - Não usar frameworks ou tecnologias fora da lista (React, Bootstrap, TypeScript, etc.).
-- Não mudar o `package.json`.
 - Não fazer alterações grandes de uma vez. Prefira mudanças pequenas e explique o que foi feito.
 - Se não tiver certeza de alguma coisa, pergunte antes de alterar.
 

@@ -53,7 +53,6 @@ Cada jogo tem um espaço para comentários, onde os jogadores compartilham exper
 | JavaScript | Interação das páginas e comunicação com a API |
 | MySQL | Banco de dados |
 | web-data-viz (API) | Servidor do site, login, cadastro e dados da dashboard |
-| dat-acqu-ino (API) | Captura de dados para o banco |
 
 ---
 

@@ -38,31 +38,23 @@ Não use nenhuma tecnologia fora dessa lista.
 
 Clonar o repositório:
 
-```
 git clone https://github.com/ernani-carvalho/projeto-individual.git
-```
 
 Atualizar o projeto antes de começar a mexer:
 
-```
 git pull
-```
 
 Salvar e enviar alterações:
 
-```
 git add .
 git commit -m "tipo: descrição curta"
 git push
-```
 
 Rodar o site (dentro da pasta da web-data-viz):
 
-```
 cd web-data-viz
 npm install
 npm start
-```
 
 O `npm install` só precisa ser rodado na primeira vez ou quando o `package.json` mudar. A dat-acqu-ino funciona do mesmo jeito: entrar na pasta dela, rodar `npm install` e depois `npm start`.
 
@@ -72,7 +64,6 @@ Banco de dados: abrir o arquivo `web-data-viz/src/database/script-tabelas.sql` n
 
 A raiz do repositório tem as duas APIs da faculdade:
 
-```
 Projeto-Individual/
   AGENTS.md
   README.md
@@ -94,7 +85,7 @@ Projeto-Individual/
       models/
       database/
   dat-acqu-ino/
-```
+
 
 O que fica em cada pasta da web-data-viz:
 
@@ -156,9 +147,9 @@ Antes de criar qualquer arquivo, veja os arquivos de usuário que já existem (r
 
 Os commits seguem o formato:
 
-```
+
 tipo: descrição curta em português
-```
+
 
 Tipos usados:
 
@@ -172,7 +163,7 @@ A descrição começa com letra minúscula, usa o verbo no presente e é curta.
 
 Exemplos:
 
-```
+
 feat: cria tela de cadastro de jogos
 feat: adiciona registro de progresso por jogo
 feat: mostra horas jogadas na dashboard
@@ -181,7 +172,7 @@ fix: arruma comentário que não aparecia na página do jogo
 style: ajusta cores do menu da página inicial
 docs: atualiza passo a passo do README
 refactor: separa funções do jogoController
-```
+
 
 Cada commit deve ter uma alteração só. Se mexeu em duas coisas diferentes, faça dois commits.
 

@@ -61,19 +61,6 @@ A dashboard transforma o seu progresso em números:
 | MySQL | Banco de dados, rodando numa máquina virtual Linux |
 | Chart.js | Gráficos da dashboard |
 
-## Como rodar
-
-```bash
-git clone https://github.com/ernani-carvalho/projeto-individual.git
-cd projeto-individual/web-data-viz
-npm install
-npm start
-```
-
-Antes de ligar, crie o banco com o script `web-data-viz/src/database/script-tabelas.sql` e preencha os dados de acesso no arquivo `web-data-viz/.env.dev`.
-
-O site abre em `http://localhost:3333`.
-
 ---
 
 <p align="center">

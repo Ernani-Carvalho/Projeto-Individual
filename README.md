@@ -1,4 +1,8 @@
-<h1 align="center">[PREENCHER: nome do site]</h1>
+<p align="center">
+  <img src="assets/logo/logo-firstrun.png" alt="FirstRun" width="600">
+</p>
+
+<h1 align="center">FirstRun</h1>
 
 <p align="center">
   Seu diário de jogos indie: horas jogadas, bosses derrotados e cada tentativa até a vitória, tudo em um lugar só.
@@ -25,13 +29,13 @@ Hollow Knight, Celeste, Cuphead, Hades. Muitos dos jogos mais marcantes dos últ
 
 Quem gosta de jogos indie costuma passar por muitos jogos diferentes, e é fácil perder a conta de quanto tempo já jogou, até onde chegou e quantas vezes morreu para aquele boss.
 
-Este site é o lugar para guardar essa trajetória. Você registra os jogos que joga, as horas, os bosses que derrotou e quanto cada luta custou, e acompanha tudo no seu perfil e numa dashboard com gráficos.
+O **FirstRun** é o lugar para guardar essa trajetória. Você registra os jogos que joga, as horas, os bosses que derrotou e quanto cada luta custou, e acompanha tudo no seu perfil e numa dashboard com gráficos.
 
 > Derrotou a Hornet na terceira tentativa? Levou quarenta tentativas no Radiance? Registre, compare e veja seu progresso crescer.
 
 ## O que dá para fazer
 
-- 🏠 **Conhecer o mundo indie:** jogos em destaque, a história dos indies, curiosidades e indies brasileiros.
+- 🏠 **Conhecer o mundo indie:** os jogos mais jogados, a história dos indies, curiosidades e um indie para cada tipo de jogador.
 - 🎮 **Explorar o catálogo:** cada jogo com seus bosses e a média de tentativas dos jogadores.
 - 📝 **Registrar o progresso:** horas jogadas, status (jogando, zerado ou pausado), bosses derrotados, tentativas e a dificuldade de 1 a 5 que você deu para cada um.
 - 👤 **Ver o seu perfil:** total de horas, horas de cada jogo e todos os bosses que você já venceu.
@@ -41,11 +45,11 @@ Este site é o lugar para guardar essa trajetória. Você registra os jogos que 
 
 A dashboard transforma o seu progresso em números:
 
-- total de horas jogadas e média de horas por jogo;
-- jogos cadastrados e bosses derrotados;
-- média de tentativas e o boss mais difícil;
+- total de horas jogadas, jogos cadastrados e bosses derrotados;
+- o jogo mais jogado e o boss mais difícil;
 - porcentagem de conclusão de cada jogo;
-- gráficos de horas por jogo, bosses que mais deram trabalho e dificuldade das lutas.
+- gráficos de horas por jogo e de jogos por status;
+- comparação do seu progresso com a média dos jogadores.
 
 ## Tecnologias
 

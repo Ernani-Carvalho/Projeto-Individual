@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- o nome que aparece lá na aba do navegador -->
+    <title>FirstRun | Início</title>
+    <!-- a chaminha azul (logo do site) que aparece na aba, do lado do nome -->
+    <link rel="icon" href="assets/logo/favicon-chama.png">
+
+    <!-- as fontes vêm do Google Fonts: a gótica (Grenze Gotisch) e a do texto normal (Alegreya Sans) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <!-- todo o visual da página tá nesse arquivo -->
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+    <!-- fundo de capas -->
+    <!-- são as capas tortinhas que ficam paradas atrás da página inteira -->
+    <!-- cada div é uma tira; o CSS que entorta e deixa elas apagadinhas -->
+    <div class="fundo-de-capas">
+        <div class="tira-inclinada"><img src="assets/jogos/hollow-knight.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/silksong.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/hades.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/cuphead.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/celeste.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/dead-cells.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/undertale.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/blasphemous.jpg" alt=""></div>
+        <div class="tira-inclinada"><img src="assets/jogos/ori.jpg" alt=""></div>
+    </div>
+
+    <!-- cabeçalho -->
+    <!-- a barra lá de cima, que fica grudada quando a gente rola a página -->
+    <!-- os links sem href são das páginas que ainda não existem: quando eu criar, é só colocar o href="..." neles -->
+    <div class="cabecalho">
+        <div class="coluna-central">
+            <!-- logo: clicando nela volta pra própria página inicial -->
+            <a class="logo" href="home.html"><img src="assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
+
+            <!-- menu do site (o "pagina-atual" deixa o Início marcado com a linha azul) -->
+            <nav class="menu">
+                <a class="pagina-atual" href="home.html">Início</a>
+                <a>Jogos</a>
+                <a>Sobre mim</a>
+            </nav>
+
+            <!-- cantinho da direita: entrar e criar conta -->
+            <div class="menu-usuario">
+                <a>Entrar</a>
+                <a>Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- topo -->
+    <!-- a primeira coisa que aparece: o título grandão, os botões e os números -->
+    <div class="topo-pagina-inicial coluna-central">
+        <!-- o textinho amarelo que fica em cima do título -->
+        <span class="texto-acima-do-titulo">Seu diário de jogos indie</span>
+        <!-- o span faz a segunda frase ficar azul e descer pra linha de baixo -->
+        <h1>Jogos pequenos. <span class="texto-azul">Grandes histórias.</span></h1>
+        <p class="texto-do-topo">Cada indie que você joga vira uma jornada. Guarde aqui suas horas, os bosses que você venceu e quantas tentativas cada um custou, e acompanhe tudo no seu perfil e na sua dashboard.</p>
+
+        <!-- os dois botões: o amarelo cheio e o que é só a borda -->
+        <div class="botoes-topo">
+            <a class="botao">Criar conta</a>
+            <a class="botao botao-contorno">Explorar jogos</a>
+        </div>
+
+        <!-- números gerais -->
+        <!-- as 4 caixinhas com os números de todo mundo junto -->
+        <!-- por enquanto tá tudo 0; depois esses números vão vir do banco (por isso cada um tem um id) -->
+        <div class="numeros-gerais">
+            <div class="caixa-numero">
+                <span class="numero-grande" id="span_total_jogadores">0</span>
+                <span class="texto-suave">jogadores cadastrados</span>
+            </div>
+            <div class="caixa-numero">
+                <span class="numero-grande" id="span_total_horas">0</span>
+                <span class="texto-suave">horas registradas</span>
+            </div>
+            <div class="caixa-numero">
+                <span class="numero-grande" id="span_total_bosses">0</span>
+                <span class="texto-suave">bosses derrotados</span>
+            </div>
+            <div class="caixa-numero">
+                <span class="numero-grande" id="span_total_jogos">0</span>
+                <span class="texto-suave">jogos no catálogo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ranking -->
+    <!-- os jogos mais jogados por todo mundo -->
+    <!-- ainda não tem dados, então fica só o aviso; quando o banco tiver pronto eu monto o ranking dentro da div_ranking -->
+    <div class="bloco">
+        <div class="coluna-central">
+            <span class="texto-acima-do-titulo">Ranking dos jogadores</span>
+            <h2 class="titulo-secao">Os mais jogados</h2>
+            <p class="subtitulo">Os jogos com mais horas registradas somando todos os jogadores.</p>
+            <div class="ranking" id="div_ranking">
+                <div class="aviso-sem-dados">O ranking aparece aqui quando os jogadores começarem a registrar horas.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- três motivos -->
+    <!-- explica rapidinho o que dá pra fazer no site, um cartão pra cada coisa -->
+    <div class="bloco">
+        <div class="coluna-central">
+            <span class="texto-acima-do-titulo">Como funciona</span>
+            <h2 class="titulo-secao">Três motivos para entrar</h2>
+            <!-- "tres-colunas" coloca os 3 cartões lado a lado -->
+            <div class="tres-colunas">
+                <div class="cartao-motivo">
+                    <span class="icone-motivo">👤</span>
+                    <h3>Seu perfil de jogador</h3>
+                    <p class="texto-suave">Total de horas, horas de cada jogo, bosses derrotados, tentativas e a dificuldade que você sentiu em cada luta.</p>
+                </div>
+                <div class="cartao-motivo">
+                    <span class="icone-motivo">📊</span>
+                    <h3>Uma dashboard só sua</h3>
+                    <p class="texto-suave">Gráficos mostram onde você passou mais tempo, quanto falta para fechar cada jogo e quais bosses deram mais trabalho.</p>
+                </div>
+                <div class="cartao-motivo">
+                    <span class="icone-motivo">🎮</span>
+                    <h3>Catálogo de indies</h3>
+                    <p class="texto-suave">Cada jogo com os seus bosses e a média de tentativas dos jogadores, para você saber o que te espera.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- história dos indies -->
+    <!-- essa parte é mais escura e tem: o texto de introdução, as 3 ideias, a linha do tempo e as curiosidades -->
+    <div class="bloco bloco-escuro">
+        <div class="coluna-central">
+
+            <!-- título de um lado e o texto do outro -->
+            <div class="historia-introducao">
+                <div>
+                    <span class="texto-acima-do-titulo">A história dos indies</span>
+                    <h2 class="titulo-secao">De quartos e garagens para o mundo</h2>
+                </div>
+                <div class="historia-texto">
+                    <p>Um jogo indie é feito por uma pessoa ou por uma equipe pequena, sem uma grande editora decidindo o que pode ou não pode. Por isso esses jogos arriscam mais: histórias estranhas, visuais diferentes e ideias que um estúdio grande talvez nunca aprovasse.</p>
+                    <p>Por muito tempo eles ficaram escondidos. Foi a internet, com as lojas digitais e o financiamento coletivo, que abriu caminho até os jogadores. Depois vieram os prêmios, muitas vezes na frente de produções gigantes.</p>
+                </div>
+            </div>
+
+            <!-- as 3 ideias que resumem o jeito indie (01, 02 e 03) -->
+            <div class="tres-colunas">
+                <div class="cartao-ideia">
+                    <span class="numero-ideia">01</span>
+                    <h3>Liberdade</h3>
+                    <p class="texto-suave">Sem editora mandando, quem cria decide a história, o visual e até o quanto o jogo vai ser difícil.</p>
+                </div>
+                <div class="cartao-ideia">
+                    <span class="numero-ideia">02</span>
+                    <h3>Equipes pequenas</h3>
+                    <p class="texto-suave">Muitos clássicos foram feitos por duas ou três pessoas, às vezes por uma só, ao longo de anos.</p>
+                </div>
+                <div class="cartao-ideia">
+                    <span class="numero-ideia">03</span>
+                    <h3>Comunidade</h3>
+                    <p class="texto-suave">São os jogadores que ajudam a pagar, espalham a notícia e mantêm esses jogos vivos por muito tempo.</p>
+                </div>
+            </div>
+
+            <h3 class="titulo-linha-do-tempo">Momentos que mudaram tudo</h3>
+
+            <!-- linha do tempo -->
+            <!-- cada "evento" é um cartão; o CSS joga um pra esquerda e o próximo pra direita da linha azul do meio -->
+            <!-- os que têm img mostram a capa do jogo do lado do texto -->
+            <div class="linha-do-tempo">
+                <div class="evento">
+                    <div class="cartao-evento">
+                        <div>
+                            <span class="ano-evento">2004</span>
+                            <h4>Cave Story, feito por uma pessoa só</h4>
+                            <p class="texto-suave">Daisuke Amaya passou cerca de cinco anos fazendo sozinho, no tempo livre, a arte, a música e a programação. O jogo saiu de graça e inspirou uma geração inteira a criar jogos sozinha.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="cartao-evento">
+                        <div>
+                            <span class="ano-evento">2008</span>
+                            <h4>Braid abre as portas</h4>
+                            <p class="texto-suave">Jonathan Blow lança Braid no Xbox Live Arcade, um jogo de plataforma em que voltar no tempo faz parte dos quebra-cabeças. O sucesso mostrou que as lojas digitais dos consoles tinham espaço para jogos pequenos.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="cartao-evento">
+                        <img src="assets/jogos/undertale.jpg" alt="Capa de Undertale">
+                        <div>
+                            <span class="ano-evento">2013</span>
+                            <h4>Undertale no Kickstarter</h4>
+                            <p class="texto-suave">Toby Fox pediu 5 mil dólares e arrecadou mais de 51 mil, mais de dez vezes a meta. O jogo saiu em 2015 e provou que a própria comunidade pode bancar uma ideia em que acredita.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="cartao-evento">
+                        <img src="assets/jogos/hollow-knight.jpg" alt="Capa de Hollow Knight">
+                        <div>
+                            <span class="ano-evento">2017</span>
+                            <h4>O ano de Hollow Knight e Cuphead</h4>
+                            <p class="texto-suave">A Team Cherry, da Austrália, e o Studio MDHR, do Canadá, lançam dois dos jogos mais marcantes da década, famosos pelos chefes difíceis e pela arte feita à mão.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="cartao-evento">
+                        <img src="assets/jogos/celeste.jpg" alt="Capa de Celeste">
+                        <div>
+                            <span class="ano-evento">2018</span>
+                            <h4>Celeste é premiado</h4>
+                            <p class="texto-suave">Celeste ganha o prêmio de Melhor Jogo Independente no The Game Awards. Um jogo de plataforma difícil que fala abertamente de ansiedade mostrou que jogo pequeno também pode tratar de assunto sério.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="cartao-evento">
+                        <img src="assets/jogos/hades.jpg" alt="Capa de Hades">
+                        <div>
+                            <span class="ano-evento">2021</span>
+                            <h4>Hades vence os gigantes</h4>
+                            <p class="texto-suave">Lançado em 2020, o Hades da Supergiant Games ganha o prêmio de Melhor Jogo no BAFTA Games Awards, disputando com produções de orçamento muito maior.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="cartao-evento">
+                        <img src="assets/jogos/silksong.jpg" alt="Capa de Hollow Knight: Silksong">
+                        <div>
+                            <span class="ano-evento">2025</span>
+                            <h4>Silksong finalmente chega</h4>
+                            <p class="texto-suave">Anunciado em 2019, Hollow Knight: Silksong é lançado depois de mais de seis anos de espera. Uma prova de como uma equipe pequena consegue segurar a atenção de milhões de fãs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- curiosidades -->
+            <!-- 4 caixinhas com um número grandão laranja e uma frase que completa o número -->
+            <div class="curiosidades">
+                <div class="curiosidade">
+                    <span class="numero-curiosidade">1</span>
+                    <p class="texto-suave">pessoa fez Stardew Valley inteiro: Eric Barone criou a arte, a música e a programação.</p>
+                </div>
+                <div class="curiosidade">
+                    <span class="numero-curiosidade">2</span>
+                    <p class="texto-suave">irmãos, Chad e Jared Moldenhauer, criaram o Studio MDHR para fazer Cuphead.</p>
+                </div>
+                <div class="curiosidade">
+                    <span class="numero-curiosidade">3</span>
+                    <p class="texto-suave">pessoas formavam a Team Cherry durante a criação de Hollow Knight.</p>
+                </div>
+                <div class="curiosidade">
+                    <span class="numero-curiosidade">4 dias</span>
+                    <p class="texto-suave">foi o tempo para fazer a primeira versão de Celeste, criada numa game jam.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- um indie para cada tipo de jogador -->
+    <!-- a div_recomendacoes começa vazia mesmo: quem coloca os cartões aqui dentro é o JavaScript lá embaixo -->
+    <div class="bloco">
+        <div class="coluna-central">
+            <span class="texto-acima-do-titulo">Por onde começar</span>
+            <h2 class="titulo-secao">Um indie para cada tipo de jogador</h2>
+            <p class="subtitulo">Nunca jogou um indie ou está procurando o próximo? Veja qual combina mais com você.</p>
+            <div class="tres-colunas" id="div_recomendacoes"></div>
+        </div>
+    </div>
+
+    <!-- chamada final -->
+    <!-- o último empurrãozinho pra pessoa criar a conta: texto na esquerda e botão na direita -->
+    <div class="bloco-chamada-final">
+        <div class="coluna-central">
+            <div>
+                <span class="texto-acima-do-titulo">Comece agora</span>
+                <h2>Sua jornada começa <span class="texto-azul">no primeiro save.</span></h2>
+                <p class="texto-suave">Criar conta é rápido. Depois é só registrar os jogos que você joga.</p>
+            </div>
+            <a class="botao">Criar conta</a>
+        </div>
+    </div>
+
+    <!-- rodapé -->
+    <!-- o finalzinho da página: nome do projeto e os links de novo -->
+    <footer class="rodape">
+        <div class="coluna-central">
+            <span>FirstRun · Projeto individual de Pesquisa e Inovação</span>
+            <nav>
+                <a href="home.html">Início</a>
+                <a>Jogos</a>
+                <a>Sobre mim</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // lista das recomendações: cada objeto é um cartão
+        // tipoDeJogador = o texto amarelo, jogo = o nome, capa = o caminho da imagem, motivo = o textinho de baixo
+        // se eu quiser mais uma recomendação, é só copiar uma linha dessas e trocar os textos
+        let recomendacoes = [
+            { tipoDeJogador: "Se você gosta de explorar", jogo: "Hollow Knight", capa: "assets/jogos/hollow-knight.jpg", motivo: "Um mapa enorme, cheio de caminhos escondidos, que você vai desenhando enquanto descobre o reino." },
+            { tipoDeJogador: "Se você quer uma história que faz pensar", jogo: "Undertale", capa: "assets/jogos/undertale.jpg", motivo: "Cada escolha importa, e dá para chegar ao fim sem machucar ninguém." },
+            { tipoDeJogador: "Se você adora um desafio", jogo: "Cuphead", capa: "assets/jogos/cuphead.jpg", motivo: "Uma luta de chefe atrás da outra, todas desenhadas à mão como um desenho animado antigo." },
+            { tipoDeJogador: "Se você gosta de tentar de novo", jogo: "Hades", capa: "assets/jogos/hades.jpg", motivo: "Cada fuga é diferente, e cada derrota faz a história andar um pouco mais." },
+            { tipoDeJogador: "Se você quer se emocionar", jogo: "Ori and the Blind Forest", capa: "assets/jogos/ori.jpg", motivo: "Uma floresta linda e uma história de família contada quase sem palavras." },
+            { tipoDeJogador: "Se você está num momento difícil", jogo: "Celeste", capa: "assets/jogos/celeste.jpg", motivo: "Uma escalada sobre ansiedade, que trata cada queda como parte do caminho." }
+        ];
+
+        // monta os cartões das recomendações
+        function mostrarRecomendacoes() {
+            // primeiro limpa a div, pra não duplicar nada
+            div_recomendacoes.innerHTML = "";
+
+            // o for passa por cada recomendação da lista (i = 0, 1, 2... até acabar)
+            // e o innerHTML += vai colando um cartão novo embaixo do outro
+            // o ${...} é onde entra o valor de cada recomendação (nome, capa, texto...)
+            for (let i = 0; i < recomendacoes.length; i++) {
+                div_recomendacoes.innerHTML += `
+                    <div class="cartao-recomendacao">
+                        <div class="capa-jogo"><img src="${recomendacoes[i].capa}" alt="Capa de ${recomendacoes[i].jogo}"></div>
+                        <div class="recomendacao-texto">
+                            <span class="tipo-de-jogador">${recomendacoes[i].tipoDeJogador}</span>
+                            <h3>${recomendacoes[i].jogo}</h3>
+                            <p class="texto-suave">${recomendacoes[i].motivo}</p>
+                        </div>
+                    </div>`;
+            }
+        }
+
+        // chama a função pra montar os cartões assim que a página abre
+        // (funciona porque o script tá no fim do body, então a div_recomendacoes já existe quando chega aqui)
+        mostrarRecomendacoes();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,588 @@
+/* cores e fontes */
+/* o :root é tipo uma caixinha de variáveis: eu dou um nome pra cor aqui e uso no resto com var(--nome) */
+/* se um dia eu quiser trocar uma cor do site inteiro, é só mudar aqui */
+:root {
+    --preto: #0a0f1d; /* quase preto azulado: cabeçalho, rodapé e letra dos botões */
+    --fundo: #0d1526; /* azul bem escuro do fundo da página */
+    --fundo-escuro: #080d19; /* um azul ainda mais escuro */
+    --fundo-cartao: #131d33; /* fundo dos cartões e caixinhas */
+    --fundo-cartao-claro: #1b2846; /* um pouquinho mais claro que o do cartão */
+    --borda: #27375a; /* cor das bordinhas */
+    --texto: #eef2f8; /* texto normal (quase branco) */
+    --texto-suave: #9aa8c4; /* texto mais apagado, cinza azulado */
+    --azul: #4db6ff; /* o azul vivo dos títulos e detalhes */
+    --azul-escuro: #2f95e8;
+    --amarelo: #ffcc40; /* o amarelo dos botões e textinhos de cima */
+    --amarelo-escuro: #f0a91a; /* usado no fim do degradê dos botões */
+    --laranja: #ff9f2e; /* só nos números das curiosidades */
+
+    /* as duas fontes: a gótica e a do texto normal (se a do Google não carregar, usa a que vem depois da vírgula) */
+    --fonte-gotica: "Grenze Gotisch", Georgia, serif;
+    --fonte-texto: "Alegreya Sans", "Segoe UI", sans-serif;
+}
+
+/* base (vale pra página toda) */
+/* faz o padding e a borda contarem dentro da largura, assim as caixas não ficam maiores do que eu mandei */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0; /* tira o espacinho branco que o navegador coloca em volta */
+    color: var(--texto);
+    font-family: var(--fonte-texto);
+    font-size: 17px;
+    line-height: 1.6; /* espaço entre as linhas do texto */
+    background-color: var(--fundo); /* radial-gradient = uma mancha de luz redonda; aqui tem uma azul em cima na esquerda e uma amarela embaixo na direita */
+    background-image:
+        radial-gradient(circle at 15% 10%, rgba(77, 182, 255, 0.13), transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(255, 204, 64, 0.1), transparent 40%);
+    background-attachment: fixed; /* as manchas de luz ficam paradas quando eu rolo a página */
+}
+
+/* todos os títulos: sem margem, linhas mais juntinhas e em LETRA MAIÚSCULA */
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+/* tira a margem que o navegador coloca nos parágrafos */
+p {
+    margin: 0;
+}
+
+/* links ficam com a mesma cor do texto em volta (e não aquele azul padrão) */
+a {
+    color: inherit;
+}
+
+/* a coluna do meio: o conteúdo nunca passa de 1200px e fica centralizado (o margin auto que centraliza) */
+.coluna-central {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px; /* um respiro dos lados, pro conteúdo não grudar na borda da janela */
+}
+
+/* fundo de capas (as capas tortinhas atrás de tudo) */
+/* a camada inteira fica presa na tela: eu rolo a página e ela não se mexe, só o conteúdo passa por cima */
+/* ela passa 160px pra fora de cada lado porque as tiras são tortas e senão sobrava um buraco nos cantos */
+.fundo-de-capas {
+    position: fixed; /* fixed = presa na tela, não rola junto */
+    top: 0;
+    left: -160px;
+    right: -160px;
+    height: 100%;
+    z-index: -1; /* z-index decide quem fica na frente; -1 = atrás de tudo */
+    display: flex; /* coloca as tiras uma do lado da outra */
+    gap: 10px; /* espacinho entre as tiras */
+    opacity: 0.2; /* bem apagadinho (0 = some, 1 = normal), senão atrapalha ler o texto */
+    pointer-events: none; /* o mouse "atravessa" o fundo, então dá pra clicar nas coisas da frente */
+}
+
+/* cada tira: todas do mesmo tamanho (flex: 1) e entortadas pro lado */
+.tira-inclinada {
+    flex: 1;
+    overflow: hidden; /* corta o que sobrar da imagem pra fora da tira */
+    transform: skewX(12deg); /* skewX entorta a caixa 12 graus */
+}
+
+/* a imagem dentro da tira: entorto ela pro lado contrário (-12deg) pra ela ficar reta de novo */
+/* e deixo ela 2x mais larga e puxada pra esquerda pra não sobrar cantinho vazio */
+.tira-inclinada img {
+    width: 200%;
+    height: 100%;
+    margin-left: -50%;
+    object-fit: cover; /* preenche a caixa sem esticar a imagem */
+    transform: skewX(-12deg);
+}
+
+/* cabeçalho */
+.cabecalho {
+    position: sticky; /* sticky = quando eu rolo, ele gruda no topo da tela */
+    top: 0;
+    z-index: 10; /* fica na frente do resto da página */
+    background-color: rgba(10, 15, 29, 0.95); /* rgba = cor com transparência; o 0.95 deixa ele quase sólido */
+    border-bottom: 1px solid var(--borda);
+}
+
+/* logo, menu e o cantinho da direita tudo numa linha, alinhados no meio */
+.cabecalho .coluna-central {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    min-height: 68px;
+}
+
+/* a logo é uma imagem, então só controlo a altura (a largura acompanha sozinha) */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+}
+
+/* o menu ocupa o espaço que sobrar (flex: 1), aí o "entrar/criar conta" vai lá pro canto direito */
+.menu {
+    display: flex;
+    flex: 1;
+    gap: 4px;
+}
+
+.menu-usuario {
+    display: flex;
+    gap: 4px;
+}
+
+/* cada link do cabeçalho: maiúsculo, sem sublinhado e com uma borda embaixo invisível (transparent) */
+/* a borda já existe invisível pra quando ela ficar azul o texto não pular de lugar */
+.menu a,
+.menu-usuario a {
+    padding: 22px 12px;
+    border-bottom: 3px solid transparent;
+    color: #b3bdd4;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+/* passando o mouse (ou se for a página atual) o link fica branco e ganha a linha azul embaixo */
+.menu a:hover,
+.menu-usuario a:hover,
+.menu .pagina-atual {
+    color: #fff;
+    border-bottom-color: var(--azul);
+}
+
+/* botões */
+/* o botão amarelo padrão */
+.botao {
+    display: inline-block;
+    padding: 12px 26px;
+    border: 2px solid var(--amarelo);
+    border-radius: 4px; /* cantinhos levemente arredondados */
+    /* linear-gradient = degradê em linha reta: vai do amarelo pro amarelo mais escuro, na diagonal (135deg) */
+    background: linear-gradient(135deg, var(--amarelo), var(--amarelo-escuro));
+    color: var(--preto);
+    font-family: var(--fonte-texto);
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer; /* mãozinha quando passa o mouse */
+}
+
+/* com o mouse em cima ele fica amarelo liso */
+.botao:hover {
+    background: var(--amarelo);
+}
+
+/* o outro tipo de botão: só a bordinha branca, sem fundo (uso junto com a classe "botao") */
+.botao-contorno {
+    border-color: var(--texto);
+    background: transparent;
+    color: var(--texto);
+}
+
+/* com o mouse em cima aparece um fundinho branco bem fraquinho */
+.botao-contorno:hover {
+    background: rgba(238, 242, 248, 0.1);
+}
+
+/* textos que aparecem em vários lugares */
+/* o textinho amarelo pequeno que fica em cima dos títulos */
+.texto-acima-do-titulo {
+    display: inline-block;
+    color: var(--amarelo);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 3px; /* espaço entre as letras, pra ficar mais "chique" */
+    text-transform: uppercase;
+}
+
+/* título de cada parte da página, com a letra pintada de degradê (branco indo pro azul) */
+/* o truque: o degradê é o fundo, o background-clip: text faz ele aparecer só dentro das letras */
+/* e o color: transparent tira a cor normal da letra pra dar pra ver o degradê */
+.titulo-secao {
+    font-size: 46px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--texto), var(--azul) 70%);
+    background-clip: text;
+    color: transparent;
+}
+
+/* o texto que vem embaixo dos títulos */
+.subtitulo {
+    max-width: 640px; /* pra linha não ficar comprida demais de ler */
+    margin-top: 10px;
+    color: var(--texto-suave);
+    font-size: 18px;
+}
+
+/* classes de cor pra usar em qualquer texto */
+.texto-suave {
+    color: var(--texto-suave);
+}
+
+.texto-azul {
+    color: var(--azul);
+}
+
+/* blocos (cada "parte" da página) */
+/* cada parte da página ocupa a tela toda de largura e tem um espaçamento grande em cima e embaixo */
+.bloco {
+    padding: 96px 0;
+}
+
+/* a parte escura (história dos indies); é meio transparente pra dar pra ver as capas do fundo */
+.bloco-escuro {
+    background-color: rgba(8, 13, 25, 0.6);
+}
+
+/* caixinha tracejada que aparece quando ainda não tem dados (tipo no ranking) */
+.aviso-sem-dados {
+    margin-top: 28px;
+    padding: 40px;
+    border: 1px dashed var(--borda); /* dashed = borda tracejada */
+    border-radius: 8px;
+    background-color: var(--fundo-cartao);
+    color: var(--texto-suave);
+    text-align: center;
+}
+
+/* topo da página */
+/* o espaço em cima é grande pro título não ficar colado no cabeçalho */
+.topo-pagina-inicial {
+    padding-top: 120px;
+    padding-bottom: 24px;
+}
+
+/* o título GIGANTE */
+.topo-pagina-inicial h1 {
+    max-width: 1100px;
+    margin-top: 14px;
+    font-size: 110px;
+    font-weight: 800;
+    line-height: 0.9; /* linhas bem juntinhas, porque a letra é muito grande */
+}
+
+/* o span vira block pra "Grandes histórias." descer pra linha de baixo */
+.topo-pagina-inicial h1 span {
+    display: block;
+}
+
+/* o parágrafo embaixo do título */
+.texto-do-topo {
+    max-width: 620px;
+    margin-top: 24px;
+    color: var(--texto-suave);
+    font-size: 20px;
+}
+
+/* os dois botões um do lado do outro */
+.botoes-topo {
+    display: flex;
+    gap: 14px;
+    margin-top: 36px;
+}
+
+/* números gerais (as 4 caixinhas do topo) */
+/* Grid divide em colunas; 1fr = uma parte igual, então são 4 colunas do mesmo tamanho */
+.numeros-gerais {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 72px;
+}
+
+/* cada caixinha: o número em cima e o texto embaixo, com uma linha azul mais grossa no topo */
+.caixa-numero {
+    display: flex;
+    flex-direction: column; /* column = um embaixo do outro */
+    gap: 6px;
+    padding: 24px;
+    border: 1px solid var(--borda);
+    border-top: 3px solid var(--azul);
+    border-radius: 10px;
+    background-color: var(--fundo-cartao);
+}
+
+/* o número grandão azul */
+.numero-grande {
+    color: var(--azul);
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* três colunas (motivos, ideias e recomendações) */
+/* 3 colunas iguais lado a lado */
+.tres-colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 28px;
+}
+
+/* cartão dos motivos: ele sobe um pouquinho quando passo o mouse */
+.cartao-motivo {
+    padding: 36px 32px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background-color: var(--fundo-cartao);
+    transition: transform 0.3s; /* transition = a mudança acontece devagarinho (0.3 segundo) em vez de pular */
+}
+
+.cartao-motivo:hover {
+    transform: translateY(-6px); /* translateY = sobe 6px sem empurrar os outros cartões */
+    border-color: var(--azul);
+}
+
+/* o emoji grandão do cartão */
+.icone-motivo {
+    font-size: 44px;
+}
+
+.cartao-motivo h3 {
+    margin: 18px 0 10px;
+    font-size: 26px;
+}
+
+/* história dos indies */
+/* título de um lado e o texto do outro, alinhados embaixo */
+.historia-introducao {
+    display: flex;
+    align-items: flex-end;
+    gap: 48px;
+}
+
+/* os dois lados dividem o espaço igualzinho */
+.historia-introducao div {
+    flex: 1;
+}
+
+.historia-texto p {
+    margin-bottom: 14px;
+    color: #c9d3e6;
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+/* cartões das 3 ideias, com uma linha amarela no topo */
+.cartao-ideia {
+    padding: 28px;
+    border: 1px solid var(--borda);
+    border-top: 3px solid var(--amarelo);
+    border-radius: 10px;
+    background-color: var(--fundo-cartao);
+}
+
+/* o 01, 02, 03 em amarelo */
+.numero-ideia {
+    color: var(--amarelo);
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.cartao-ideia h3 {
+    margin-bottom: 8px;
+    font-size: 24px;
+}
+
+/* linha do tempo */
+.titulo-linha-do-tempo {
+    margin: 80px 0 40px;
+    font-size: 32px;
+    text-align: center;
+}
+
+/* o position: relative aqui é pra linha azul (que é absolute) se posicionar dentro dessa caixa */
+.linha-do-tempo {
+    position: relative;
+}
+
+/* a linha azul do meio: ela não existe no HTML, quem cria é o ::before */
+/* ::before = um elemento "extra" feito só pelo CSS; o content: "" é obrigatório pra ele aparecer */
+.linha-do-tempo::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%; /* bem no meio */
+    width: 2px;
+    height: 100%;
+    background-color: var(--azul);
+}
+
+/* cada evento ocupa metade da largura e fica do lado esquerdo da linha */
+.evento {
+    width: 50%;
+    padding: 0 40px 36px 0;
+}
+
+/* :nth-child(even) pega os pares (2º, 4º, 6º...) e joga eles pro lado direito da linha */
+.evento:nth-child(even) {
+    margin-left: 50%;
+    padding: 0 0 36px 40px;
+}
+
+/* o cartão do evento: capa (quando tem) e texto lado a lado */
+.cartao-evento {
+    display: flex;
+    gap: 18px;
+    padding: 20px;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    background-color: var(--fundo-cartao);
+}
+
+/* a capa pequena do lado do texto */
+.cartao-evento img {
+    width: 86px;
+    height: 129px;
+    flex-shrink: 0; /* não deixa a capa ser espremida quando o texto é grande */
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* o ano grandão em amarelo */
+.ano-evento {
+    color: var(--amarelo);
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.cartao-evento h4 {
+    margin: 6px 0;
+    font-size: 21px;
+}
+
+/* curiosidades */
+/* 4 colunas iguais, igual os números do topo */
+.curiosidades {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 72px;
+}
+
+.curiosidade {
+    padding: 28px 24px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background-color: var(--fundo);
+}
+
+/* o número laranja */
+.numero-curiosidade {
+    color: var(--laranja);
+    font-size: 44px;
+    font-weight: 800;
+}
+
+/* um indie para cada tipo de jogador */
+/* o cartão: capa pequena na esquerda e o texto na direita */
+.cartao-recomendacao {
+    display: flex;
+    overflow: hidden; /* corta o cantinho da capa pra acompanhar a borda arredondada */
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    background-color: var(--fundo-cartao);
+}
+
+/* passando o mouse a borda fica amarela */
+.cartao-recomendacao:hover {
+    border-color: var(--amarelo);
+}
+
+/* a caixinha da capa: aspect-ratio deixa ela sempre no formato 2 de largura por 3 de altura (o formato das capas) */
+.capa-jogo {
+    width: 120px;
+    flex-shrink: 0; /* não deixa a capa ser espremida */
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    background-color: var(--preto);
+}
+
+/* a imagem preenche a caixinha inteira sem esticar */
+.capa-jogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* o lado do texto: um embaixo do outro */
+.recomendacao-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 18px;
+}
+
+/* o "Se você gosta de..." em amarelo */
+.tipo-de-jogador {
+    color: var(--amarelo);
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.cartao-recomendacao h3 {
+    font-size: 22px;
+}
+
+/* chamada final */
+.bloco-chamada-final {
+    border-top: 1px solid var(--borda);
+    background-color: rgba(8, 13, 25, 0.75);
+}
+
+/* texto na esquerda e botão na direita (space-between empurra um pra cada ponta) */
+.bloco-chamada-final .coluna-central {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.bloco-chamada-final h2 {
+    max-width: 640px;
+    margin: 8px 0 14px;
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 0.95;
+}
+
+/* rodapé */
+.rodape {
+    padding: 40px 0;
+    border-top: 1px solid var(--borda);
+    background-color: var(--preto);
+    color: var(--texto-suave);
+    font-size: 15px;
+}
+
+/* nome do projeto na esquerda e os links na direita */
+.rodape .coluna-central {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.rodape a {
+    margin-left: 16px;
+    text-decoration: none;
+}
+
+.rodape a:hover {
+    color: var(--azul);
+}

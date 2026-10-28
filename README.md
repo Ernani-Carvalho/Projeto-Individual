@@ -1,58 +1,74 @@
-<h1 align="center">Jogos Indie</h1>
+<h1 align="center">[PREENCHER: nome do site]</h1>
 
 <p align="center">
-  Um lugar para fãs de jogos indie acompanharem o próprio progresso e conversarem sobre os jogos com outros fãs e com quem desenvolve.
+  Seu diário de jogos indie: horas jogadas, bosses derrotados e cada tentativa até a vitória, tudo em um lugar só.
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML">
   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS">
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
   <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="Chart.js">
 </p>
 
 <p align="center">
-  Projeto individual de Pesquisa e Inovação · 1º semestre de Análise e Desenvolvimento de Sistemas
+  Projeto individual · Análise e Desenvolvimento de Sistemas · SPTech
 </p>
 
 ---
 
 ## A ideia
 
-Os jogos indie ganharam muito espaço nos últimos anos. Títulos como Hollow Knight, Celeste, Cuphead e Hades foram feitos por equipes pequenas e conquistaram uma comunidade enorme de fãs. Quem joga esse estilo costuma passar por muitos jogos diferentes, e com isso é fácil perder a conta de quanto tempo já jogou, até onde chegou e quais desafios já superou em cada um.
+Hollow Knight, Celeste, Cuphead, Hades. Muitos dos jogos mais marcantes dos últimos anos foram feitos por equipes pequenas, às vezes por uma pessoa só.
 
-Além disso, as conversas sobre esses jogos ficam espalhadas em fóruns, vídeos e redes sociais. Não existe um lugar pensado só para essa comunidade, onde o jogador consiga guardar a própria trajetória e, ao mesmo tempo, trocar experiências com outros fãs e com quem desenvolveu o jogo.
+Quem gosta de jogos indie costuma passar por muitos jogos diferentes, e é fácil perder a conta de quanto tempo já jogou, até onde chegou e quantas vezes morreu para aquele boss.
 
-O objetivo do site é ser esse lugar.
+Este site é o lugar para guardar essa trajetória. Você registra os jogos que joga, as horas, os bosses que derrotou e quanto cada luta custou, e acompanha tudo no seu perfil e numa dashboard com gráficos.
 
-### Perfil do jogador
+> Derrotou a Hornet na terceira tentativa? Levou quarenta tentativas no Radiance? Registre, compare e veja seu progresso crescer.
 
-Depois de criar uma conta, o jogador cadastra os jogos que joga e vai registrando o seu progresso. Tudo isso aparece no perfil dele:
+## O que dá para fazer
 
-- o total de horas jogadas somando todos os jogos cadastrados;
-- as horas jogadas em cada jogo;
-- quantos bosses ele já derrotou em cada jogo e quais foram;
-- quantas tentativas ele precisou para vencer cada boss;
-- a dificuldade que ele deu para cada boss.
+- 🏠 **Conhecer o mundo indie:** jogos em destaque, a história dos indies, curiosidades e indies brasileiros.
+- 🎮 **Explorar o catálogo:** cada jogo com seus bosses e a média de tentativas dos jogadores.
+- 📝 **Registrar o progresso:** horas jogadas, status (jogando, zerado ou pausado), bosses derrotados, tentativas e a dificuldade de 1 a 5 que você deu para cada um.
+- 👤 **Ver o seu perfil:** total de horas, horas de cada jogo e todos os bosses que você já venceu.
+- 📊 **Acompanhar a dashboard:** gráficos e indicadores feitos com os seus dados.
 
-Por exemplo, um jogador de Hollow Knight pode registrar que derrotou a Hornet na terceira tentativa e achou a luta média, enquanto o Radiance levou quarenta tentativas e foi a mais difícil do jogo.
+## Dashboard
 
-### Dashboard
+A dashboard transforma o seu progresso em números:
 
-Os dados do perfil viram gráficos na dashboard. Assim o jogador consegue ver em quais jogos passou mais tempo, quantos bosses já derrotou e quais lutas deram mais trabalho.
-
-### Comunidade
-
-Cada jogo tem um espaço para comentários, onde os jogadores compartilham experiências, dicas e opiniões. Desenvolvedores indie também podem ter conta no site, acompanhar o que estão falando dos seus jogos e responder diretamente a quem joga.
+- total de horas jogadas e média de horas por jogo;
+- jogos cadastrados e bosses derrotados;
+- média de tentativas e o boss mais difícil;
+- porcentagem de conclusão de cada jogo;
+- gráficos de horas por jogo, bosses que mais deram trabalho e dificuldade das lutas.
 
 ## Tecnologias
 
-| Tecnologia | Uso no projeto |
+| Tecnologia | Uso |
 | --- | --- |
 | HTML e CSS | Estrutura e visual das páginas |
 | JavaScript | Interação das páginas e comunicação com a API |
-| MySQL | Banco de dados |
-| web-data-viz (API) | Servidor do site, login, cadastro e dados da dashboard |
+| Node.js | API que liga as páginas ao banco de dados |
+| MySQL | Banco de dados, rodando numa máquina virtual Linux |
+| Chart.js | Gráficos da dashboard |
+
+## Como rodar
+
+```bash
+git clone https://github.com/ernani-carvalho/projeto-individual.git
+cd projeto-individual/web-data-viz
+npm install
+npm start
+```
+
+Antes de ligar, crie o banco com o script `web-data-viz/src/database/script-tabelas.sql` e preencha os dados de acesso no arquivo `web-data-viz/.env.dev`.
+
+O site abre em `http://localhost:3333`.
 
 ---
 

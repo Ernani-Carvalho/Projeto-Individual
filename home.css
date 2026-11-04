@@ -67,37 +67,18 @@ a {
     padding: 0 24px; /* um respiro dos lados, pro conteúdo não grudar na borda da janela */
 }
 
-/* fundo de capas (as capas tortinhas atrás de tudo) */
-/* a camada inteira fica presa na tela: eu rolo a página e ela não se mexe, só o conteúdo passa por cima */
-/* ela passa 160px pra fora de cada lado porque as tiras são tortas e senão sobrava um buraco nos cantos */
+/* fundo de capas (a imagem com as capas tortinhas atrás de tudo) */
+/* ela fica presa na tela: eu rolo a página e ela não se mexe, só o conteúdo passa por cima */
 .fundo-de-capas {
     position: fixed; /* fixed = presa na tela, não rola junto */
     top: 0;
-    left: -160px;
-    right: -160px;
+    left: 0;
+    width: 100%;
     height: 100%;
     z-index: -1; /* z-index decide quem fica na frente; -1 = atrás de tudo */
-    display: flex; /* coloca as tiras uma do lado da outra */
-    gap: 10px; /* espacinho entre as tiras */
+    object-fit: cover; /* preenche a tela sem esticar a imagem */
     opacity: 0.2; /* bem apagadinho (0 = some, 1 = normal), senão atrapalha ler o texto */
     pointer-events: none; /* o mouse "atravessa" o fundo, então dá pra clicar nas coisas da frente */
-}
-
-/* cada tira: todas do mesmo tamanho (flex: 1) e entortadas pro lado */
-.tira-inclinada {
-    flex: 1;
-    overflow: hidden; /* corta o que sobrar da imagem pra fora da tira */
-    transform: skewX(12deg); /* skewX entorta a caixa 12 graus */
-}
-
-/* a imagem dentro da tira: entorto ela pro lado contrário (-12deg) pra ela ficar reta de novo */
-/* e deixo ela 2x mais larga e puxada pra esquerda pra não sobrar cantinho vazio */
-.tira-inclinada img {
-    width: 200%;
-    height: 100%;
-    margin-left: -50%;
-    object-fit: cover; /* preenche a caixa sem esticar a imagem */
-    transform: skewX(-12deg);
 }
 
 /* cabeçalho */
@@ -344,9 +325,12 @@ a {
     border-color: var(--azul);
 }
 
-/* o emoji grandão do cartão */
+/* o ícone do cartão: a imagem tem fundo transparente, então o cartão aparece atrás dela */
 .icone-motivo {
-    font-size: 44px;
+    display: block; /* img fica em linha com o texto; block deixa ela ocupar a linha dela */
+    width: 96px;
+    height: 96px;
+    margin-left: -8px; /* a imagem tem uma folguinha transparente; isso alinha o desenho com o título */
 }
 
 .cartao-motivo h3 {

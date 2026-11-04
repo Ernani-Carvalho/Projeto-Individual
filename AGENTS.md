@@ -200,7 +200,7 @@ Todas em `web-data-viz/public/`, cada uma no seu `.html` e com o seu CSS.
 | Página | Arquivo | CSS | Conteúdo |
 | --- | --- | --- | --- |
 | Início | `index.html` | `inicio.css` | Capas em tiras inclinadas no fundo do título, números gerais, destaques, história dos indies (texto, três ideias e linha do tempo com capas), curiosidades, um indie para cada tipo de jogador |
-| Sobre mim | `sobre.html` | `sobre.css` | Quem eu sou e dedicatória (textos meus, `[PREENCHER]`) |
+| Sobre mim | `sobre.html` | `sobre.css` | Quem eu sou e dedicatória (textos meus) |
 | Catálogo | `jogos.html` | `jogos.css` | Capas dos jogos, busca e o cenário do jogo no fundo ao passar o mouse |
 | Jogo | `jogo.html` | `jogos.css` | Capa, ficha (estúdio, criadores, país, ano, gênero), temas, filosofia em parágrafos, bosses e média de tentativas, com o cenário fixo no fundo |
 | Login | `login.html` | `login.css` | Login |
@@ -299,7 +299,7 @@ JavaScript:
 
 HTML: tags básicas e semânticas (`nav`, `main`, `footer`, `div`, `span`, `h1` a `h6`, `p`, `br`, `ul`, `a`, `img`), `input`, `label`, `select`, `option`, `button`, links, `onclick` e `oninput`. O cabeçalho é uma `div` com a classe `cabecalho`, e as partes da página também são `div`.
 
-SQL: `CREATE DATABASE`, `CREATE TABLE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `ALTER TABLE`, `PRIMARY KEY`, `FOREIGN KEY`, `CONSTRAINT`, `CHECK`, `UNIQUE`, `DEFAULT`, `AUTO_INCREMENT`, `JOIN`, `LEFT JOIN`, `WHERE`, `LIKE`, `ORDER BY`, `LIMIT`, `AS`, `CASE`, `IFNULL`, `CONCAT`, `COUNT`, `SUM`, `AVG`, `ROUND`, `GROUP BY`, `CREATE USER` e `GRANT`. `COUNT`, `SUM`, `AVG`, `ROUND` e `GROUP BY` eu ainda vou ver em aula, então explique quando usar.
+SQL: `CREATE DATABASE`, `CREATE TABLE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `ALTER TABLE`, `PRIMARY KEY`, `FOREIGN KEY`, `CONSTRAINT`, `CHECK`, `UNIQUE`, `DEFAULT`, `AUTO_INCREMENT`, `JOIN`, `LEFT JOIN`, `WHERE`, `LIKE`, `ORDER BY`, `LIMIT`, `AS`, `CASE`, `IFNULL`, `CONCAT`, `COUNT`, `SUM`, `AVG`, `ROUND`, `GROUP BY`, `CREATE USER` e `GRANT`. `COUNT`, `SUM`, `AVG`, `ROUND` e `GROUP BY`
 
 ## O que não pode usar
 
@@ -375,7 +375,7 @@ Então:
 
 ### Diário de Prompts
 
-O professor pede um Diário de Prompts. No fim de cada tarefa, a IA adiciona uma entrada no `DIARIO-DE-PROMPTS.md` usando o modelo do arquivo (data e assunto, IA, o que eu pedi, o que ela fez, o que eu usei, o que eu mudei e link). O que ela não souber, deixa em branco para eu completar.
+O professor pede um Diário de Prompts. No fim de cada tarefa, a IA adiciona uma entrada no `DIARIO-DE-PROMPTS.md` usando o modelo do arquivo (data e assunto, IA, o que eu pedi, o que ela fez). O que ela não souber, deixa em branco para eu completar.
 
 ## Cuidados
 

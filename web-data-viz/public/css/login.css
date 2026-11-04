@@ -1,60 +1,44 @@
 /* login e cadastro (as cores, o cabeçalho e o botão vêm do home.css) */
 
-/* marca "Entrar" ou "Criar conta" no cabeçalho, igual o Início é marcado na home */
-.menu-usuario .pagina-atual {
-    color: #fff;
-    border-bottom-color: var(--azul);
-}
-
-/* a área em volta da caixa: deixa a caixa no meio, com um respiro em cima e embaixo */
-.area-login {
-    display: flex;
-    justify-content: center;
-    padding-top: 64px;
-    padding-bottom: 64px;
+/* tira a rolagem destas duas páginas */
+body {
+    overflow: hidden;
 }
 
 /* a caixa: boas-vindas de um lado e formulário do outro */
 .caixa-login {
     display: flex;
-    width: 100%;
     max-width: 1000px;
+    margin: 32px auto 0;
     overflow: hidden; /* corta o que passar dos cantos arredondados */
     border: 1px solid var(--borda);
     border-radius: 8px;
     background-color: var(--fundo-cartao);
 }
 
-/* lado das boas-vindas, com as mesmas manchas de luz do fundo da página */
+/* as imagens já vêm com a parte do texto escurecida */
 .lado-boas-vindas {
     flex: 1;
-    display: flex;
-    flex-direction: column; /* um embaixo do outro */
-    justify-content: center;
-    padding: 48px;
-    background-color: var(--preto);
-    background-image:
-        radial-gradient(circle at 20% 15%, rgba(77, 182, 255, 0.18), transparent 45%),
-        radial-gradient(circle at 85% 85%, rgba(255, 204, 64, 0.12), transparent 45%);
+    padding: 28px 40px;
+    background-size: cover; /* preenche o lado inteiro sem esticar a imagem */
+    background-position: center;
+}
+
+.lado-login {
+    background-image: url("../assets/login/fundo-login.jpg");
+}
+
+.lado-cadastro {
+    background-image: url("../assets/login/fundo-cadastro.jpg");
 }
 
 .lado-boas-vindas h2 {
-    margin: 8px 0 16px;
-    font-size: 50px;
-    font-weight: 800;
-    line-height: 0.95;
+    margin: 6px 0 12px;
+    font-size: 42px;
 }
 
-/* o span do título desce pra linha de baixo */
-.lado-boas-vindas h2 span {
-    display: block;
-}
-
-/* o controle que aparece em cima do texto no login */
-.icone-boas-vindas {
-    width: 112px;
-    height: 112px;
-    margin: 0 0 16px -9px; /* a imagem tem uma folguinha transparente; isso alinha o desenho com o texto */
+.lado-boas-vindas p {
+    color: var(--texto);
 }
 
 /* cada vantagem do cadastro: ícone de um lado e texto do outro */
@@ -62,46 +46,38 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 12px;
+    margin-top: 8px;
 }
 
 .vantagem img {
-    width: 64px;
-    height: 64px;
-    margin-left: -5px;
+    width: 56px;
+    height: 56px;
 }
 
-/* lado do formulário */
+/* formulário */
 .lado-formulario {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 48px;
+    padding: 24px 40px;
 }
 
 .lado-formulario h1 {
-    margin-bottom: 24px;
+    margin-bottom: 14px;
+    font-size: 38px;
 }
 
-/* campos */
 .campo {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
-/* o display: block faz o rótulo ficar em cima do campo, e não do lado */
 .campo label {
     display: block;
-    margin-bottom: 6px;
     font-weight: 700;
     font-size: 15px;
 }
 
-/* width: 100% = o campo ocupa toda a largura do lado do formulário */
-/* a fonte precisa ser avisada, porque o input não herda a da página */
 .campo input {
     width: 100%;
-    padding: 12px 14px;
+    padding: 9px 14px;
     border: 1px solid var(--borda);
     border-radius: 4px;
     background-color: var(--fundo-cartao-claro);
@@ -110,13 +86,7 @@
     font-size: 17px;
 }
 
-/* quando clico no campo, ele troca a borda preta do navegador pela azul */
-.campo input:focus {
-    outline: none;
-    border-color: var(--azul);
-}
-
-/* mensagens: o min-height guarda o espaço delas, assim o botão não pula quando aparece um texto */
+/* o min-height guarda o espaço da mensagem, assim o botão não pula */
 .mensagem-erro {
     min-height: 26px;
     color: #dd5f6a;
@@ -129,16 +99,15 @@
 }
 
 .lado-formulario .botao {
-    margin-top: 8px;
+    width: 100%;
+    margin-top: 4px;
 }
 
-/* o "já tem conta?" embaixo do botão */
 .troca-de-pagina {
-    margin-top: 18px;
+    margin-top: 10px;
     text-align: center;
 }
 
 .troca-de-pagina a {
     color: var(--azul);
-    font-weight: 700;
 }

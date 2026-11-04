@@ -2,7 +2,7 @@
 /* o :root é tipo uma caixinha de variáveis: eu dou um nome pra cor aqui e uso no resto com var(--nome) */
 /* se um dia eu quiser trocar uma cor do site inteiro, é só mudar aqui */
 :root {
-    --preto: #0a0f1d; /* quase preto azulado: cabeçalho, rodapé e letra dos botões */
+    --preto: #0a0f1d; /* quase preto azulado: cabeçalho e letra dos botões */
     --fundo: #0d1526; /* azul bem escuro do fundo da página */
     --fundo-escuro: #080d19; /* um azul ainda mais escuro */
     --fundo-cartao: #131d33; /* fundo dos cartões e caixinhas */
@@ -543,30 +543,4 @@ a {
     font-size: 56px;
     font-weight: 800;
     line-height: 0.95;
-}
-
-/* rodapé */
-.rodape {
-    padding: 40px 0;
-    border-top: 1px solid var(--borda);
-    background-color: var(--preto);
-    color: var(--texto-suave);
-    font-size: 15px;
-}
-
-/* nome do projeto na esquerda e os links na direita */
-.rodape .coluna-central {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.rodape a {
-    margin-left: 16px;
-    text-decoration: none;
-}
-
-.rodape a:hover {
-    color: var(--azul);
 }

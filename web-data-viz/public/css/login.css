@@ -1,0 +1,144 @@
+/* login e cadastro (as cores, o cabeçalho e o botão vêm do home.css) */
+
+/* marca "Entrar" ou "Criar conta" no cabeçalho, igual o Início é marcado na home */
+.menu-usuario .pagina-atual {
+    color: #fff;
+    border-bottom-color: var(--azul);
+}
+
+/* a área em volta da caixa: deixa a caixa no meio, com um respiro em cima e embaixo */
+.area-login {
+    display: flex;
+    justify-content: center;
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+/* a caixa: boas-vindas de um lado e formulário do outro */
+.caixa-login {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    overflow: hidden; /* corta o que passar dos cantos arredondados */
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background-color: var(--fundo-cartao);
+}
+
+/* lado das boas-vindas, com as mesmas manchas de luz do fundo da página */
+.lado-boas-vindas {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* um embaixo do outro */
+    justify-content: center;
+    padding: 48px;
+    background-color: var(--preto);
+    background-image:
+        radial-gradient(circle at 20% 15%, rgba(77, 182, 255, 0.18), transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(255, 204, 64, 0.12), transparent 45%);
+}
+
+.lado-boas-vindas h2 {
+    margin: 8px 0 16px;
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 0.95;
+}
+
+/* o span do título desce pra linha de baixo */
+.lado-boas-vindas h2 span {
+    display: block;
+}
+
+/* o controle que aparece em cima do texto no login */
+.icone-boas-vindas {
+    width: 112px;
+    height: 112px;
+    margin: 0 0 16px -9px; /* a imagem tem uma folguinha transparente; isso alinha o desenho com o texto */
+}
+
+/* cada vantagem do cadastro: ícone de um lado e texto do outro */
+.vantagem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.vantagem img {
+    width: 64px;
+    height: 64px;
+    margin-left: -5px;
+}
+
+/* lado do formulário */
+.lado-formulario {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px;
+}
+
+.lado-formulario h1 {
+    margin-bottom: 24px;
+}
+
+/* campos */
+.campo {
+    margin-bottom: 16px;
+}
+
+/* o display: block faz o rótulo ficar em cima do campo, e não do lado */
+.campo label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+/* width: 100% = o campo ocupa toda a largura do lado do formulário */
+/* a fonte precisa ser avisada, porque o input não herda a da página */
+.campo input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--borda);
+    border-radius: 4px;
+    background-color: var(--fundo-cartao-claro);
+    color: var(--texto);
+    font-family: var(--fonte-texto);
+    font-size: 17px;
+}
+
+/* quando clico no campo, ele troca a borda preta do navegador pela azul */
+.campo input:focus {
+    outline: none;
+    border-color: var(--azul);
+}
+
+/* mensagens: o min-height guarda o espaço delas, assim o botão não pula quando aparece um texto */
+.mensagem-erro {
+    min-height: 26px;
+    color: #dd5f6a;
+    font-weight: 700;
+}
+
+.mensagem-sucesso {
+    color: var(--azul);
+    font-weight: 700;
+}
+
+.lado-formulario .botao {
+    margin-top: 8px;
+}
+
+/* o "já tem conta?" embaixo do botão */
+.troca-de-pagina {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.troca-de-pagina a {
+    color: var(--azul);
+    font-weight: 700;
+}

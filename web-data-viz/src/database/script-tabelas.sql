@@ -1,25 +1,10 @@
--- ===================================================================
--- FirstRun: script do banco de dados
---
--- Ter este arquivo aqui não cria nada: é preciso rodar no MySQL da VM.
---
---   Parte 1: banco e tabelas
---   Parte 2: catálogo de jogos e bosses
---   Parte 3: textos da página de cada jogo
---   Parte 4: usuário que a API usa
---   Parte 5: selects da dashboard
--- ===================================================================
-
-
--- ===================================================================
--- PARTE 1: BANCO E TABELAS
--- ===================================================================
+-- script do banco do FirstRun
 
 CREATE DATABASE firstrun;
 
 USE firstrun;
 
--- Jogadores que criam conta no site
+-- jogadores
 CREATE TABLE usuario (
 	id    INT PRIMARY KEY AUTO_INCREMENT,
 	nome  VARCHAR(50),
@@ -28,9 +13,8 @@ CREATE TABLE usuario (
 	CONSTRAINT uq_usuario_email UNIQUE (email)
 );
 
--- Catálogo fixo de jogos: só muda por este script
--- A coluna imagem guarda o nome do arquivo, que é igual nas duas pastas:
--- a capa fica em assets/jogos/ e o cenário em assets/cenarios/
+-- jogos do catálogo
+-- imagem é o nome do arquivo, igual em assets/jogos e assets/cenarios
 CREATE TABLE jogo (
 	id        INT PRIMARY KEY AUTO_INCREMENT,
 	nome      VARCHAR(60),
@@ -43,7 +27,7 @@ CREATE TABLE jogo (
 	filosofia VARCHAR(1500)
 );
 
--- Cada boss é de um jogo só (jogo 1:N boss)
+-- bosses de cada jogo
 CREATE TABLE boss (
 	id      INT PRIMARY KEY AUTO_INCREMENT,
 	nome    VARCHAR(50),
@@ -51,8 +35,8 @@ CREATE TABLE boss (
 	CONSTRAINT fk_boss_jogo FOREIGN KEY (fk_jogo) REFERENCES jogo(id)
 );
 
--- Horas e status de cada jogador em cada jogo (usuario N:N jogo)
--- O UNIQUE deixa uma linha só por jogador e jogo: registrar de novo vira UPDATE
+-- horas e status de cada jogador em cada jogo
+-- unique: uma linha só por jogador em cada jogo
 CREATE TABLE progresso (
 	id         INT PRIMARY KEY AUTO_INCREMENT,
 	fk_usuario INT,
@@ -68,7 +52,7 @@ CREATE TABLE progresso (
 	)
 );
 
--- Bosses que cada jogador derrotou (usuario N:N boss)
+-- bosses que cada jogador derrotou
 CREATE TABLE boss_derrotado (
 	id          INT PRIMARY KEY AUTO_INCREMENT,
 	fk_usuario  INT,
@@ -82,12 +66,7 @@ CREATE TABLE boss_derrotado (
 	CONSTRAINT chk_derrotado_dificuldade CHECK (dificuldade >= 1 AND dificuldade <= 5)
 );
 
-
--- ===================================================================
--- PARTE 2: CATÁLOGO DE JOGOS E BOSSES
--- ===================================================================
-
--- O id de cada jogo segue a ordem desta lista (1 = Hollow Knight ... 9 = Ori)
+-- o id segue essa ordem (1 é Hollow Knight e 9 é Ori)
 INSERT INTO jogo (nome, estudio, ano, genero, imagem) VALUES
 ('Hollow Knight',            'Team Cherry',        2017, 'Metroidvania', 'hollow-knight.jpg'),
 ('Hollow Knight: Silksong',  'Team Cherry',        2025, 'Metroidvania', 'silksong.jpg'),
@@ -99,7 +78,7 @@ INSERT INTO jogo (nome, estudio, ano, genero, imagem) VALUES
 ('Blasphemous',              'The Game Kitchen',   2019, 'Metroidvania', 'blasphemous.jpg'),
 ('Ori and the Blind Forest', 'Moon Studios',       2015, 'Metroidvania', 'ori.jpg');
 
--- O número depois do nome é o id do jogo
+-- o número é o id do jogo
 INSERT INTO boss (nome, fk_jogo) VALUES
 -- Hollow Knight
 ('False Knight', 1),
@@ -155,13 +134,8 @@ INSERT INTO boss (nome, fk_jogo) VALUES
 ('Forlorn Ruins Escape', 9),
 ('Mount Horu Escape', 9);
 
-
--- ===================================================================
--- PARTE 3: TEXTOS DA PÁGINA DE CADA JOGO
---
--- O CONCAT junta os pedaços num texto só, para as linhas não ficarem enormes.
--- O \n\n separa os parágrafos: na página, use white-space: pre-line no CSS.
--- ===================================================================
+-- textos da página de cada jogo
+-- \n\n é a quebra de parágrafo
 
 -- Hollow Knight
 UPDATE jogo SET
@@ -325,29 +299,15 @@ UPDATE jogo SET
 	)
 WHERE id = 9;
 
-
--- ===================================================================
--- PARTE 4: USUÁRIO QUE A API USA
---
--- Só com o que ela precisa e só neste banco.
--- Troque usuario e senha pelos seus, tire os dois traços e rode como root na VM.
--- Depois coloque o mesmo usuário e senha no .env.dev (nunca aqui).
--- ===================================================================
+-- usuário da api: trocar usuario e senha e rodar como root na vm
 
 -- CREATE USER 'usuario'@'%' IDENTIFIED BY 'senha';
 -- GRANT SELECT, INSERT, UPDATE, DELETE ON firstrun.* TO 'usuario'@'%';
 
+-- selects da dashboard
+-- o 1 é o id do jogador, no model vira ${idUsuario}
 
--- ===================================================================
--- PARTE 5: SELECTS DA DASHBOARD
---
--- O 1 em fk_usuario = 1 é só um exemplo: no model ele vira ${idUsuario}.
---
--- COUNT conta linhas, SUM soma os valores e GROUP BY faz a conta por grupo.
--- IFNULL devolve 0 no lugar de NULL quando o jogador ainda não tem dados.
--- ===================================================================
-
--- Painel de boas-vindas: jogo mais jogado (o de mais horas)
+-- jogo mais jogado
 SELECT jogo.nome, jogo.imagem, progresso.horas
 FROM progresso
 JOIN jogo ON progresso.fk_jogo = jogo.id
@@ -355,7 +315,7 @@ WHERE progresso.fk_usuario = 1
 ORDER BY progresso.horas DESC
 LIMIT 1;
 
--- Indicadores "Total de horas" e "Jogos cadastrados" (com quantos estão zerados)
+-- total de horas, de jogos e de zerados
 SELECT
 	IFNULL(SUM(horas), 0) AS total_horas,
 	COUNT(id) AS total_jogos,
@@ -363,21 +323,21 @@ SELECT
 FROM progresso
 WHERE fk_usuario = 1;
 
--- Indicador "Bosses derrotados" (com o total de tentativas)
+-- bosses derrotados e tentativas
 SELECT
 	COUNT(id) AS total_bosses,
 	IFNULL(SUM(tentativas), 0) AS total_tentativas
 FROM boss_derrotado
 WHERE fk_usuario = 1;
 
--- Gráfico de barras "Horas por jogo"
+-- horas por jogo
 SELECT jogo.nome, progresso.horas
 FROM progresso
 JOIN jogo ON progresso.fk_jogo = jogo.id
 WHERE progresso.fk_usuario = 1
 ORDER BY progresso.horas DESC;
 
--- Cartão "Boss mais difícil": maior dificuldade e, no empate, mais tentativas
+-- boss mais difícil: maior dificuldade, no empate mais tentativas
 SELECT
 	boss.nome AS boss,
 	jogo.nome AS jogo,
@@ -390,9 +350,8 @@ WHERE boss_derrotado.fk_usuario = 1
 ORDER BY boss_derrotado.dificuldade DESC, boss_derrotado.tentativas DESC
 LIMIT 1;
 
--- Gráficos de rosca "Conclusão de cada jogo"
--- O LEFT JOIN mantém os bosses que o jogador ainda não derrotou.
--- A porcentagem é feita na página: bosses_derrotados / total_bosses * 100
+-- conclusão de cada jogo (a porcentagem é feita na página)
+-- left join para contar também os bosses não derrotados
 SELECT
 	jogo.nome,
 	COUNT(boss.id) AS total_bosses,
@@ -406,16 +365,13 @@ WHERE progresso.fk_usuario = 1
 GROUP BY jogo.id, jogo.nome
 ORDER BY jogo.nome;
 
--- Gráfico de rosca "Jogos por status"
+-- jogos por status
 SELECT status, COUNT(id) AS quantidade
 FROM progresso
 WHERE fk_usuario = 1
 GROUP BY status;
 
--- "Você x média dos jogadores": os totais de todos os jogadores.
--- Os valores do jogador já vêm dos indicadores acima. Na página:
--- média = total de todos / total_jogadores
--- comparação = (valor do jogador - média) / média * 100
+-- totais de todos os jogadores, para comparar com a média
 SELECT COUNT(id) AS total_jogadores
 FROM usuario;
 

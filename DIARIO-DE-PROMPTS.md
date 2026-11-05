@@ -36,3 +36,15 @@ Onde eu anoto cada vez que usei IA no projeto.
 - IA: Claude Code
 - Pedi: colocar alguns efeitos simples na home para deixar a página mais dinâmica.
 - Ela fez: colocou no fim do `home.css` a borda azul nos cartões ao passar o mouse, a troca de cor dos botões e o topo da página aparecendo aos poucos com `@keyframes`, sem nada se mexer de lugar.
+
+## 04/11/2026 - comentários do script do banco
+
+- IA: Claude Code
+- Pedi: deixar os comentários do script do banco com menos cara de IA.
+- Ela fez: tirou as faixas de separação e os comentários longos e deixou comentários curtos. O código do script não mudou.
+
+## 04/11/2026 - DER atualizado
+
+- IA: Claude Code
+- Pedi: criar de novo o DER, depois das mudanças no script do banco.
+- Ela fez: gerou com o MySQL Workbench o `docs/modelo-logico.mwb` e a imagem `docs/modelo-logico.png`, a partir das tabelas do `script-tabelas.sql`.

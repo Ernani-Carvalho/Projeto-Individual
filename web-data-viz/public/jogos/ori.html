@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FirstRun | Ori and the Blind Forest</title>
+    <link rel="icon" href="../assets/logo/favicon-chama.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <script src="../js/sessao.js"></script>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/jogos.css">
+</head>
+
+<body>
+
+    <img class="fundo-de-capas cenario-fixo" src="../assets/cenarios/ori.jpg" alt="">
+
+    <div class="cabecalho">
+        <div class="coluna-central">
+            <a class="logo" href="../index.html"><img src="../assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
+
+            <nav class="menu">
+                <a href="../index.html">Início</a>
+                <a class="pagina-atual" href="../jogos.html">Jogos</a>
+                <a>Sobre mim</a>
+            </nav>
+
+            <div class="menu-usuario" id="div_menu_usuario">
+                <a href="../login.html">Entrar</a>
+                <a href="../cadastro.html">Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco">
+        <div class="coluna-central">
+            <div class="topo-jogo">
+                <img class="capa-grande" src="../assets/jogos/ori.jpg" alt="Capa de Ori and the Blind Forest">
+                <div>
+                    <h1 class="titulo-secao">Ori and the Blind Forest</h1>
+                    <p class="lema-jogo">Ninguém ali é mau à toa: até a raiva nasce de uma perda.</p>
+                    <p><span class="rotulo">Estúdio:</span> Moon Studios</p>
+                    <p><span class="rotulo">País:</span> Áustria</p>
+                    <p><span class="rotulo">Ano:</span> 2015</p>
+                    <p><span class="rotulo">Gênero:</span> Metroidvania</p>
+                    <p><span class="rotulo">Temas:</span> Luto, Perdão, Família, Natureza</p>
+                </div>
+            </div>
+
+            <div class="texto-jogo">
+                <h2>A filosofia do jogo</h2>
+                <p>Durante uma tempestade, o pequeno espírito Ori cai da Árvore Espiritual e é adotado por Naru, que cuida dele como filho. Quando a floresta de Nibel começa a morrer, Ori perde Naru e fica sozinho.</p>
+                <p>Com a ajuda de Sein, a luz da Árvore, Ori tenta salvar a floresta. A grande inimiga é a coruja Kuro, mas o jogo mostra que ela também perdeu os filhos, e a dor dela explica a raiva. Não existe um vilão simples, só pessoas machucadas tentando proteger o que amam.</p>
+                <p>É uma história sobre luto, perdão e família, contada quase sem palavras, só com imagens e música. A floresta acompanha esse caminho: ela sofre junto com os personagens e volta a viver quando eles conseguem se perdoar.</p>
+            </div>
+
+            <div class="texto-jogo">
+                <h2>Quem criou</h2>
+                <p>A Moon Studios foi fundada em 2010 por Thomas Mahler e Gennadiy Korol. Mahler estudou escultura na Academia de Belas Artes de Viena e trabalhou como artista na Blizzard antes de abrir o estúdio.</p>
+                <p>A música, um dos pontos mais lembrados do jogo, é de Gareth Coker. Ori and the Blind Forest saiu em 2015, publicado pela Microsoft, e ganhou a continuação Ori and the Will of the Wisps em 2020.</p>
+            </div>
+
+            <div class="texto-jogo">
+                <h2>O país de origem</h2>
+                <p>A sede oficial fica em Viena, na Áustria, mas a Moon Studios funciona como um estúdio virtual: não aluga escritório, contrata pessoas pelo mundo inteiro e trabalha pela internet. Em 2020, eram mais de 80 pessoas de 43 países.</p>
+                <p>Por isso, Ori não pertence a um único lugar. O jogo é um exemplo de como uma equipe espalhada pelo mundo consegue fazer um trabalho muito unido.</p>
+            </div>
+
+            <h2 class="titulo-secao titulo-bosses">Bosses</h2>
+            <p class="subtitulo">Média de tentativas de todos os jogadores em cada luta.</p>
+            <div class="lista-bosses">
+                <div class="cartao-boss">
+                    <img src="../assets/bosses/ginso-tree.png" alt="Ginso Tree Escape">
+                    <h3>Ginso Tree Escape</h3>
+                    <p class="texto-suave" id="p_media_164">Ninguém registrou ainda</p>
+                </div>
+                <div class="cartao-boss">
+                    <img src="../assets/bosses/forlorn-ruins.png" alt="Forlorn Ruins Escape">
+                    <h3>Forlorn Ruins Escape</h3>
+                    <p class="texto-suave" id="p_media_165">Ninguém registrou ainda</p>
+                </div>
+                <div class="cartao-boss">
+                    <img src="../assets/bosses/mount-horu.png" alt="Mount Horu Escape">
+                    <h3>Mount Horu Escape</h3>
+                    <p class="texto-suave" id="p_media_166">Ninguém registrou ainda</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // se tiver alguém logado, troca "Entrar" e "Criar conta" pelos links da conta
+        function montarMenu() {
+            if (sessionStorage.ID_USUARIO != undefined) {
+                div_menu_usuario.innerHTML = `
+                    <a href="../registrar.html">Registrar</a>
+                    <a href="../perfil.html">Perfil</a>
+                    <a>Dashboard</a>
+                    <a onclick="limparSessao()">Sair</a>`;
+            }
+        }
+
+        // busca no banco a média de tentativas dos bosses deste jogo (o 9 é o id do jogo)
+        function buscarMedias() {
+            fetch("/jogos/medias/9").then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        mostrarMedias(json);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        // cada boss tem um parágrafo com o id dele no banco (p_media_1, p_media_2...)
+        function mostrarMedias(medias) {
+            for (let i = 0; i < medias.length; i++) {
+                document.getElementById(`p_media_${medias[i].id}`).innerHTML = `Média: ${medias[i].media_tentativas} tentativas`;
+            }
+        }
+
+        buscarMedias();
+        montarMenu();
+    </script>
+
+</body>
+
+</html>

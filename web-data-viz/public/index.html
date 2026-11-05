@@ -7,6 +7,7 @@
     <link rel="icon" href="assets/logo/favicon-chama.png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <script src="js/sessao.js"></script>
     <link rel="stylesheet" href="css/home.css">
 </head>
 
@@ -20,11 +21,11 @@
 
             <nav class="menu">
                 <a class="pagina-atual" href="index.html">Início</a>
-                <a>Jogos</a>
+                <a href="jogos.html">Jogos</a>
                 <a>Sobre mim</a>
             </nav>
 
-            <div class="menu-usuario">
+            <div class="menu-usuario" id="div_menu_usuario">
                 <a href="login.html">Entrar</a>
                 <a href="cadastro.html">Criar conta</a>
             </div>
@@ -38,7 +39,7 @@
 
         <div class="botoes-topo">
             <a class="botao" href="cadastro.html">Criar conta</a>
-            <a class="botao botao-contorno">Explorar jogos</a>
+            <a class="botao botao-contorno" href="jogos.html">Explorar jogos</a>
         </div>
 
         <div class="numeros-gerais">
@@ -66,9 +67,8 @@
             <span class="texto-acima-do-titulo">Ranking dos jogadores</span>
             <h2 class="titulo-secao">Os mais jogados</h2>
             <p class="subtitulo">Os jogos com mais horas registradas somando todos os jogadores.</p>
-            <div class="ranking" id="div_ranking">
-                <div class="aviso-sem-dados">O ranking aparece aqui quando os jogadores começarem a registrar horas.</div>
-            </div>
+            <div class="aviso-sem-dados" id="div_aviso_ranking">O ranking aparece aqui quando os jogadores começarem a registrar horas.</div>
+            <div class="ranking" id="div_ranking"></div>
         </div>
     </div>
 
@@ -243,13 +243,24 @@
     </div>
 
     <script>
+        // se tiver alguém logado, troca "Entrar" e "Criar conta" pelos links da conta
+        function montarMenu() {
+            if (sessionStorage.ID_USUARIO != undefined) {
+                div_menu_usuario.innerHTML = `
+                    <a href="registrar.html">Registrar</a>
+                    <a href="perfil.html">Perfil</a>
+                    <a>Dashboard</a>
+                    <a onclick="limparSessao()">Sair</a>`;
+            }
+        }
+
         let recomendacoes = [
-            { tipoDeJogador: "Se você gosta de explorar", jogo: "Hollow Knight", capa: "assets/jogos/hollow-knight.jpg", motivo: "Um mapa enorme, cheio de caminhos escondidos, que você vai desenhando enquanto descobre o reino." },
-            { tipoDeJogador: "Se você quer uma história que faz pensar", jogo: "Undertale", capa: "assets/jogos/undertale.jpg", motivo: "Cada escolha importa, e dá para chegar ao fim sem machucar ninguém." },
-            { tipoDeJogador: "Se você adora um desafio", jogo: "Cuphead", capa: "assets/jogos/cuphead.jpg", motivo: "Uma luta de chefe atrás da outra, todas desenhadas à mão como um desenho animado antigo." },
-            { tipoDeJogador: "Se você gosta de tentar de novo", jogo: "Hades", capa: "assets/jogos/hades.jpg", motivo: "Cada fuga é diferente, e cada derrota faz a história andar um pouco mais." },
-            { tipoDeJogador: "Se você quer se emocionar", jogo: "Ori and the Blind Forest", capa: "assets/jogos/ori.jpg", motivo: "Uma floresta linda e uma história de família contada quase sem palavras." },
-            { tipoDeJogador: "Se você está num momento difícil", jogo: "Celeste", capa: "assets/jogos/celeste.jpg", motivo: "Uma escalada sobre ansiedade, que trata cada queda como parte do caminho." }
+            { tipoDeJogador: "Se você gosta de explorar", pagina: "jogos/hollow-knight.html", jogo: "Hollow Knight", capa: "assets/jogos/hollow-knight.jpg", motivo: "Um mapa enorme, cheio de caminhos escondidos, que você vai desenhando enquanto descobre o reino." },
+            { tipoDeJogador: "Se você quer uma história que faz pensar", pagina: "jogos/undertale.html", jogo: "Undertale", capa: "assets/jogos/undertale.jpg", motivo: "Cada escolha importa, e dá para chegar ao fim sem machucar ninguém." },
+            { tipoDeJogador: "Se você adora um desafio", pagina: "jogos/cuphead.html", jogo: "Cuphead", capa: "assets/jogos/cuphead.jpg", motivo: "Uma luta de chefe atrás da outra, todas desenhadas à mão como um desenho animado antigo." },
+            { tipoDeJogador: "Se você gosta de tentar de novo", pagina: "jogos/hades.html", jogo: "Hades", capa: "assets/jogos/hades.jpg", motivo: "Cada fuga é diferente, e cada derrota faz a história andar um pouco mais." },
+            { tipoDeJogador: "Se você quer se emocionar", pagina: "jogos/ori.html", jogo: "Ori and the Blind Forest", capa: "assets/jogos/ori.jpg", motivo: "Uma floresta linda e uma história de família contada quase sem palavras." },
+            { tipoDeJogador: "Se você está num momento difícil", pagina: "jogos/celeste.html", jogo: "Celeste", capa: "assets/jogos/celeste.jpg", motivo: "Uma escalada sobre ansiedade, que trata cada queda como parte do caminho." }
         ];
 
         function mostrarRecomendacoes() {
@@ -257,18 +268,55 @@
 
             for (let i = 0; i < recomendacoes.length; i++) {
                 div_recomendacoes.innerHTML += `
-                    <div class="cartao-recomendacao">
+                    <a class="cartao-recomendacao" href="${recomendacoes[i].pagina}">
                         <div class="capa-jogo"><img src="${recomendacoes[i].capa}" alt="Capa de ${recomendacoes[i].jogo}"></div>
                         <div class="recomendacao-texto">
                             <span class="tipo-de-jogador">${recomendacoes[i].tipoDeJogador}</span>
                             <h3>${recomendacoes[i].jogo}</h3>
                             <p class="texto-suave">${recomendacoes[i].motivo}</p>
                         </div>
+                    </a>`;
+            }
+        }
+
+        // números gerais e ranking, somando todos os jogadores
+        function buscarIndicadores() {
+            fetch("/indicadores/gerais").then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        span_total_jogadores.innerHTML = json.jogadores;
+                        span_total_horas.innerHTML = json.horas;
+                        span_total_bosses.innerHTML = json.bosses;
+                        span_total_jogos.innerHTML = json.jogos;
+                        mostrarRanking(json.ranking);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        function mostrarRanking(ranking) {
+            if (ranking.length == 0) {
+                return;
+            }
+
+            div_aviso_ranking.style.display = "none";
+            div_ranking.innerHTML = "";
+
+            for (let i = 0; i < ranking.length; i++) {
+                div_ranking.innerHTML += `
+                    <div class="ranking-jogo">
+                        <img src="assets/jogos/${ranking[i].imagem}" alt="Capa de ${ranking[i].nome}">
+                        <h3>${i + 1}º ${ranking[i].nome}</h3>
+                        <p class="texto-azul">${ranking[i].horas} horas</p>
                     </div>`;
             }
         }
 
         mostrarRecomendacoes();
+        buscarIndicadores();
+        montarMenu();
     </script>
 
 </body>

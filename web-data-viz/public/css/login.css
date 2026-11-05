@@ -65,27 +65,6 @@ body {
     font-size: 38px;
 }
 
-.campo {
-    margin-bottom: 10px;
-}
-
-.campo label {
-    display: block;
-    font-weight: 700;
-    font-size: 15px;
-}
-
-.campo input {
-    width: 100%;
-    padding: 9px 14px;
-    border: 1px solid var(--borda);
-    border-radius: 4px;
-    background-color: var(--fundo-cartao-claro);
-    color: var(--texto);
-    font-family: var(--fonte-texto);
-    font-size: 17px;
-}
-
 /* o min-height guarda o espaço da mensagem, assim o botão não pula */
 .mensagem-erro {
     min-height: 26px;

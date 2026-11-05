@@ -7,6 +7,7 @@
     <link rel="icon" href="assets/logo/favicon-chama.png">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <script src="js/sessao.js"></script>
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
@@ -21,11 +22,11 @@
 
             <nav class="menu">
                 <a href="index.html">Início</a>
-                <a>Jogos</a>
+                <a href="jogos.html">Jogos</a>
                 <a>Sobre mim</a>
             </nav>
 
-            <div class="menu-usuario">
+            <div class="menu-usuario" id="div_menu_usuario">
                 <a class="pagina-atual" href="login.html">Entrar</a>
                 <a href="cadastro.html">Criar conta</a>
             </div>
@@ -62,6 +63,17 @@
     </div>
 
     <script>
+        // se tiver alguém logado, troca "Entrar" e "Criar conta" pelos links da conta
+        function montarMenu() {
+            if (sessionStorage.ID_USUARIO != undefined) {
+                div_menu_usuario.innerHTML = `
+                    <a href="registrar.html">Registrar</a>
+                    <a href="perfil.html">Perfil</a>
+                    <a>Dashboard</a>
+                    <a onclick="limparSessao()">Sair</a>`;
+            }
+        }
+
         function entrar() {
             let email = ipt_email.value.trim().toLowerCase();
             let senha = ipt_senha.value;
@@ -110,9 +122,8 @@
 
                         div_mensagem_sucesso.innerHTML = `Olá, ${json.nome}! Entrando...`;
 
-                        // quando a dashboard/perfil.html existir, o login passa a ir para ela
                         setTimeout(function () {
-                            window.location = "index.html";
+                            window.location = "perfil.html";
                         }, 1500);
                     });
                 } else if (resposta.status == 403) {
@@ -127,6 +138,7 @@
                 div_mensagem_erro.innerHTML = "Não foi possível falar com o servidor.";
             });
         }
+        montarMenu();
     </script>
 
 </body>

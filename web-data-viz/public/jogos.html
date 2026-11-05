@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FirstRun | Jogos</title>
+    <link rel="icon" href="assets/logo/favicon-chama.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <script src="js/sessao.js"></script>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/jogos.css">
+</head>
+
+<body>
+
+    <img class="fundo-de-capas" src="assets/fundo/fundo-de-capas.jpg" alt="">
+
+    <div class="cabecalho">
+        <div class="coluna-central">
+            <a class="logo" href="index.html"><img src="assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
+
+            <nav class="menu">
+                <a href="index.html">Início</a>
+                <a class="pagina-atual" href="jogos.html">Jogos</a>
+                <a>Sobre mim</a>
+            </nav>
+
+            <div class="menu-usuario" id="div_menu_usuario">
+                <a href="login.html">Entrar</a>
+                <a href="cadastro.html">Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco">
+        <div class="coluna-central">
+            <span class="texto-acima-do-titulo">Catálogo</span>
+            <h1 class="titulo-secao">Jogos</h1>
+            <p class="subtitulo">Escolha um jogo para conhecer a filosofia, quem criou e os bosses.</p>
+
+            <div class="lista-jogos">
+                <a class="cartao-jogo" href="jogos/hollow-knight.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/hollow-knight.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/hollow-knight.jpg" alt="Capa de Hollow Knight">
+                    <h3>Hollow Knight</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/silksong.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/silksong.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/silksong.jpg" alt="Capa de Hollow Knight: Silksong">
+                    <h3>Hollow Knight: Silksong</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/hades.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/hades.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/hades.jpg" alt="Capa de Hades">
+                    <h3>Hades</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/cuphead.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/cuphead.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/cuphead.jpg" alt="Capa de Cuphead">
+                    <h3>Cuphead</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/celeste.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/celeste.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/celeste.jpg" alt="Capa de Celeste">
+                    <h3>Celeste</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/dead-cells.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/dead-cells.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/dead-cells.jpg" alt="Capa de Dead Cells">
+                    <h3>Dead Cells</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/undertale.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/undertale.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/undertale.jpg" alt="Capa de Undertale">
+                    <h3>Undertale</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/blasphemous.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/blasphemous.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/blasphemous.jpg" alt="Capa de Blasphemous">
+                    <h3>Blasphemous</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/ori.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/ori.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/ori.jpg" alt="Capa de Ori and the Blind Forest">
+                    <h3>Ori and the Blind Forest</h3>
+                </a>
+                <a class="cartao-jogo" href="jogos/nine-sols.html">
+                    <img class="cenario-do-jogo" src="assets/cenarios/nine-sols.jpg" alt="">
+                    <img class="capa-do-jogo" src="assets/jogos/nine-sols.jpg" alt="Capa de Nine Sols">
+                    <h3>Nine Sols</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // se tiver alguém logado, troca "Entrar" e "Criar conta" pelos links da conta
+        function montarMenu() {
+            if (sessionStorage.ID_USUARIO != undefined) {
+                div_menu_usuario.innerHTML = `
+                    <a href="registrar.html">Registrar</a>
+                    <a href="perfil.html">Perfil</a>
+                    <a>Dashboard</a>
+                    <a onclick="limparSessao()">Sair</a>`;
+            }
+        }
+
+        montarMenu();
+    </script>
+
+</body>
+
+</html>

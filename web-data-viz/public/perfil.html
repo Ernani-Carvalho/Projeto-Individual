@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FirstRun | Perfil</title>
+    <link rel="icon" href="assets/logo/favicon-chama.png">
+
+    <script src="js/sessao.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+
+    <img class="fundo-de-capas" src="assets/fundo/fundo-de-capas.jpg" alt="">
+
+    <div class="cabecalho">
+        <div class="coluna-central">
+            <a class="logo" href="index.html"><img src="assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
+
+            <nav class="menu">
+                <a href="index.html">Início</a>
+                <a href="jogos.html">Jogos</a>
+                <a>Sobre mim</a>
+            </nav>
+
+            <div class="menu-usuario">
+                <a href="registrar.html">Registrar</a>
+                <a class="pagina-atual" href="perfil.html">Perfil</a>
+                <a>Dashboard</a>
+                <a onclick="limparSessao()">Sair</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco">
+        <div class="coluna-central">
+            <span class="texto-acima-do-titulo">Sua conta</span>
+            <h1 class="titulo-secao">Perfil</h1>
+
+            <div class="painel topo-perfil">
+                <span class="circulo-letra" id="span_letra"></span>
+                <div>
+                    <h2 id="b_usuario"></h2>
+                    <p class="texto-suave" id="p_email"></p>
+                </div>
+                <a class="botao" href="registrar.html">Registrar progresso</a>
+            </div>
+
+            <div class="numeros-gerais">
+                <div class="caixa-numero">
+                    <span class="numero-grande" id="span_total_horas">0</span>
+                    <span class="texto-suave">horas jogadas</span>
+                </div>
+                <div class="caixa-numero">
+                    <span class="numero-grande" id="span_total_jogos">0</span>
+                    <span class="texto-suave">jogos registrados</span>
+                </div>
+                <div class="caixa-numero">
+                    <span class="numero-grande" id="span_total_bosses">0</span>
+                    <span class="texto-suave">bosses derrotados</span>
+                </div>
+                <div class="caixa-numero">
+                    <span class="numero-grande" id="span_total_tentativas">0</span>
+                    <span class="texto-suave">tentativas no total</span>
+                </div>
+            </div>
+
+            <div class="duas-colunas">
+                <div class="painel">
+                    <h2>Horas por jogo</h2>
+                    <div id="div_jogos">
+                        <p class="texto-suave">Você ainda não registrou nenhum jogo.</p>
+                    </div>
+                </div>
+
+                <div class="painel">
+                    <h2>Bosses derrotados</h2>
+                    <div id="div_bosses">
+                        <p class="texto-suave">Nenhum boss registrado ainda.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let nomesDificuldade = ["Fácil", "Média", "Difícil", "Muito difícil", "Insana"];
+
+        function carregarPerfil() {
+            // o validarSessao (do sessao.js) coloca o nome no b_usuario ou volta para o login
+            validarSessao();
+
+            span_letra.innerHTML = sessionStorage.NOME_USUARIO.substring(0, 1).toUpperCase();
+            p_email.innerHTML = sessionStorage.EMAIL_USUARIO;
+
+            buscarJogos();
+            buscarBosses();
+        }
+
+        function buscarJogos() {
+            fetch(`/progressos/jogos/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        mostrarJogos(json);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        // os jogos já vêm do banco do que tem mais horas para o que tem menos
+        function mostrarJogos(jogos) {
+            if (jogos.length == 0) {
+                return;
+            }
+
+            let totalHoras = 0;
+            let maiorHoras = jogos[0].horas;
+            div_jogos.innerHTML = "";
+
+            for (let i = 0; i < jogos.length; i++) {
+                totalHoras += jogos[i].horas;
+
+                // a barra do jogo com mais horas fica cheia (100%) e as outras proporcionais a ela
+                let largura = 0;
+                if (maiorHoras > 0) {
+                    largura = jogos[i].horas / maiorHoras * 100;
+                }
+
+                div_jogos.innerHTML += `
+                    <div class="jogo-horas">
+                        <div class="nome-e-horas">
+                            <span>${jogos[i].nome}</span>
+                            <span class="texto-suave">${jogos[i].status} · <span class="texto-azul">${jogos[i].horas}h</span></span>
+                        </div>
+                        <div class="barra"><div class="barra-cheia" style="width: ${largura}%"></div></div>
+                    </div>`;
+            }
+
+            span_total_horas.innerHTML = totalHoras;
+            span_total_jogos.innerHTML = jogos.length;
+        }
+
+        function buscarBosses() {
+            fetch(`/progressos/bosses/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        mostrarBosses(json);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        function mostrarBosses(bosses) {
+            if (bosses.length == 0) {
+                return;
+            }
+
+            let totalTentativas = 0;
+            div_bosses.innerHTML = "";
+
+            for (let i = 0; i < bosses.length; i++) {
+                totalTentativas += bosses[i].tentativas;
+
+                div_bosses.innerHTML += `
+                    <div class="linha-boss">
+                        <div>
+                            <span>${bosses[i].boss}</span>
+                            <span class="texto-suave"> · ${bosses[i].jogo}</span>
+                        </div>
+                        <div>
+                            <span class="texto-suave">${bosses[i].tentativas} tentativas</span>
+                            <span class="etiqueta nivel-${bosses[i].dificuldade}">${nomesDificuldade[bosses[i].dificuldade - 1]}</span>
+                        </div>
+                    </div>`;
+            }
+
+            span_total_bosses.innerHTML = bosses.length;
+            span_total_tentativas.innerHTML = totalTentativas;
+        }
+
+        carregarPerfil();
+    </script>
+
+</body>
+
+</html>

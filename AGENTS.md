@@ -1,113 +1,112 @@
 # AGENTS.md
 
-Instruções para qualquer IA que for mexer neste projeto. Leia tudo antes de alterar qualquer coisa.
+Regras para qualquer IA que for mexer neste projeto. Leia tudo antes de alterar alguma coisa.
 
 ## O projeto
 
-É o meu projeto individual de Pesquisa e Inovação (PI), do 1º semestre de Análise e Desenvolvimento de Sistemas na SPTech. O tema é jogos indie.
+Este é o meu projeto individual de Pesquisa e Inovação (PI), do 1º semestre de Análise e Desenvolvimento de Sistemas na SPTech. O site se chama FirstRun e o tema é jogos indie.
 
-Quem joga indie passa por muitos jogos diferentes e acaba sem um lugar para guardar o que já jogou, até onde chegou e o que achou de cada luta. O site junta isso num lugar só. Nele dá para:
+Quem joga indie passa por muitos jogos e não tem um lugar para guardar o que já jogou, até onde chegou e o que achou de cada luta. O site junta isso. Nele dá para:
 
-- conhecer o tema na página inicial (jogos em destaque, a história dos indies com linha do tempo, curiosidades e recomendações de um jogo para cada tipo de jogador);
+- conhecer o tema na página inicial;
 - ler a página "Sobre mim", com uma dedicatória;
-- ver o catálogo de jogos e a página de cada jogo, com a filosofia do jogo e os bosses;
-- criar conta e fazer login;
-- registrar o progresso: horas em cada jogo, status (jogando, zerado ou pausado), bosses derrotados, quantas tentativas levou e a dificuldade de 1 a 5;
-- ver o perfil com o resumo do progresso;
+- ver o catálogo e a página de cada jogo, com a filosofia, quem criou, o país de origem e os bosses (textos fixos no código);
+- criar conta e entrar;
+- registrar o progresso: horas em cada jogo, status (jogando, zerado ou pausado), bosses derrotados, tentativas e dificuldade de 1 a 5;
+- ver o perfil com o resumo;
 - acompanhar tudo numa dashboard com gráficos (Chart.js) e indicadores.
 
-Só existe um tipo de usuário: o jogador. O perfil e a dashboard mostram só os dados de quem está logado. A página inicial mostra números somando todos os jogadores (jogadores, horas, bosses derrotados e jogos no catálogo), e a página de cada jogo mostra a média de tentativas de todos os jogadores em cada boss.
+Só existe um tipo de usuário: o jogador. O perfil e a dashboard mostram só os dados de quem está logado. A página inicial mostra números de todos os jogadores, e a página de cada jogo mostra a média de tentativas de todos em cada boss.
 
 O projeto é da faculdade e não vai para produção.
 
 ### O que o professor pede
 
-Pelos slides do professor, o projeto precisa ter:
-
-- Desafio: site com formulário de cadastro, tema que me representa, HTML, CSS, validações em JavaScript e a API em Node.js (web-data-viz) para cadastrar e consultar no banco.
+- Desafio: site com cadastro, tema que me representa, HTML, CSS, validações em JavaScript e a API em Node.js (web-data-viz) para cadastrar e consultar no banco.
 - Tecnologia da Informação: documento do projeto (eu faço), Trello e Git com commits pequenos e frequentes.
 - Banco de Dados: modelo lógico, relacionamentos e comandos SQL.
 - Algoritmos: variáveis, funções, contas, condicionais, repetições e vetores.
-- Arquitetura de Computadores e Matemática: cálculos (totais, médias e porcentagens).
+- Arquitetura de Computadores e Matemática: totais, médias e porcentagens.
 - Introdução aos Sistemas Operacionais: uma VM Linux só com o banco.
 - Pesquisa e Inovação: contexto, planejamento, dashboard e indicadores.
-- Socioemocional: página "Sobre mim" e a apresentação final, que responde quando o interesse por indies começou, quais valores meus aparecem no projeto, a maior dificuldade, a maior superação e a quem sou grato.
+- Socioemocional: página "Sobre mim" e a apresentação final (quando o interesse por indies começou, meus valores no projeto, a maior dificuldade, a maior superação e a quem sou grato).
 
-O README é só a vitrine do projeto no GitHub, curta e bonita. Não coloque nele requisitos do professor, cronograma, Socioemocional nem nada da matéria. Isso fica no documento do projeto, que eu vou fazer.
+O README é só a vitrine no GitHub, curta. Nada de requisitos do professor, cronograma ou Socioemocional nele. Isso fica no documento do projeto, que eu faço.
 
 ## O que não vai ser feito
 
-Não crie páginas, tabelas, rotas ou código para isto, mesmo que apareça no protótipo antigo:
+Não crie nada disto, mesmo que apareça no protótipo antigo:
 
-- comentários, respostas ou qualquer conversa entre usuários;
+- comentários ou conversa entre usuários;
 - conta de desenvolvedor ou outro tipo de usuário;
-- jogos cadastrados pelo usuário (o catálogo é fixo, vem do script do banco).
+- jogos cadastrados pelo usuário (o catálogo é fixo e vem do script do banco).
 
 ## Tecnologias
 
-- HTML para a estrutura das páginas.
-- CSS para o visual.
-- JavaScript para as validações, a interação e o `fetch` para a API. A API também é em JavaScript.
-- MySQL para o banco (usuários, jogos, bosses e progresso).
-- Uma VM Linux só com o MySQL.
-- web-data-viz: a API da faculdade, que serve o site e liga as páginas ao banco. Roda com Node.js e já vem com express, mysql2 e dotenv. Os gráficos usam o Chart.js, carregado direto no HTML.
+- HTML, CSS e JavaScript no site. A API também é em JavaScript.
+- MySQL numa VM Linux que só tem o banco.
+- web-data-viz: a API da faculdade, com Node.js, express, mysql2 e dotenv.
+- Chart.js para os gráficos, carregado direto no HTML.
 
-O projeto não usa sensor nem Arduino, então a dat-acqu-ino não entra. Todos os dados são digitados pelos jogadores no site.
-
-Não use nada fora dessa lista.
+Não tem sensor nem Arduino. Não use nada fora dessa lista.
 
 ## Comandos
 
 Git:
 
-- `git clone https://github.com/ernani-carvalho/projeto-individual.git` para baixar.
 - `git pull` antes de começar.
 - `git add .`, `git commit -m "tipo: descrição curta"` e `git push` para enviar.
 
-Site (web-data-viz), na minha máquina:
+Site, dentro de `web-data-viz`:
 
-- `cd web-data-viz`
 - `npm install` na primeira vez ou quando o `package.json` mudar.
 - `npm start` para ligar. O site abre em `http://localhost:3333`.
 - `Ctrl + C` para desligar.
 
-Banco de dados, na VM:
+Nunca rode `npm audit fix`. As versões foram travadas pela faculdade.
 
-- O MySQL fica numa VM Lubuntu, no VirtualBox, que tem só o banco. O site e a API não rodam na VM.
-- A conexão segue o jeito da atividade de SO: a placa de rede da VM fica em NAT e o VirtualBox tem um redirecionamento de porta (Configurações → Rede → Avançado → Redirecionamento de Portas), TCP, com porta do host 3307 e porta do guest 3306. O que chega na porta 3307 da minha máquina vai para o MySQL da VM.
-- Uso 3307 no host para não bater com um MySQL que já esteja instalado na minha máquina.
-- Por causa do redirecionamento, eu me conecto em `127.0.0.1`, porta `3307`. O IP da VM não é usado.
-- O MySQL da VM precisa aceitar conexão de fora, com um usuário criado para isso (`CREATE USER` e `GRANT`, como na aula).
-- Para testar pelo terminal: `mysql -u usuario -p -h 127.0.0.1 -P 3307` (`-p` pede a senha, `-P` é a porta).
-- No Workbench: conexão em `127.0.0.1`, porta `3307`. Depois abrir `web-data-viz/src/database/script-tabelas.sql` e rodar o script inteiro.
-- No `web-data-viz/.env.dev`: `DB_HOST` = `127.0.0.1` e `DB_PORT` = `3307`. Nome do banco, usuário e senha quem preenche sou eu. A IA nunca escreve esses dados.
+Banco, na VM:
+
+- O MySQL fica numa VM Lubuntu, no VirtualBox. O site e a API não rodam nela.
+- A rede da VM fica em NAT, com redirecionamento de porta TCP: 3307 na minha máquina vai para 3306 na VM. Uso 3307 para não bater com o MySQL da minha máquina.
+- Eu me conecto em `127.0.0.1`, porta `3307`. O IP da VM não é usado.
+- No terminal: `mysql -u usuario -p -h 127.0.0.1 -P 3307`.
+- No `.env.dev`: `DB_HOST` = `127.0.0.1` e `DB_PORT` = `3307`. Nome do banco, usuário e senha quem preenche sou eu. A IA nunca escreve esses dados.
+- O script fica em `web-data-viz/src/database/script-tabelas.sql`. Se o banco já existir, ele precisa ser apagado antes de rodar o script de novo.
+- A mesma VM tem o banco do projeto em grupo. Os usuários deste projeto só recebem `GRANT` no banco `firstrun`.
+- A API só precisa de `SELECT`, `INSERT` e `UPDATE`. O usuário dela não usa `DELETE`.
 - Ordem no dia a dia: ligar a VM, ver se o Workbench conecta e só depois rodar `npm start`.
-
-Nunca rode `npm audit fix`. As versões foram travadas pela faculdade e esse comando quebra o projeto.
 
 ## Pastas
 
-- `AGENTS.md`, `README.md` e `DIARIO-DE-PROMPTS.md`
-- `docs/`: imagens da documentação, como o modelo lógico (`docs/modelo-logico.png`).
-- `testes/`: coisas só minhas, que estão no `.gitignore` e não vão para o GitHub (PDFs das aulas, prompts e o protótipo).
-  - `testes/prototipo/`: o site de referência feito com IA, só para eu estudar. Não usa a API nem o banco e não tem dados de exemplo nem arquivos `.js`: cada página tem só a base (HTML, CSS e um `<script>` pequeno), com avisos onde os dados do banco vão aparecer e comentários `AQUI ENTRA O FETCH`. As capas estão em `assets/jogos/`, os cenários em `assets/cenarios/` e a logo em `assets/logo/`. Os textos dos jogos ficaram em `testes/dados-dos-jogos.md`, para os `INSERT` do banco.
-- `web-data-viz/`: onde fica o projeto de verdade, que eu faço na mão.
+- `AGENTS.md`, `README.md` e `DIARIO-DE-PROMPTS.md`.
+- `docs/`: `modelo-logico.mwb` (o DER no Workbench) e `modelo-logico.png`.
+- `testes/`: coisas só minhas, no `.gitignore` (PDFs das aulas, prompts e o protótipo). Os textos antigos dos jogos estão em `testes/dados-dos-jogos.md`.
+- `web-data-viz/`: o projeto de verdade.
   - `app.js`: liga o servidor e registra as rotas.
-  - `package.json`: bibliotecas e o comando do `npm start`.
-  - `.env.dev`: acesso ao banco da VM (o que eu uso no dia a dia).
-  - `.env`: banco remoto, não usado aqui.
-  - `DOCUMENTOS_DE_APOIO/`: tutoriais da faculdade, como o passo a passo de criar rota.
-  - `public/`: o que aparece no navegador (`index.html`, `login.html`, `cadastro.html`, `simulador.html`, a pasta `dashboard/` com as páginas logadas, `css/`, `js/` com `sessao.js` e `alerta.js`, e `assets/`).
-  - `src/routes/`: os caminhos da API, como `/usuarios/cadastrar`.
+  - `.env.dev`: acesso ao banco da VM. `.env` é o banco remoto e não é usado.
+  - `DOCUMENTOS_DE_APOIO/`: tutoriais da faculdade.
+  - `public/`: as páginas, `css/`, `js/` e `assets/`.
+  - `src/routes/`: os caminhos da API.
   - `src/controllers/`: recebem os dados, validam e chamam o model.
   - `src/models/`: montam o SQL e mandam executar.
-  - `src/database/`: `config.js` (conexão) e `script-tabelas.sql` (tabelas).
+  - `src/database/`: `config.js` e `script-tabelas.sql`.
 
-Os arquivos de aquário, empresa, medida e aviso são do AquaTech, o exemplo da faculdade. Servem de modelo para os meus.
+Imagens em `public/assets/`:
 
-Não copie arquivos do protótipo para a `web-data-viz/` e não altere a `web-data-viz/` a partir dele.
+| Pasta | O que tem |
+| --- | --- |
+| `jogos/` | Capas em pé (600x900) |
+| `cenarios/` | Artes largas de cada jogo, com o mesmo nome de arquivo da capa |
+| `bosses/` | Imagem de cada boss, em PNG |
+| `fundo/` | `fundo-de-capas.jpg`, a imagem com as capas de todos os jogos inclinadas |
+| `login/` | Fundo do painel do login e do cadastro |
+| `icones/` | Ícones de perfil, dashboard e controle |
+| `logo/` | Logo e favicon |
 
-O navegador e a API rodam na minha máquina. Na VM fica só o MySQL.
+O site sempre usa arquivos locais, nunca link de imagem da internet.
+
+Os arquivos de aquário, empresa, medida e aviso são do AquaTech, o exemplo da faculdade, e servem de modelo. Eu já apaguei as imagens do AquaTech de propósito, porque o simulador, o `estilo.css` e a dashboard antiga não vão ser usados. Não restaure esses arquivos, e também não apague outros sem me perguntar.
 
 ### Caminho de uma requisição
 
@@ -117,283 +116,235 @@ Usando o login como exemplo:
 2. O JavaScript faz `fetch` com `POST` para `/usuarios/autenticar`, mandando `emailServer` e `senhaServer`.
 3. O `app.js` passa para `src/routes/usuarios.js`.
 4. A rota chama `autenticar` no `usuarioController.js`.
-5. O controller pega `req.body.emailServer` e `req.body.senhaServer`, vê se não estão vazios e chama o `usuarioModel.js`.
-6. O model monta o `SELECT` na variável `instrucaoSql` e roda com `database.executar()`, que conecta no MySQL da VM.
-7. A resposta volta pelo mesmo caminho. Se deu certo, a página guarda `NOME_USUARIO`, `EMAIL_USUARIO` e `ID_USUARIO` no `sessionStorage` e vai para a área logada.
+5. O controller pega os dados do `req.body`, confere e chama o `usuarioModel.js`.
+6. O model monta o `SELECT` em `instrucaoSql` e roda com `database.executar()`.
+7. A resposta volta pelo mesmo caminho. Se deu certo, a página guarda `NOME_USUARIO`, `EMAIL_USUARIO` e `ID_USUARIO` no `sessionStorage`.
 
-As páginas logadas chamam `validarSessao()` (do `js/sessao.js`) logo no começo da função que roda quando a página abre (o `<script>` fica no fim do `body` e chama essa função na última linha). Sem ninguém logado, volta para o login. O botão de sair chama `limparSessao()`.
+As páginas logadas (`perfil.html` e `registrar.html`) carregam o `js/sessao.js` e chamam `validarSessao()` ao abrir, que coloca o nome do jogador no elemento `b_usuario` (no perfil, dentro da caixa do topo). O "Sair" chama `limparSessao()`.
+
+Nas outras páginas, o `<div class="menu-usuario" id="div_menu_usuario">` começa com "Entrar" e "Criar conta". A função `montarMenu()`, escrita no script de cada página, troca esses links por Registrar, Perfil, Dashboard e Sair quando existe `sessionStorage.ID_USUARIO`. O Dashboard ainda é só texto, sem link.
 
 Tudo que for novo segue o mesmo caminho: página, `fetch`, rota, controller, model e banco.
 
+### Rotas
+
+| Arquivo | Rotas | Situação |
+| --- | --- | --- |
+| `usuarios.js` | `POST /usuarios/cadastrar`, `POST /usuarios/autenticar` | Pronto |
+| `jogos.js` | `GET /jogos/medias/:idJogo` (média de tentativas) e `GET /jogos/bosses/:idJogo` (bosses do jogo, para o registrar) | Pronto |
+| `progressos.js` | `POST /progressos/jogo`, `POST /progressos/boss`, `GET /progressos/jogos/:idUsuario`, `GET /progressos/bosses/:idUsuario` | Pronto |
+| `indicadores.js` | `GET /indicadores/gerais` (números e ranking da home) | Pronto. Os da dashboard faltam (confirmar comigo) |
+
+Arquivos seguem o padrão: rota no plural (`jogos.js`), controller e model no singular (`jogoController.js`, `jogoModel.js`). Rota nova entra no `app.js` em dois lugares: o `require` e o `app.use`. Busca usa `router.get` e gravação usa `router.post`. Antes de criar, olhe os arquivos de usuário e de jogo.
+
 ### Dados da dashboard
 
-1. A página faz `fetch` com `GET` para uma rota que busca os dados do jogador, usando o `ID_USUARIO` do `sessionStorage`.
-2. Rota, controller e model funcionam igual ao login. O model já faz as contas no `SELECT` (`SUM` das horas, `COUNT` dos bosses, `AVG` das tentativas, com `GROUP BY`).
-3. A página recebe o JSON, percorre com `for`, faz o que faltar (como a porcentagem de bosses derrotados) e monta os gráficos com Chart.js, como no `dashboard/dashboard.html` da web-data-viz.
-
-Os números gerais da página inicial seguem o mesmo caminho, só que sem filtrar por jogador.
-
-### Onde criar arquivos novos
-
-Seguindo o padrão da web-data-viz e o `PASSO_A_PASSO_CRIAR_ROTA_NA_API.md`, os jogos ficariam assim:
-
-- página `public/jogos.html` (ou em `public/dashboard/` se for da área logada);
-- CSS `public/css/jogos.css`;
-- rota `src/routes/jogos.js` (plural);
-- controller `src/controllers/jogoController.js` e model `src/models/jogoModel.js` (singular);
-- tabelas novas no `script-tabelas.sql`.
-
-A rota nova precisa ser registrada no `app.js` em dois lugares, igual às que já existem:
-
-- `var jogosRouter = require("./src/routes/jogos");` junto das outras importações;
-- `app.use("/jogos", jogosRouter);` junto dos outros `app.use`.
-
-Rota que só busca usa `router.get` (ex.: `/jogos/listar`). Rota que grava usa `router.post` (ex.: `/progressos/registrar`).
-
-Antes de criar qualquer arquivo, olhe os de usuário (rota, controller e model) e siga o mesmo formato.
-
-Ideia de rotas (confirmar comigo quando chegar a hora de cada uma):
-
-- `usuarios.js` (já existe): cadastro e login.
-- `jogos.js`, com `jogoController.js` e `jogoModel.js`: catálogo, um jogo e os bosses dele com a média de tentativas.
-- `progressos.js`, com `progressoController.js` e `progressoModel.js`: registrar horas e status, registrar boss derrotado e buscar o progresso para o perfil.
-- `indicadores.js`, com `indicadorController.js` e `indicadorModel.js`: números da página inicial e indicadores da dashboard.
+A página faz `fetch` para uma rota com o `ID_USUARIO`. O model faz as contas no `SELECT` (`SUM`, `COUNT`, `AVG` e `GROUP BY`). A página percorre o JSON com `for`, faz o que faltar (como porcentagens) e monta os gráficos com Chart.js. Os selects de cada parte já estão no fim do `script-tabelas.sql`.
 
 ## Banco de dados
 
-Tabelas que vou criar no `script-tabelas.sql`:
+| Tabela | Colunas |
+| --- | --- |
+| `usuario` | `id`, `nome`, `email` (unique), `senha` |
+| `jogo` | `id`, `nome`, `imagem` |
+| `boss` | `id`, `nome`, `fk_jogo` |
+| `progresso` | `id`, `fk_usuario`, `fk_jogo`, `horas`, `status` |
+| `boss_derrotado` | `id`, `fk_usuario`, `fk_boss`, `tentativas`, `dificuldade` |
 
-| Tabela | Colunas | Observação |
-| --- | --- | --- |
-| `usuario` | `id`, `nome`, `email`, `senha` | Adaptar a que já existe na web-data-viz. |
-| `jogo` | `id`, `nome`, `estudio`, `ano`, `genero`, `criadores`, `pais`, `descricao`, `lema`, `temas`, `filosofia` | Catálogo fixo, com `INSERT` no script. `temas` pode ser um texto separado por vírgula e `filosofia` um texto maior. |
-| `boss` | `id`, `nome`, `fk_jogo` | Bosses de cada jogo. |
-| `progresso` | `id`, `fk_usuario`, `fk_jogo`, `horas`, `status` | `status` com `CHECK` em `'jogando'`, `'zerado'` ou `'pausado'`. |
-| `boss_derrotado` | `id`, `fk_usuario`, `fk_boss`, `tentativas`, `dificuldade` | `CHECK` com tentativas maior ou igual a 1 e dificuldade de 1 a 5. |
+- `jogo.imagem` é só o nome do arquivo: a capa fica em `assets/jogos/` e o cenário em `assets/cenarios/`.
+- Filosofia, criador, país, ficha e imagens dos bosses não ficam no banco. Eles ficam escritos direto na página de cada jogo, em `public/jogos/`.
+- As tabelas `jogo` e `boss` existem porque `progresso` e `boss_derrotado` dependem delas.
+- O id de cada jogo e a ordem dos bosses precisam ser iguais no script e nas páginas: o parágrafo da média de cada boss tem o id dele no banco (`p_media_1`, `p_media_2`...).
+- Cada boss aparece uma vez só. Outra forma ou versão mais forte do mesmo boss não entra (por exemplo, Absolute Radiance).
+- `progresso` e `boss_derrotado` têm `UNIQUE` para o jogador ter uma linha só por jogo e por boss. Registrar de novo vira `UPDATE`.
+- `CHECK`: horas maior ou igual a 0, status `jogando`, `zerado` ou `pausado`, tentativas maior ou igual a 1 e dificuldade de 1 a 5.
 
 Relacionamentos:
 
-- `jogo` 1:N `boss`: cada jogo tem vários bosses, e cada boss é de um jogo só.
-- `usuario` N:N `jogo`, resolvido pela tabela `progresso`.
-- `usuario` N:N `boss`, resolvido pela tabela `boss_derrotado`.
+- `jogo` 1:N `boss`.
+- `usuario` N:N `jogo`, pela tabela `progresso`.
+- `usuario` N:N `boss`, pela tabela `boss_derrotado`.
 
-As tabelas do meio (`progresso` e `boss_derrotado`) têm `id` próprio com `AUTO_INCREMENT` e as duas chaves estrangeiras. A imagem do modelo lógico vai em `docs/modelo-logico.png`.
+Contas do site:
 
-Contas que aparecem no site:
-
-- total de horas do jogador: `SUM(horas)`;
-- jogo mais jogado: o de mais horas (`ORDER BY horas DESC LIMIT 1`);
-- média de tentativas de cada boss entre todos os jogadores: `ROUND(AVG(tentativas))`, sempre um número inteiro;
-- porcentagem de conclusão de cada jogo: bosses derrotados ÷ total de bosses do jogo × 100, com `.toFixed()`;
+- total de horas: `SUM(horas)`;
+- jogo mais jogado: `ORDER BY horas DESC LIMIT 1`;
+- média de tentativas de cada boss: `ROUND(AVG(tentativas))`;
+- conclusão de cada jogo: bosses derrotados ÷ total de bosses × 100, com `.toFixed()`;
 - comparação com a média: (valor do jogador − média de todos) ÷ média × 100.
 
-Indicadores da dashboard: total de horas, jogos cadastrados, bosses derrotados, jogo mais jogado, boss mais difícil, conclusão de cada jogo, jogos por status e a comparação com a média dos jogadores.
+Indicadores da dashboard: total de horas, jogos cadastrados, bosses derrotados, jogo mais jogado, boss mais difícil, conclusão de cada jogo, jogos por status e comparação com a média.
 
-## Plano do site
+Se mudar uma tabela, o DER em `docs/` também precisa ser refeito.
 
-O protótipo em `testes/prototipo/` mostra como o site deve ficar. Ele foi feito só com os comandos que eu sei, mas é uma base para eu estudar: o código de verdade eu escrevo na mão, ligando com a API e o banco.
+## Páginas
 
-### Páginas
+Todas em `web-data-viz/public/`.
 
-Todas em `web-data-viz/public/`, cada uma no seu `.html` e com o seu CSS.
-
-| Página | Arquivo | CSS | Conteúdo |
+| Página | Arquivo | CSS | Situação |
 | --- | --- | --- | --- |
-| Início | `index.html` | `inicio.css` | Capas em tiras inclinadas no fundo do título, números gerais, destaques, história dos indies (texto, três ideias e linha do tempo com capas), curiosidades, um indie para cada tipo de jogador |
-| Sobre mim | `sobre.html` | `sobre.css` | Quem eu sou e dedicatória (textos meus) |
-| Catálogo | `jogos.html` | `jogos.css` | Capas dos jogos, busca e o cenário do jogo no fundo ao passar o mouse |
-| Jogo | `jogo.html` | `jogos.css` | Capa, ficha (estúdio, criadores, país, ano, gênero), temas, filosofia em parágrafos, bosses e média de tentativas, com o cenário fixo no fundo |
-| Login | `login.html` | `login.css` | Login |
-| Cadastro | `cadastro.html` | `login.css` | Cadastro com validações |
-| Perfil | `dashboard/perfil.html` | `perfil.css` | Resumo, horas por jogo (da maior para a menor) e bosses de um jogo por vez |
-| Registrar | `dashboard/registrar.html` | `registrar.css` | Registro em 3 passos: jogo, horas e status, chefe vencido |
-| Dashboard | `dashboard/dashboard.html` | `dashboard.css` | Indicadores e gráficos |
+| Início | `index.html` | `home.css` | Pronta |
+| Catálogo | `jogos.html` | `jogos.css` | Pronta |
+| Jogos | `jogos/hollow-knight.html`, `jogos/hades.html` e as outras (uma por jogo) | `jogos.css` | Prontas |
+| Login | `login.html` | `login.css` | Pronta |
+| Cadastro | `cadastro.html` | `login.css` | Pronta |
+| Sobre mim | `sobre.html` | `sobre.css` | Falta (textos meus, `[PREENCHER]`) |
+| Perfil | `perfil.html` | `perfil.css` | Pronta (o login vem para cá) |
+| Registrar | `registrar.html` (no lugar do antigo `simulador.html`) | `perfil.css` | Pronta |
+| Dashboard | `dashboard/dashboard.html` | `dashboard.css` | Falta (hoje é o arquivo do AquaTech) |
 
-O `dashboard.css` do projeto não é o `dashboards.css` do AquaTech.
+O `home.css` também tem a parte geral (cores, cabeçalho, botões), então todas as páginas carregam ele. O `estilo.css` é do AquaTech e não é usado nas minhas páginas.
 
-`index.html`, `login.html`, `cadastro.html`, `dashboard/dashboard.html` e `css/estilo.css` já existem na web-data-viz (são do AquaTech). Peça confirmação antes de trocar o conteúdo de qualquer um deles.
+Como as coisas funcionam:
 
-Texto fixo (apresentação, linha do tempo, curiosidades, sobre mim) fica escrito no HTML. O que vem do banco (catálogo, bosses, perfil, dashboard, números gerais) é montado com `for` e `innerHTML +=` depois do `fetch`, como o `cadastro.html` da web-data-viz faz com as empresas.
+- O texto fixo fica no HTML ou num vetor no `<script>` da página. O que vem do banco é montado com `for` e `innerHTML +=` depois do `fetch`.
+- Só usa `fetch` o que muda conforme os jogadores usam o site. Na página de cada jogo, isso é só a média de tentativas.
+- O catálogo e as páginas dos jogos são HTML fixo, com links normais (`<a href>`). Nada de `sessionStorage` ou `window.location` para abrir um jogo.
+- Jogo novo = uma página nova em `public/jogos/`, um cartão no `jogos.html`, as imagens em `assets/` e as linhas no script do banco.
+- Fundo padrão: a imagem `fundo-de-capas.jpg` presa na tela. Quando entrar um jogo novo, essa imagem precisa ser refeita.
+- Fundo do catálogo: cada cartão tem o cenário escondido com `opacity: 0`, e o `:hover` do cartão mostra ele.
+- Fundo da página do jogo: o cenário do jogo fica fixo no lugar da imagem padrão.
+- Login e cadastro não têm rolagem (`overflow: hidden` no `body`).
+
+Ainda sobre o que falta fazer, o protótipo em `testes/prototipo/` mostra a ideia de cada página. Ele é só para estudo: não copie o código dele. Imagens podem vir de lá. Alguns jeitos de fazer:
+
+- trocar conteúdo: botões com `onclick` que trocam o `innerHTML` a partir de um vetor;
+- busca: `oninput`, `for`, `.toLowerCase()` e `.includes()`;
+- escolhas no Registrar (jogo, status, boss e dificuldade): botões com `onclick` que guardam a escolha numa variável e montam os botões de novo marcando o escolhido com a classe `opcao-escolhida` (sem `onchange` e sem `radio`). Já está feito assim no `registrar.html`;
+- mostrar e esconder: `style.display`;
+- ordenar: `ORDER BY` no banco (`.sort()` é proibido);
+- maior valor: `for` com `if`;
+- tabelas: `div`s com Grid ou Flexbox (`<table>` é proibido);
+- gráficos: Chart.js no formato da web-data-viz, `bar` para horas e `doughnut` para conclusão e status.
+
+Se algo não der para fazer com o que eu sei, fale claramente e sugira o mais parecido.
 
 ### Ordem de construção
 
-Seguindo o cronograma do professor:
-
-1. Semana 3: Home e Sobre mim, só HTML e CSS, com o `estilo.css` geral.
-2. Semana 4: cadastro e login com validação e API, tabelas na VM, catálogo e página do jogo com vetor e `for`.
-3. Depois: registrar progresso e perfil, com as rotas de progresso.
-4. Semana 5: dashboard com Chart.js.
-5. Semana 6: apresentação.
-
-### Como o protótipo resolveu cada coisa
-
-O primeiro protótipo (feito por outra IA, fora deste repositório) usava muita coisa que eu não aprendi. O `testes/prototipo/` refez tudo assim, e o projeto de verdade deve seguir o mesmo caminho:
-
-| Recurso | Como fazer |
-| --- | --- |
-| Site de uma página só trocando conteúdo pelo `location.hash` | Um `.html` por página, com links normais |
-| Página do jogo saber qual jogo abrir | Ao clicar no cartão, guardar `sessionStorage.ID_JOGO` e abrir `jogo.html`, que lê esse valor quando o `<script>` do fim da página roda |
-| Fundo do título da Home | Capas em tiras inclinadas (`skewX` de 12°) ocupando o topo inteiro, montadas com `for` a partir do vetor de jogos. A imagem leva a inclinação contrária para ficar reta, uma sombra escura fica do lado do texto e o `:hover` alarga a tira um pouco |
-| Recomendações da Home | Vetor de objetos ligando um tipo de jogador a um jogo, percorrido com `for` para montar os cartões |
-| Números animados | Números fixos, com um `@keyframes` simples de aparecer |
-| Abas dos jogos em destaque | Botões com `onclick="mostrarDestaque(0)"` que trocam o `innerHTML` a partir de um vetor |
-| Busca de jogos | `oninput="buscarJogos()"`, percorrendo o vetor com `for`, `if`, `.toLowerCase()` e `.includes()` |
-| Escolher opções no Registrar (jogo, status, chefe, dificuldade) | Botões com `onclick` que guardam a escolha numa variável e remontam os botões marcando o escolhido. Sem `onchange` e sem `radio` |
-| Mostrar e esconder partes | `style.display = "block"` ou `"none"` |
-| Aviso que aparece e some | `style.display` e `setTimeout` |
-| Ordenar por horas ou tentativas | No banco, `ORDER BY`. No protótipo, um `while` que vai pegando o maior que ainda não entrou na lista (`.sort()` é proibido) |
-| Maior valor | `for` com `if` guardando o maior |
-| Cenário no fundo ao passar o mouse | Só CSS: a imagem fica escondida com `position: fixed` e `opacity: 0`, e o `:hover` do cartão mostra ela |
-| Tabela de bosses | `div`s em linha com Grid ou Flexbox (`<table>` é proibido) |
-| Formulário | Botão com `onclick="cadastrar()"`, como na web-data-viz |
-| Gráficos | Chart.js no formato da web-data-viz: `bar` para horas e `doughnut` para conclusão e status |
-
-Se aparecer algo que não dá para fazer com o que eu sei, fale isso claramente e sugira o mais parecido.
+1. Home, login e cadastro, catálogo e páginas dos jogos (feito).
+2. Sobre mim.
+3. Registrar progresso e perfil (feito).
+4. Dashboard com Chart.js e os indicadores.
+5. Apresentação.
 
 ### Visual
 
-Tema escuro em azul e amarelo: fundo azul bem escuro, azul vivo nos títulos, links e detalhes, e amarelo nos botões, rótulos e destaques. Faixas alternando fundo mais claro e mais escuro com luzes coloridas, títulos grandes em maiúsculas com degradê, cartões com as capas dos jogos e as cores de dificuldade de 1 a 5.
+Tema escuro em azul e amarelo, com fundo azul bem escuro, azul nos títulos e links e amarelo nos botões e rótulos. As capas são as da biblioteca da Steam e os cenários são as artes largas.
 
-As capas são as da biblioteca da Steam (600×900, todas em pé) e os cenários são as artes largas da Steam. No projeto de verdade elas vão para `web-data-viz/public/assets/`.
-
-Cores (variáveis no `:root` do `estilo.css`):
+Variáveis no `:root` do `home.css`:
 
 | Variável | Cor | Uso |
 | --- | --- | --- |
-| `--preto` | `#0a0f1d` | Cabeçalho e rodapé |
-| `--fundo` | `#0d1526` | Blocos claros |
-| `--fundo-escuro` | `#080d19` | Blocos escuros |
-| `--fundo-cartao` | `#131d33` | Cartões e painéis |
-| `--fundo-cartao-claro` | `#1b2846` | Cartões dentro de cartões, campos |
+| `--preto` | `#0a0f1d` | Cabeçalho e letra dos botões |
+| `--fundo` | `#0d1526` | Fundo da página |
+| `--fundo-cartao` | `#131d33` | Cartões |
+| `--fundo-cartao-claro` | `#1b2846` | Campos |
 | `--borda` | `#27375a` | Bordas |
 | `--texto` | `#eef2f8` | Texto principal |
 | `--texto-suave` | `#9aa8c4` | Texto secundário |
 | `--azul` | `#4db6ff` | Títulos, links e detalhes |
-| `--azul-escuro` | `#2f95e8` | Azul mais escuro |
-| `--amarelo` | `#ffcc40` | Botões, textos acima dos títulos e destaques |
-| `--amarelo-escuro` | `#f0a91a` | Fim do degradê dos botões |
-| `--laranja` | `#ff9f2e` | Detalhes em laranja (curiosidades) |
-| `--dificuldade-1` a `--dificuldade-5` | `#7fc493`, `#d8c35e`, `#e48a52`, `#dd5f6a`, `#b77ce0` | Dificuldade de Fácil a Insana |
+| `--amarelo` | `#ffcc40` | Botões e rótulos |
 
-Fontes do Google Fonts: `Grenze Gotisch` (600 e 700) no logo e em detalhes, e `Alegreya Sans` (400, 500, 700 e 800) no resto.
+As cores de dificuldade de 1 a 5, quando forem usadas: `#7fc493`, `#d8c35e`, `#e48a52`, `#dd5f6a` e `#b77ce0`.
+
+Fonte do Google Fonts: `Alegreya Sans` no texto.
 
 ## Comandos que eu já sei
 
-O código só pode usar o que eu já aprendi nas aulas.
+O código só pode usar o que eu aprendi nas aulas.
 
 JavaScript:
 
 - `let`, `var`, `Number()`, `parseInt()`, `parseFloat()`, `isNaN()`, `.toFixed()`;
 - `+ - * / %`, comparação, `&&`, `||`, `!`, `++`, `+=`;
-- `if`, `else if`, `else`;
-- `while` e `for`;
+- `if`, `else if`, `else`, `while` e `for`;
 - `function` com parâmetros e `return`, chamada no `onclick` ou no `oninput`;
 - vetores: `[]`, índice, `.length`, `.push()`, `.pop()`, `.at()`, `.includes()`, `.indexOf()`, `.toString()`, `.replaceAll()`;
-- objetos (`{ chave: valor }`) e vetor de objetos (`lista[0].nome`);
+- objetos e vetor de objetos (`lista[0].nome`);
 - textos: `` `${}` ``, `.toUpperCase()`, `.toLowerCase()`, `.substring()`, `.replace()`, `.trim()`;
 - pegar e mostrar dados: `ipt_nome.value`, `div_msg.innerHTML`, `innerHTML +=`, `alert()`;
 - estilo pelo JS: `elemento.style.display` e `elemento.style.width`;
 - `setTimeout`, `setInterval`, `clearInterval`;
-- `sessionStorage`, como no login da web-data-viz;
-- `fetch(...).then(...).catch(...)` e Chart.js (`bar`, `line` e `doughnut`) no formato das páginas da web-data-viz. Dá para copiar o `resposta.json().then(json => { ... })` do `login.html`, mas para percorrer listas use `for` ou `while`. O Chart.js precisa de `<canvas>`, e quando o id do gráfico muda (um gráfico por jogo) pode usar `document.getElementById`, como a web-data-viz faz com os aquários.
+- `sessionStorage`;
+- `fetch(...).then(...).catch(...)` e Chart.js (`bar`, `line` e `doughnut`) no formato da web-data-viz. Dá para usar `resposta.json().then(json => { ... })`, mas listas são percorridas com `for` ou `while`.
 
-HTML: tags básicas e semânticas (`nav`, `main`, `footer`, `div`, `span`, `h1` a `h6`, `p`, `br`, `ul`, `a`, `img`), `input`, `label`, `select`, `option`, `button`, links, `onclick` e `oninput`. O cabeçalho é uma `div` com a classe `cabecalho`, e as partes da página também são `div`.
+HTML: `nav`, `main`, `div`, `span`, `h1` a `h6`, `p`, `br`, `ul`, `a`, `img`, `input`, `label`, `select`, `option`, `button`, `onclick` e `oninput`. O cabeçalho é uma `div` com a classe `cabecalho`, e as partes da página também são `div`.
 
-SQL: `CREATE DATABASE`, `CREATE TABLE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `ALTER TABLE`, `PRIMARY KEY`, `FOREIGN KEY`, `CONSTRAINT`, `CHECK`, `UNIQUE`, `DEFAULT`, `AUTO_INCREMENT`, `JOIN`, `LEFT JOIN`, `WHERE`, `LIKE`, `ORDER BY`, `LIMIT`, `AS`, `CASE`, `IFNULL`, `CONCAT`, `COUNT`, `SUM`, `AVG`, `ROUND`, `GROUP BY`, `CREATE USER` e `GRANT`. `COUNT`, `SUM`, `AVG`, `ROUND` e `GROUP BY`
+SQL: `CREATE DATABASE`, `CREATE TABLE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `ALTER TABLE`, `PRIMARY KEY`, `FOREIGN KEY`, `CONSTRAINT`, `CHECK`, `UNIQUE`, `DEFAULT`, `AUTO_INCREMENT`, `JOIN`, `LEFT JOIN`, `WHERE`, `LIKE`, `ORDER BY`, `LIMIT`, `AS`, `CASE`, `IFNULL`, `CONCAT`, `COUNT`, `SUM`, `AVG`, `ROUND`, `GROUP BY`, `CREATE USER` e `GRANT`.
 
 ## O que não pode usar
 
-Aparece no protótipo antigo ou na internet, mas eu não aprendi:
-
 - montar a página inteira pelo JavaScript ou trocar conteúdo pelo `location.hash`;
 - `addEventListener`, `querySelector`, `querySelectorAll`, `classList`, `dataset` e `data-*`;
-- `header`, `section` e `li` (no lugar, usar `div`);
+- `header`, `section`, `footer` e `li`;
 - `const` (usar `let`);
 - `onload`, `onchange`, `onmouseover` ou qualquer evento além de `onclick` e `oninput`;
-- criar arquivos `.js` meus no front (como um `dados.js` ou um arquivo de funções em `public/js/`);
+- arquivos `.js` meus no front;
 - `.map()`, `.filter()`, `.reduce()`, `.find()`, `.forEach()`, `.sort()`, `.join()`, `Object.keys()`, `Object.entries()`, `Object.values()`, `Array.from()`;
 - `=>` fora do formato do `fetch`, `? :`, desestruturação e `...`;
 - `localStorage`, `try/catch`, expressões regulares, `requestAnimationFrame`, `matchMedia`, `performance.now()`, `toLocaleString()`, `Math.max(...)` com vetor;
 - `<table>`, `<details>`, `<summary>`, `<form>` com `submit`, `<svg>` no código e `input type="radio"`;
-- qualquer framework ou biblioteca nova (React, Bootstrap, jQuery, TypeScript...).
+- qualquer framework ou biblioteca nova.
 
-A web-data-viz usa alguns desses (como `.forEach` e `.find` no AquaTech), mas isso não libera para os meus arquivos.
-
-Se algo útil não estiver na lista, pergunte antes e me explique o comando, para eu decidir se estudo ou se seguimos sem.
+A web-data-viz usa alguns desses, mas isso não libera para os meus arquivos. Se algo útil não estiver na lista, pergunte e me explique, para eu decidir se estudo ou seguimos sem.
 
 ## CSS
 
-- Todo CSS em arquivos `.css` separados em `web-data-viz/public/css/`. Nada de `<style>` no HTML e o mínimo de `style=""` (só para larguras calculadas, como as barras).
-- Um `estilo.css` geral (cores, fontes, cabeçalho, rodapé, botões, cartões) e um arquivo por página quando fizer sentido.
-- No CSS eu tenho mais liberdade, mas tem que ser algo que eu consiga explicar.
-- Pode usar: Flexbox, Grid, `:root` e `var()`, `:hover`, `:focus`, `:nth-child`, `::before` e `::after`, `transition`, `transform`, `@keyframes`, `animation`, `@media`, `position` (inclusive `fixed` e `sticky`), `z-index`, `overflow`, `opacity`, `box-shadow`, `text-shadow`, `border-radius`, `linear-gradient`, `radial-gradient`, `border-image`, `aspect-ratio`, `object-fit`, `pointer-events`, `mask-image`, `background-clip: text`, `filter` (`saturate` e `brightness`), `vw`, `overflow-x: clip` e Google Fonts.
-- Evite o que é avançado demais: `clip-path` com `calc()`, `:has()`, `-webkit-text-stroke`, `text-wrap: balance`, `hsl()` calculado, `env()`, `:focus-visible` e `color-scheme`.
-- Comentários curtos separando as partes do CSS, e um comentário na frente de cada recurso que eu ainda não usei nas aulas, dizendo o que ele faz.
+- O CSS tem que ser o mais simples e curto possível, sem perder o que importa.
+- Tudo em arquivos `.css` em `public/css/`. Nada de `<style>` no HTML e o mínimo de `style=""`.
+- Regras parecidas ficam juntas, com seletores agrupados.
+- `:hover` só no que é clicável.
+- Nada de animação de enfeite, como caixinha que se mexe. Só uma transição simples de cor ou opacidade quando ajudar.
+- O site é só para PC: sem `@media` e sem meta viewport.
+- Pode usar: Flexbox, Grid, `:root` e `var()`, `:hover`, `transition`, `@keyframes`, `animation`, `position`, `z-index`, `overflow`, `opacity`, `border-radius`, `aspect-ratio`, `object-fit` e `background-size`.
+- Evite o que é avançado demais: `clip-path`, `:has()`, `hsl()` calculado e `env()`.
+- Comentários curtos, e um comentário na frente de recurso que eu ainda não usei nas aulas.
 
 ## Jeito de escrever o código
 
-- `let` para as variáveis (`const` eu ainda não aprendi). Os arquivos da API usam `var`, não reescreva eles só por isso.
-- Nomes de variáveis e funções em português e camelCase (`nomeJogo`, `listarJogos`).
+- Nomes em português e camelCase (`nomeJogo`, `listarJogos`).
 - Dados do `fetch` terminam com `Server` (`nomeJogoServer`).
-- Arquivos em minúsculo: rota no plural (`jogos.js`), controller e model no singular com o tipo no fim (`jogoController.js`).
 - Tabelas e colunas em português, sem acento, no singular. Chave estrangeira começa com `fk_`.
-- Ids no padrão das aulas: `ipt_` para campos e `div_` para divs.
-- Indentação organizada e igual no arquivo todo.
-- Comentários curtos só onde não for óbvio.
-- O JavaScript da página fica num `<script>` no fim do `body`. A última linha do script chama a função que monta a página (ex.: `carregarPagina();`), no lugar do `onload`: quando o script roda, o HTML de cima já existe.
-- Eu não posso criar arquivos `.js` meus no front. Função usada em várias páginas é escrita no `<script>` de cada página que precisa dela. Os arquivos `.js` que já vêm na web-data-viz (como o `sessao.js`) podem ser usados.
+- Ids no padrão das aulas: `ipt_` para campos, `div_` para divs, e o mesmo jeito para os outros (`span_`, `img_`, `h1_`, `p_`).
+- Comentários curtos e simples, só onde não for óbvio. Nada de faixas decorativas ou explicações longas.
+- O JavaScript fica num `<script>` no fim do `body`, e a última linha chama a função que monta a página.
+- Função usada em várias páginas é escrita no `<script>` de cada uma. Os `.js` que já vêm na web-data-viz podem ser usados.
+- O código precisa ser fácil de explicar.
 - Sempre testar no navegador depois de mudar algo.
 
 ## Commits
 
-Formato: `tipo: descrição curta em português`, começando com letra minúscula e verbo no presente.
+Formato: `tipo: descrição curta em português`, com letra minúscula e verbo no presente.
 
 - `feat`: funcionalidade nova
 - `fix`: correção
 - `style`: visual ou CSS
-- `docs`: documentação (README, AGENTS.md, Diário)
+- `docs`: documentação
 - `refactor`: organização sem mudar o que o código faz
 
-Exemplos: `feat: cria tela de cadastro`, `feat: mostra horas jogadas na dashboard`, `fix: corrige soma de horas no perfil`, `style: ajusta cores do menu`, `docs: atualiza o README`.
-
-Um commit para cada mudança. Se mexeu em duas coisas, são dois commits.
+Um commit para cada mudança.
 
 ## Como a IA deve me ajudar
 
-O professor disse: "você pode usar IA, mas não pode terceirizar o entendimento". Se eu não souber explicar um trecho, ele não conta. Na avaliação ele pode pedir para eu explicar qualquer parte, mudar algo ao vivo e desenhar o caminho front → back → banco.
+O professor disse: "você pode usar IA, mas não pode terceirizar o entendimento". Na avaliação ele pode pedir para eu explicar qualquer parte, mudar algo ao vivo e desenhar o caminho front → back → banco.
 
-Então:
-
-- Use a IA para tirar dúvida, explicar erro, revisar, testar, comparar jeitos de fazer e gerar trechos pequenos dentro da web-data-viz.
-- Não gere o projeto inteiro de uma vez, não mude a arquitetura, não traga tecnologia de fora e não entregue código que eu não sei explicar.
-- Uma parte por vez: diga antes o que vai fazer, depois explique o código em linguagem simples e espere eu testar e aprovar.
-- Só use os comandos da lista que eu sei.
-- Quando tiver mais de um jeito de fazer, pergunte em vez de escolher sozinha.
-- Lembre que o protótipo e os dados de exemplo são só base. O banco, a API e o resto eu faço na mão.
+- Explique o código em linguagem simples e não entregue nada que eu não consiga explicar.
+- Não mude a arquitetura e não traga tecnologia de fora.
+- Faça só o que eu pedi.
+- Quando tiver mais de um jeito de fazer e a escolha for minha, pergunte.
 - Não invente nada sobre mim (história, valores, dificuldades, pessoas). Onde precisar, deixe `[PREENCHER]`.
 - Não faça commit nem push. Isso é comigo.
 
 ### Diário de Prompts
 
-O professor pede um Diário de Prompts. No fim de cada tarefa, a IA adiciona uma entrada no `DIARIO-DE-PROMPTS.md` usando o modelo do arquivo (data e assunto, IA, o que eu pedi, o que ela fez). O que ela não souber, deixa em branco para eu completar.
+No fim de cada tarefa, a IA adiciona uma entrada no `DIARIO-DE-PROMPTS.md` usando o modelo do arquivo (data e assunto, IA, o que eu pedi, o que ela fez), a não ser que eu diga para não colocar.
 
 ## Cuidados
 
-O mais importante: não mudar a estrutura da web-data-viz.
-
-- Não mude as pastas nem a configuração da API (`package.json`, `package-lock.json`, `src/database/config.js` e a escolha de ambiente no começo do `app.js`).
-- Pode criar arquivos novos no mesmo padrão (rotas, controllers e models da API, páginas e CSS). No front, nada de arquivo `.js` novo.
-- Em arquivos que já existem, só pode:
-  - registrar rotas novas no `app.js`;
-  - colocar as tabelas do projeto no `script-tabelas.sql`;
-  - adaptar cadastro e login (`cadastro.html`, `login.html`, `usuarioController.js` e `usuarioModel.js`) como nas atividades de aula, pedindo confirmação antes;
-  - trocar o conteúdo de `index.html`, `dashboard/dashboard.html` e `css/estilo.css` pelo do projeto, pedindo confirmação antes.
-- Não apague os arquivos do AquaTech nem os `DOCUMENTOS_DE_APOIO`.
+- Não mude as pastas nem a configuração da API (`package.json`, `src/database/config.js` e a escolha de ambiente no começo do `app.js`).
+- Pode criar arquivos novos no mesmo padrão. No front, nada de arquivo `.js` novo.
+- Em arquivos da web-data-viz que já existem, peça confirmação antes de mudar, a não ser que eu tenha pedido.
 - Não apague, renomeie ou mova arquivos sem me perguntar.
-- Nunca escreva senha, usuário ou dados de acesso de verdade em arquivo nenhum. Isso fica no `.env.dev`, que eu preencho. Não faça commit do `.env.dev` com a senha.
-- Não instale pacotes (`npm install nome-do-pacote`) e não rode `npm audit fix`.
-- Não mexa na `node_modules`.
-- Nada de mudança grande de uma vez. Prefira passos pequenos e explique o que fez.
-- Na dúvida, pergunte antes.
-
-Se faltar alguma informação aqui, olhe o código que já existe e siga o mesmo padrão. Se ainda tiver dúvida, pergunte.
+- Nunca escreva senha, usuário ou dados de acesso de verdade em arquivo nenhum.
+- Não instale pacotes novos, não rode `npm audit fix` e não mexa na `node_modules`.
+- Na dúvida, pergunte.

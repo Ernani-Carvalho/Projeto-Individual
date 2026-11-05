@@ -14,17 +14,11 @@ CREATE TABLE usuario (
 );
 
 -- jogos do catálogo
--- imagem é o nome do arquivo, igual em assets/jogos e assets/cenarios
+-- imagem é o nome do arquivo da capa, em assets/jogos
 CREATE TABLE jogo (
-	id        INT PRIMARY KEY AUTO_INCREMENT,
-	nome      VARCHAR(60),
-	estudio   VARCHAR(50),
-	ano       INT,
-	genero    VARCHAR(30),
-	imagem    VARCHAR(30),
-	lema      VARCHAR(150),
-	temas     VARCHAR(150),
-	filosofia VARCHAR(1500)
+	id     INT PRIMARY KEY AUTO_INCREMENT,
+	nome   VARCHAR(60),
+	imagem VARCHAR(30)
 );
 
 -- bosses de cada jogo
@@ -66,243 +60,214 @@ CREATE TABLE boss_derrotado (
 	CONSTRAINT chk_derrotado_dificuldade CHECK (dificuldade >= 1 AND dificuldade <= 5)
 );
 
--- o id segue essa ordem (1 é Hollow Knight e 9 é Ori)
-INSERT INTO jogo (nome, estudio, ano, genero, imagem) VALUES
-('Hollow Knight',            'Team Cherry',        2017, 'Metroidvania', 'hollow-knight.jpg'),
-('Hollow Knight: Silksong',  'Team Cherry',        2025, 'Metroidvania', 'silksong.jpg'),
-('Hades',                    'Supergiant Games',   2020, 'Roguelike',    'hades.jpg'),
-('Cuphead',                  'Studio MDHR',        2017, 'Run and gun',  'cuphead.jpg'),
-('Celeste',                  'Extremely OK Games', 2018, 'Plataforma',   'celeste.jpg'),
-('Dead Cells',               'Motion Twin',        2018, 'Roguelite',    'dead-cells.jpg'),
-('Undertale',                'Toby Fox',           2015, 'RPG',          'undertale.jpg'),
-('Blasphemous',              'The Game Kitchen',   2019, 'Metroidvania', 'blasphemous.jpg'),
-('Ori and the Blind Forest', 'Moon Studios',       2015, 'Metroidvania', 'ori.jpg');
+-- o id segue essa ordem e é o mesmo usado nas páginas em jogos/
+INSERT INTO jogo (nome, imagem) VALUES
+('Hollow Knight',            'hollow-knight.jpg'),
+('Hollow Knight: Silksong',  'silksong.jpg'),
+('Hades',                    'hades.jpg'),
+('Cuphead',                  'cuphead.jpg'),
+('Celeste',                  'celeste.jpg'),
+('Dead Cells',               'dead-cells.jpg'),
+('Undertale',                'undertale.jpg'),
+('Blasphemous',              'blasphemous.jpg'),
+('Ori and the Blind Forest', 'ori.jpg'),
+('Nine Sols',                'nine-sols.jpg');
 
--- o número é o id do jogo
+-- o número é o id do jogo. O id de cada boss segue esta ordem e é usado nas páginas em jogos/
 INSERT INTO boss (nome, fk_jogo) VALUES
 -- Hollow Knight
 ('False Knight', 1),
+('Gruz Mother', 1),
+('Massive Moss Charger', 1),
+('Vengefly King', 1),
+('Brooding Mawlek', 1),
 ('Hornet', 1),
 ('Mantis Lords', 1),
+('Soul Warrior', 1),
 ('Soul Master', 1),
+('Crystal Guardian', 1),
+('Oblobbles', 1),
+('Dung Defender', 1),
+('Flukemarm', 1),
+('God Tamer', 1),
+('Hive Knight', 1),
+('Broken Vessel', 1),
+('Nosk', 1),
+('Uumuu', 1),
+('Traitor Lord', 1),
+('The Collector', 1),
 ('Watcher Knights', 1),
 ('The Hollow Knight', 1),
-('Nightmare King Grimm', 1),
 ('The Radiance', 1),
+('Grimm', 1),
+('Zote', 1),
+('Elder Hu', 1),
+('Galien', 1),
+('Gorb', 1),
+('Markoth', 1),
+('Marmu', 1),
+('No Eyes', 1),
+('Xero', 1),
+('Brothers Oro & Mato', 1),
+('Paintmaster Sheo', 1),
+('Great Nailsage Sly', 1),
 -- Hollow Knight: Silksong
 ('Moss Mother', 2),
 ('Bell Beast', 2),
 ('Lace', 2),
+('Fourth Chorus', 2),
+('Savage Beastfly', 2),
+('Skull Tyrant', 2),
+('Sister Splinter', 2),
 ('Widow', 2),
+('Phantom', 2),
+('Moorwing', 2),
+('Great Conchflies', 2),
+('Last Judge', 2),
+('Cogwork Dancers', 2),
+('Trobbio', 2),
+('Signis and Gron', 2),
+('Groal the Great', 2),
+('The Unraveled', 2),
+('Disgraced Chef Lugoli', 2),
+('First Sinner', 2),
+('Craggler', 2),
+('Father of the Flame', 2),
+('Hunter Queen Carmelita', 2),
+('Voltvyrm', 2),
+('Second Sentinel', 2),
+('Broodmother', 2),
+('Bell Eater', 2),
+('Plasmified Zango', 2),
+('Crust King Khann', 2),
+('Seth', 2),
+('Nyleth', 2),
+('Pale Stag', 2),
+('Clover Dancers', 2),
+('Pinstress', 2),
+('Gurr the Outcast', 2),
+('Watcher at the Edge', 2),
+('Crawfather', 2),
+('Summoned Saviour', 2),
+('Shakra', 2),
+('Garmond and Zaza', 2),
 ('Grand Mother Silk', 2),
 -- Hades
 ('Megaera', 3),
+('Alecto', 3),
+('Tisiphone', 3),
 ('Lernaean Bone Hydra', 3),
 ('Theseus e Asterius', 3),
 ('Hades', 3),
+('Charon', 3),
 -- Cuphead
 ('The Root Pack', 4),
 ('Goopy Le Grande', 4),
 ('Hilda Berg', 4),
 ('Cagney Carnation', 4),
+('Ribby and Croaks', 4),
+('Baroness Von Bon Bon', 4),
+('Djimmi The Great', 4),
+('Beppi The Clown', 4),
+('Wally Warbles', 4),
 ('Grim Matchstick', 4),
+('Rumor Honeybottoms', 4),
+('Captain Brineybeard', 4),
+('Sally Stageplay', 4),
+('Werner Werman', 4),
+('Dr. Kahl''s Robot', 4),
+('Cala Maria', 4),
+('Phantom Express', 4),
 ('King Dice', 4),
 ('The Devil', 4),
+('Glumstone The Giant', 4),
+('Moonshine Mob', 4),
+('Mortimer Freeze', 4),
+('Esther Winchester', 4),
+('The Howling Aces', 4),
+('Chef Saltbaker', 4),
 -- Celeste
 ('Mr. Oshiro', 5),
 ('Badeline', 5),
 -- Dead Cells
 ('The Concierge', 6),
 ('Conjunctivius', 6),
+('Mama Tick', 6),
 ('The Time Keeper', 6),
 ('The Giant', 6),
+('The Scarecrow', 6),
 ('The Hand of the King', 6),
+('The Servants', 6),
+('The Queen', 6),
+('The Collector', 6),
 -- Undertale
 ('Toriel', 7),
+('Napstablook', 7),
+('Doggo', 7),
+('Lesser Dog', 7),
+('Dogamy and Dogaressa', 7),
+('Greater Dog', 7),
 ('Papyrus', 7),
+('Shyren', 7),
+('Mad Dummy', 7),
 ('Undyne', 7),
+('Glyde', 7),
+('Royal Guards', 7),
+('So Sorry', 7),
+('Muffet', 7),
 ('Mettaton EX', 7),
 ('Asgore', 7),
+('Omega Flowey', 7),
+('Asriel Dreemurr', 7),
 ('Sans', 7),
+('Endogeny', 7),
+('Lemon Bread', 7),
+('Reaper Bird', 7),
+('Snowdrake''s Mother', 7),
+('Memoryhead', 7),
 -- Blasphemous
+('Warden of the Silent Sorrow', 8),
 ('Ten Piedad', 8),
 ('Tres Angustias', 8),
 ('Esdras', 8),
+('Melquiades', 8),
+('Exposito', 8),
+('Quirce', 8),
 ('Crisanta', 8),
+('Our Lady of the Charred Visage', 8),
+('Perpetva', 8),
+('Last Son of the Miracle', 8),
+('Sor Cautiva Del Silencio', 8),
+('Escribar', 8),
+('Laudes', 8),
+('Amanecida of the Bejeweled Arrow', 8),
+('Amanecida of the Chiselled Steel', 8),
+('Amanecida of the Golden Blades', 8),
+('Amanecida of the Molten Thorn', 8),
+('Isidora', 8),
+('Sierpes', 8),
 -- Ori and the Blind Forest
 ('Ginso Tree Escape', 9),
 ('Forlorn Ruins Escape', 9),
-('Mount Horu Escape', 9);
-
--- textos da página de cada jogo
--- \n\n é a quebra de parágrafo
-
--- Hollow Knight
-UPDATE jogo SET
-	lema = 'Nenhum reino dura para sempre, mas ainda vale a pena explorar o que restou.',
-	temas = 'Sacrifício, Memória, Exploração, Solidão, Persistência',
-	filosofia = CONCAT(
-		'Hallownest foi um reino que quis durar para sempre. Para isso, o rei prendeu ',
-		'um mal antigo dentro de criaturas vazias, os Vasos, que deveriam existir sem ',
-		'mente, sem vontade e sem voz. Quando você chega, o reino já está em ruínas: ',
-		'o preço de tentar ser eterno foi alto demais.\n\n',
-
-		'O jogo quase não explica nada. O mapa precisa ser comprado e desenhado, e a ',
-		'história aparece em pedaços, em placas, conversas e lugares abandonados. Quem ',
-		'joga monta o quebra-cabeça sozinho, e a sensação de descoberta é a recompensa.\n\n',
-
-		'Quando você morre, deixa para trás uma sombra com o seu dinheiro e precisa ',
-		'voltar até ela para recuperar tudo. Errar custa caro, mas sempre dá para ',
-		'voltar e tentar de novo.'
-	)
-WHERE id = 1;
-
--- Hollow Knight: Silksong
-UPDATE jogo SET
-	lema = 'Subir até o topo para entender por que trouxeram você até aqui.',
-	temas = 'Liberdade, Controle, Coragem, Identidade',
-	filosofia = CONCAT(
-		'Hornet, que no primeiro jogo era rival e aliada do Cavaleiro, agora é a ',
-		'protagonista. Ela é capturada e levada para Pharloom, um reino governado pela ',
-		'seda e pela música, e precisa subir até a cidadela no topo para descobrir quem ',
-		'a trouxe e por quê.\n\n',
-
-		'Diferente do Cavaleiro, Hornet fala, tem personalidade e já sabe lutar desde o ',
-		'começo. A jornada fala de liberdade, de quem controla quem e de recusar o lugar ',
-		'que outros escolheram para você.'
-	)
-WHERE id = 2;
-
--- Hades
-UPDATE jogo SET
-	lema = 'Cada derrota leva de volta para casa, e cada volta conta um pouco mais da história.',
-	temas = 'Família, Perdão, Persistência, Mitologia grega',
-	filosofia = CONCAT(
-		'Zagreus é filho de Hades e quer fugir do submundo para encontrar a mãe que ',
-		'nunca conheceu. Os deuses do Olimpo ajudam com poderes, e cada fuga é uma ',
-		'corrida diferente.\n\n',
-
-		'Aqui morrer não é fracasso. Cada morte leva Zagreus de volta para a casa do ',
-		'pai, onde ele conversa com os personagens e a história avança. O jogo foi feito ',
-		'para que tentar de novo seja sempre interessante.\n\n',
-
-		'No fundo, é uma história sobre família: um pai difícil, um filho teimoso e a ',
-		'tentativa de consertar o que ficou quebrado entre eles.'
-	)
-WHERE id = 3;
-
--- Cuphead
-UPDATE jogo SET
-	lema = 'Não faça acordo com o Diabo, e não desista depois de errar.',
-	temas = 'Persistência, Consequência, Animação clássica',
-	filosofia = CONCAT(
-		'Cuphead e Mugman apostaram a própria alma no cassino do Diabo e perderam. Para ',
-		'não pagar a dívida, aceitam cobrar a alma de outros devedores, e cada um deles ',
-		'é um boss.\n\n',
-
-		'O visual imita os desenhos animados dos anos 30: as animações foram desenhadas ',
-		'à mão e os cenários pintados em aquarela. A trilha é jazz tocado por músicos ',
-		'de verdade.\n\n',
-
-		'É um jogo sobre insistir. Cada luta tem padrões que se aprende morrendo, e a ',
-		'vitória vem de prestar atenção e não desistir.'
-	)
-WHERE id = 4;
-
--- Celeste
-UPDATE jogo SET
-	lema = 'Subir a montanha não é vencer a si mesmo, é aprender a andar junto consigo.',
-	temas = 'Ansiedade, Saúde mental, Autoaceitação, Superação',
-	filosofia = CONCAT(
-		'Madeline decide escalar a montanha Celeste sem saber direito por quê. No ',
-		'caminho, encontra Badeline, uma versão sombria de si mesma, que tenta fazê-la ',
-		'desistir.\n\n',
-
-		'Badeline representa a ansiedade e a voz que diz que ela não é capaz. A virada ',
-		'da história não é derrotar essa parte, e sim aceitar e aprender a conviver ',
-		'com ela.\n\n',
-
-		'O jogo é muito difícil, mas é gentil com quem joga: trata cada morte como ',
-		'aprendizado, volta rápido para a próxima tentativa e tem um modo de assistência ',
-		'para quem precisa de ajuda.'
-	)
-WHERE id = 5;
-
--- Dead Cells
-UPDATE jogo SET
-	lema = 'Morrer faz parte, desde que você volte melhor.',
-	temas = 'Recomeço, Aprendizado, Persistência, Humor',
-	filosofia = CONCAT(
-		'Uma ilha foi tomada por uma praga chamada Malaise. O personagem é um amontoado ',
-		'de células que toma o corpo de um prisioneiro e tenta escapar do castelo.\n\n',
-
-		'Cada morte volta tudo ao começo e o mapa muda, mas as células coletadas liberam ',
-		'armas e melhorias que ficam para sempre. O que você aprende também fica: os ',
-		'inimigos, os atalhos e o seu próprio jeito de jogar.\n\n',
-
-		'Com bastante humor, o jogo mostra que repetir não é andar em círculos: cada ',
-		'volta deixa você um pouco mais forte.'
-	)
-WHERE id = 6;
-
--- Undertale
-UPDATE jogo SET
-	lema = 'Ninguém precisa morrer.',
-	temas = 'Misericórdia, Empatia, Escolhas, Consequência',
-	filosofia = CONCAT(
-		'Uma criança humana cai no Subsolo, onde os monstros ficaram presos depois de ',
-		'uma guerra contra os humanos. Todo monstro que aparece pode ser enfrentado ou ',
-		'poupado.\n\n',
-
-		'Dá para terminar o jogo sem matar ninguém, conversando e entendendo cada ',
-		'personagem. E o jogo lembra das suas escolhas, até das que você tentou desfazer ',
-		'reiniciando.\n\n',
-
-		'Undertale brinca com o que os RPGs ensinam, como lutar e subir de nível, e ',
-		'pergunta se isso é mesmo necessário. É um jogo sobre misericórdia, empatia e ',
-		'as consequências dos nossos atos.'
-	)
-WHERE id = 7;
-
--- Blasphemous
-UPDATE jogo SET
-	lema = 'Uma fé que exige sofrimento cobra um preço de todos.',
-	temas = 'Culpa, Fé, Penitência, Fanatismo',
-	filosofia = CONCAT(
-		'Cvstodia é uma terra amaldiçoada por um poder chamado o Milagre, que transforma ',
-		'culpa em castigo de verdade. O Penitente, último membro de uma irmandade de ',
-		'penitentes, atravessa esse mundo carregando o peso da própria culpa.\n\n',
-
-		'O visual vem da arte religiosa espanhola e das procissões da Semana Santa da ',
-		'Andaluzia: imagens bonitas e assustadoras ao mesmo tempo.\n\n',
-
-		'A história faz pensar sobre fé, culpa, sofrimento e fanatismo, e sobre até onde ',
-		'alguém vai para pagar por algo.'
-	)
-WHERE id = 8;
-
--- Ori and the Blind Forest
-UPDATE jogo SET
-	lema = 'Ninguém ali é mau à toa: até a raiva nasce de uma perda.',
-	temas = 'Luto, Perdão, Família, Natureza',
-	filosofia = CONCAT(
-		'Durante uma tempestade, o pequeno espírito Ori cai da Árvore Espiritual e é ',
-		'adotado por Naru, que cuida dele como filho. Quando a floresta de Nibel começa ',
-		'a morrer, Ori perde Naru e fica sozinho.\n\n',
-
-		'Com a ajuda de Sein, a luz da Árvore, Ori tenta salvar a floresta. A grande ',
-		'inimiga é a coruja Kuro, mas o jogo mostra que ela também perdeu os filhos, e ',
-		'a dor dela explica a raiva.\n\n',
-
-		'É uma história sobre luto, perdão e família, contada quase sem palavras, só ',
-		'com imagens e música.'
-	)
-WHERE id = 9;
-
--- usuário da api: trocar usuario e senha e rodar como root na vm
-
--- CREATE USER 'usuario'@'%' IDENTIFIED BY 'senha';
--- GRANT SELECT, INSERT, UPDATE, DELETE ON firstrun.* TO 'usuario'@'%';
+('Mount Horu Escape', 9),
+-- Nine Sols
+('General Yingzhao', 10),
+('Goumang', 10),
+('Xingtian', 10),
+('Yanlao', 10),
+('Kanghui', 10),
+('Jiequan', 10),
+('Lady Ethereal', 10),
+('Ji', 10),
+('Fengs', 10),
+('Eigong', 10),
+('Red Tiger Elites', 10),
+('Celestial Sentinels', 10),
+('Celestial Spectres', 10),
+('Celestial Enforcers', 10),
+('Yinyue', 10),
+('Cixing', 10),
+('Tianshou', 10);
 
 -- selects da dashboard
 -- o 1 é o id do jogador, no model vira ${idUsuario}

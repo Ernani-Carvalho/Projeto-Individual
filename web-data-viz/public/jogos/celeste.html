@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FirstRun | Celeste</title>
+    <link rel="icon" href="../assets/logo/favicon-chama.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <script src="../js/sessao.js"></script>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/jogos.css">
+</head>
+
+<body>
+
+    <img class="fundo-de-capas cenario-fixo" src="../assets/cenarios/celeste.jpg" alt="">
+
+    <div class="cabecalho">
+        <div class="coluna-central">
+            <a class="logo" href="../index.html"><img src="../assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
+
+            <nav class="menu">
+                <a href="../index.html">Início</a>
+                <a class="pagina-atual" href="../jogos.html">Jogos</a>
+                <a>Sobre mim</a>
+            </nav>
+
+            <div class="menu-usuario" id="div_menu_usuario">
+                <a href="../login.html">Entrar</a>
+                <a href="../cadastro.html">Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco">
+        <div class="coluna-central">
+            <div class="topo-jogo">
+                <img class="capa-grande" src="../assets/jogos/celeste.jpg" alt="Capa de Celeste">
+                <div>
+                    <h1 class="titulo-secao">Celeste</h1>
+                    <p class="lema-jogo">Subir a montanha não é vencer a si mesmo, é aprender a andar junto consigo.</p>
+                    <p><span class="rotulo">Estúdio:</span> Extremely OK Games</p>
+                    <p><span class="rotulo">País:</span> Canadá</p>
+                    <p><span class="rotulo">Ano:</span> 2018</p>
+                    <p><span class="rotulo">Gênero:</span> Plataforma</p>
+                    <p><span class="rotulo">Temas:</span> Ansiedade, Saúde mental, Autoaceitação, Superação</p>
+                </div>
+            </div>
+
+            <div class="texto-jogo">
+                <h2>A filosofia do jogo</h2>
+                <p>Madeline decide escalar a montanha Celeste sem saber direito por quê. No caminho, encontra Badeline, uma versão sombria de si mesma, que tenta fazê-la desistir.</p>
+                <p>Badeline representa a ansiedade e a voz que diz que ela não é capaz. A virada da história não é derrotar essa parte, e sim aceitar e aprender a conviver com ela. Quando as duas passam a trabalhar juntas, Madeline fica mais forte, e o jogo traduz isso diretamente na forma de jogar.</p>
+                <p>A dificuldade faz parte da mensagem. O jogo é muito difícil, mas é gentil com quem joga: trata cada morte como aprendizado, volta rápido para a próxima tentativa e tem um modo de assistência para quem precisa de ajuda. Pedir ajuda não é derrota, e chegar ao topo pode ter significados diferentes para cada pessoa.</p>
+            </div>
+
+            <div class="texto-jogo">
+                <h2>Quem criou</h2>
+                <p>Celeste foi criado por Maddy Thorson e Noel Berry, com a música de Lena Raine e a arte de Pedro Medeiros e Amora Bettany. Antes disso, Thorson já tinha feito TowerFall.</p>
+                <p>A primeira versão foi feita em apenas quatro dias, numa game jam, para o PICO-8, um pequeno console virtual. Depois a ideia cresceu até virar o jogo completo de 2018, que ganhou o prêmio de Melhor Jogo Independente no The Game Awards.</p>
+            </div>
+
+            <div class="texto-jogo">
+                <h2>O país de origem</h2>
+                <p>O jogo foi feito no Canadá, principalmente em Vancouver, uma cidade com muitos estúdios e uma cena indie ativa. A equipe também tinha pessoas no Brasil: Pedro Medeiros e Amora Bettany são brasileiros.</p>
+            </div>
+
+            <h2 class="titulo-secao titulo-bosses">Bosses</h2>
+            <p class="subtitulo">Média de tentativas de todos os jogadores em cada luta.</p>
+            <div class="lista-bosses">
+                <div class="cartao-boss">
+                    <img src="../assets/bosses/mr-oshiro.png" alt="Mr. Oshiro">
+                    <h3>Mr. Oshiro</h3>
+                    <p class="texto-suave" id="p_media_108">Ninguém registrou ainda</p>
+                </div>
+                <div class="cartao-boss">
+                    <img src="../assets/bosses/badeline.png" alt="Badeline">
+                    <h3>Badeline</h3>
+                    <p class="texto-suave" id="p_media_109">Ninguém registrou ainda</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // se tiver alguém logado, troca "Entrar" e "Criar conta" pelos links da conta
+        function montarMenu() {
+            if (sessionStorage.ID_USUARIO != undefined) {
+                div_menu_usuario.innerHTML = `
+                    <a href="../registrar.html">Registrar</a>
+                    <a href="../perfil.html">Perfil</a>
+                    <a>Dashboard</a>
+                    <a onclick="limparSessao()">Sair</a>`;
+            }
+        }
+
+        // busca no banco a média de tentativas dos bosses deste jogo (o 5 é o id do jogo)
+        function buscarMedias() {
+            fetch("/jogos/medias/5").then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        mostrarMedias(json);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        // cada boss tem um parágrafo com o id dele no banco (p_media_1, p_media_2...)
+        function mostrarMedias(medias) {
+            for (let i = 0; i < medias.length; i++) {
+                document.getElementById(`p_media_${medias[i].id}`).innerHTML = `Média: ${medias[i].media_tentativas} tentativas`;
+            }
+        }
+
+        buscarMedias();
+        montarMenu();
+    </script>
+
+</body>
+
+</html>

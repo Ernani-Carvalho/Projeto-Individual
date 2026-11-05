@@ -27,24 +27,19 @@ Onde eu anoto cada vez que usei IA no projeto.
 
 ## 04/11/2026 - navbar igual e login e cadastro sem rolagem
 
-- IA: Claude Code
+- IA: OpenCode
 - Pedi: deixar a navbar igual em todas as páginas e tirar a rolagem do login e do cadastro.
 - Ela fez: descobriu que a navbar do login estava 15px deslocada porque só ele não tinha barra de rolagem, e colocou `scrollbar-gutter: stable` no `home.css`. No `login.css`, deu a altura da tela ao `body` com `overflow: hidden`, centralizou a caixa e diminuiu espaços e fontes para caber. Recortou de novo as duas imagens para o novo tamanho do painel.
 
 ## 04/11/2026 - efeitos simples na home
 
-- IA: Claude Code
+- IA: OpenCode
 - Pedi: colocar alguns efeitos simples na home para deixar a página mais dinâmica.
 - Ela fez: colocou no fim do `home.css` a borda azul nos cartões ao passar o mouse, a troca de cor dos botões e o topo da página aparecendo aos poucos com `@keyframes`, sem nada se mexer de lugar.
-
-## 04/11/2026 - comentários do script do banco
-
-- IA: Claude Code
-- Pedi: deixar os comentários do script do banco com menos cara de IA.
-- Ela fez: tirou as faixas de separação e os comentários longos e deixou comentários curtos. O código do script não mudou.
 
 ## 04/11/2026 - DER atualizado
 
 - IA: Claude Code
-- Pedi: criar de novo o DER, depois das mudanças no script do banco.
-- Ela fez: gerou com o MySQL Workbench o `docs/modelo-logico.mwb` e a imagem `docs/modelo-logico.png`, a partir das tabelas do `script-tabelas.sql`.
+- Pedi: atualizar o DER, depois das mudanças no script do banco.
+- Ela fez: atualizou as tabelas do DER.
+

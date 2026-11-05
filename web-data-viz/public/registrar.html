@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FirstRun | Registrar progresso</title>
+    <link rel="icon" href="assets/logo/favicon-chama.png">
+
+    <script src="js/sessao.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600;700&family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+
+    <img class="fundo-de-capas" src="assets/fundo/fundo-de-capas.jpg" alt="">
+
+    <div class="cabecalho">
+        <div class="coluna-central">
+            <a class="logo" href="index.html"><img src="assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
+
+            <nav class="menu">
+                <a href="index.html">Início</a>
+                <a href="jogos.html">Jogos</a>
+                <a>Sobre mim</a>
+            </nav>
+
+            <div class="menu-usuario">
+                <a class="pagina-atual" href="registrar.html">Registrar</a>
+                <a href="perfil.html">Perfil</a>
+                <a>Dashboard</a>
+                <a onclick="limparSessao()">Sair</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco">
+        <div class="coluna-central">
+            <span class="texto-acima-do-titulo">Salvar o jogo</span>
+            <h1 class="titulo-secao">Registrar progresso</h1>
+            <p class="subtitulo">Olá, <span id="b_usuario"></span>! Escolha o jogo, salve as horas e depois marque os bosses que você venceu.</p>
+
+            <div class="painel">
+                <h2><span class="numero-passo">1</span> Qual jogo você jogou?</h2>
+                <div class="opcoes-jogos" id="div_jogos"></div>
+            </div>
+
+            <div class="painel">
+                <h2><span class="numero-passo">2</span> Horas e status</h2>
+
+                <div class="duas-colunas">
+                    <div class="campo">
+                        <label for="ipt_horas">Total de horas neste jogo</label>
+                        <input type="number" id="ipt_horas" placeholder="Ex.: 25">
+                    </div>
+                    <div class="campo">
+                        <label>Como está o jogo?</label>
+                        <div class="opcoes" id="div_status"></div>
+                    </div>
+                </div>
+
+                <button class="botao" onclick="salvarJogo()">Salvar jogo</button>
+                <p class="mensagem" id="p_mensagem_jogo"></p>
+            </div>
+
+            <div class="painel">
+                <h2><span class="numero-passo">3</span> Boss derrotado</h2>
+
+                <label>Qual boss você venceu?</label>
+                <div class="opcoes" id="div_bosses"></div>
+
+                <div class="duas-colunas">
+                    <div class="campo">
+                        <label for="ipt_tentativas">Quantas tentativas até vencer?</label>
+                        <input type="number" id="ipt_tentativas" placeholder="Ex.: 3">
+                    </div>
+                    <div class="campo">
+                        <label>Quão difícil foi para você?</label>
+                        <div class="opcoes" id="div_dificuldade"></div>
+                    </div>
+                </div>
+
+                <button class="botao" onclick="salvarBoss()">Salvar boss</button>
+                <p class="mensagem" id="p_mensagem_boss"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // o id é o mesmo da tabela jogo no banco
+        let jogos = [
+            { id: 1, nome: "Hollow Knight", imagem: "hollow-knight.jpg" },
+            { id: 2, nome: "Hollow Knight: Silksong", imagem: "silksong.jpg" },
+            { id: 3, nome: "Hades", imagem: "hades.jpg" },
+            { id: 4, nome: "Cuphead", imagem: "cuphead.jpg" },
+            { id: 5, nome: "Celeste", imagem: "celeste.jpg" },
+            { id: 6, nome: "Dead Cells", imagem: "dead-cells.jpg" },
+            { id: 7, nome: "Undertale", imagem: "undertale.jpg" },
+            { id: 8, nome: "Blasphemous", imagem: "blasphemous.jpg" },
+            { id: 9, nome: "Ori and the Blind Forest", imagem: "ori.jpg" },
+            { id: 10, nome: "Nine Sols", imagem: "nine-sols.jpg" }
+        ];
+        let opcoesStatus = ["jogando", "zerado", "pausado"];
+        let nomesDificuldade = ["Fácil", "Média", "Difícil", "Muito difícil", "Insana"];
+
+        // o que está escolhido (a página já abre com o Hollow Knight; bossEscolhido 0 = nenhum)
+        let jogoEscolhido = 1;
+        let statusEscolhido = "jogando";
+        let bosses = [];
+        let bossEscolhido = 0;
+        let dificuldadeEscolhida = 3;
+
+        // ----- passo 1: jogo
+        // cada vez que algo é escolhido, os botões são montados de novo para marcar o escolhido
+        function montarJogos() {
+            div_jogos.innerHTML = "";
+
+            for (let i = 0; i < jogos.length; i++) {
+                let classe = "opcao-jogo";
+                if (jogos[i].id == jogoEscolhido) {
+                    classe = "opcao-jogo opcao-escolhida";
+                }
+
+                div_jogos.innerHTML += `
+                    <button class="${classe}" onclick="escolherJogo(${jogos[i].id})">
+                        <img src="assets/jogos/${jogos[i].imagem}" alt="">
+                        <span>${jogos[i].nome}</span>
+                    </button>`;
+            }
+        }
+
+        function escolherJogo(idJogo) {
+            jogoEscolhido = idJogo;
+            p_mensagem_jogo.innerHTML = "";
+            p_mensagem_boss.innerHTML = "";
+            montarJogos();
+            buscarBosses();
+        }
+
+        // ----- passo 2: status
+        function montarStatus() {
+            div_status.innerHTML = "";
+
+            for (let i = 0; i < opcoesStatus.length; i++) {
+                let classe = "opcao";
+                if (opcoesStatus[i] == statusEscolhido) {
+                    classe = "opcao opcao-escolhida";
+                }
+
+                div_status.innerHTML += `<button class="${classe}" onclick="escolherStatus('${opcoesStatus[i]}')">${opcoesStatus[i]}</button>`;
+            }
+        }
+
+        function escolherStatus(status) {
+            statusEscolhido = status;
+            montarStatus();
+        }
+
+        function salvarJogo() {
+            let horas = Number(ipt_horas.value);
+
+            if (ipt_horas.value == "" || horas < 0) {
+                p_mensagem_jogo.innerHTML = "Digite o total de horas (0 ou mais).";
+                return;
+            }
+
+            fetch("/progressos/jogo", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: sessionStorage.ID_USUARIO,
+                    idJogoServer: jogoEscolhido,
+                    horasServer: parseInt(horas),
+                    statusServer: statusEscolhido
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    p_mensagem_jogo.innerHTML = "Jogo salvo!";
+                } else {
+                    p_mensagem_jogo.innerHTML = "Não foi possível salvar o jogo.";
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+                p_mensagem_jogo.innerHTML = "Não foi possível falar com o servidor.";
+            });
+        }
+
+        // ----- passo 3: boss e dificuldade
+        function buscarBosses() {
+            fetch(`/jogos/bosses/${jogoEscolhido}`).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        bosses = json;
+                        bossEscolhido = 0;
+                        montarBosses();
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        function montarBosses() {
+            div_bosses.innerHTML = "";
+
+            for (let i = 0; i < bosses.length; i++) {
+                let classe = "opcao";
+                if (bosses[i].id == bossEscolhido) {
+                    classe = "opcao opcao-escolhida";
+                }
+
+                div_bosses.innerHTML += `<button class="${classe}" onclick="escolherBoss(${bosses[i].id})">${bosses[i].nome}</button>`;
+            }
+        }
+
+        function escolherBoss(idBoss) {
+            bossEscolhido = idBoss;
+            montarBosses();
+        }
+
+        // 5 botões, de 1 (Fácil) a 5 (Insana); o número tem a cor do nível
+        function montarDificuldade() {
+            div_dificuldade.innerHTML = "";
+
+            for (let nivel = 1; nivel <= 5; nivel++) {
+                let classe = "opcao";
+                if (nivel == dificuldadeEscolhida) {
+                    classe = "opcao opcao-escolhida";
+                }
+
+                div_dificuldade.innerHTML += `
+                    <button class="${classe}" onclick="escolherDificuldade(${nivel})">
+                        <span class="etiqueta nivel-${nivel}">${nivel}</span> ${nomesDificuldade[nivel - 1]}
+                    </button>`;
+            }
+        }
+
+        function escolherDificuldade(nivel) {
+            dificuldadeEscolhida = nivel;
+            montarDificuldade();
+        }
+
+        function salvarBoss() {
+            let tentativas = Number(ipt_tentativas.value);
+
+            if (bossEscolhido == 0) {
+                p_mensagem_boss.innerHTML = "Clique no boss que você venceu.";
+                return;
+            }
+            if (ipt_tentativas.value == "" || tentativas < 1) {
+                p_mensagem_boss.innerHTML = "Digite as tentativas (1 ou mais).";
+                return;
+            }
+
+            fetch("/progressos/boss", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: sessionStorage.ID_USUARIO,
+                    idBossServer: bossEscolhido,
+                    tentativasServer: parseInt(tentativas),
+                    dificuldadeServer: dificuldadeEscolhida
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    p_mensagem_boss.innerHTML = "Boss salvo!";
+                } else {
+                    p_mensagem_boss.innerHTML = "Não foi possível salvar o boss.";
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+                p_mensagem_boss.innerHTML = "Não foi possível falar com o servidor.";
+            });
+        }
+
+        function carregarPagina() {
+            // sem ninguém logado, o validarSessao (do sessao.js) volta para o login
+            validarSessao();
+            montarJogos();
+            montarStatus();
+            montarDificuldade();
+            buscarBosses();
+        }
+
+        carregarPagina();
+    </script>
+
+</body>
+
+</html>

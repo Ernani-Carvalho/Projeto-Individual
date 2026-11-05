@@ -1,0 +1,182 @@
+/* perfil e registrar (as cores, o cabeçalho e os campos vêm do home.css) */
+
+/* caixa com fundo para cada parte da página */
+.painel {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background-color: var(--fundo-cartao);
+}
+
+.painel h2 {
+    margin: 0 0 16px;
+    color: var(--azul);
+    font-size: 26px;
+}
+
+.duas-colunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.mensagem {
+    margin-top: 12px;
+    color: var(--amarelo);
+    font-weight: 700;
+}
+
+/* cores da dificuldade, de 1 (Fácil) a 5 (Insana) */
+.nivel-1 { background-color: #7fc493; }
+.nivel-2 { background-color: #d8c35e; }
+.nivel-3 { background-color: #e48a52; }
+.nivel-4 { background-color: #dd5f6a; }
+.nivel-5 { background-color: #b77ce0; }
+
+/* etiqueta colorida com a dificuldade */
+.etiqueta {
+    padding: 2px 10px;
+    border-radius: 12px;
+    color: var(--preto);
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* ----- perfil */
+.topo-perfil {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.topo-perfil h2 {
+    margin: 0;
+    color: var(--texto);
+    font-size: 40px;
+}
+
+/* margin-left: auto empurra o botão para a direita */
+.topo-perfil .botao {
+    margin-left: auto;
+}
+
+/* círculo amarelo com a primeira letra do nome */
+.circulo-letra {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0; /* não deixa o círculo ser espremido */
+    border-radius: 50%;
+    background-color: var(--amarelo);
+    color: var(--preto);
+    font-size: 48px;
+    font-weight: 800;
+}
+
+.jogo-horas {
+    margin-bottom: 16px;
+}
+
+.nome-e-horas {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* a barra cinza é o fundo e a barra cheia é a parte pintada (a largura vem do JavaScript) */
+.barra {
+    height: 10px;
+    margin-top: 6px;
+    border-radius: 5px;
+    background-color: var(--fundo-cartao-claro);
+}
+
+.barra-cheia {
+    height: 100%;
+    border-radius: 5px;
+    background-color: var(--azul);
+}
+
+.linha-boss {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background-color: var(--fundo-cartao-claro);
+}
+
+/* ----- registrar */
+/* bolinha amarela com o número do passo */
+.numero-passo {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background-color: var(--amarelo);
+    color: var(--preto);
+    text-align: center;
+    line-height: 36px;
+}
+
+/* capas dos jogos, 5 por linha */
+.opcoes-jogos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.opcao-jogo {
+    padding: 0 0 10px;
+    overflow: hidden;
+    border: 2px solid var(--borda);
+    border-radius: 8px;
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: var(--fonte-texto);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.opcao-jogo img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+/* botões de status, boss e dificuldade */
+.opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0 16px;
+}
+
+.opcao {
+    padding: 8px 14px;
+    border: 2px solid var(--borda);
+    border-radius: 20px;
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: var(--fonte-texto);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.opcao-jogo:hover,
+.opcao:hover {
+    border-color: var(--azul);
+}
+
+/* o que está escolhido fica com a borda azul e um fundo azul escuro */
+.opcao-escolhida {
+    border-color: var(--azul);
+    background-color: #173a5c;
+}

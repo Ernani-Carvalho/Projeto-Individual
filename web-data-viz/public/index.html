@@ -37,7 +37,7 @@
         <h1>Jogos pequenos. <span class="texto-azul">Grandes histórias.</span></h1>
         <p class="texto-do-topo">Cada indie que você joga vira uma jornada. Guarde aqui suas horas, os bosses que você venceu e quantas tentativas cada um custou, e acompanhe tudo no seu perfil e na sua dashboard.</p>
 
-        <div class="botoes-topo">
+        <div class="botoes-topo" id="div_botoes_topo">
             <a class="botao" href="cadastro.html">Criar conta</a>
             <a class="botao botao-contorno" href="jogos.html">Explorar jogos</a>
         </div>
@@ -251,7 +251,7 @@
     </div>
 
     <div class="bloco-chamada-final">
-        <div class="coluna-central">
+        <div class="coluna-central" id="div_chamada_final">
             <div>
                 <span class="texto-acima-do-titulo">Comece agora</span>
                 <h2>Sua jornada começa <span class="texto-azul">no primeiro save.</span></h2>
@@ -270,6 +270,23 @@
                     <a href="perfil.html">Perfil</a>
                     <a>Dashboard</a>
                     <a onclick="limparSessao()">Sair</a>`;
+            }
+        }
+
+        // quem já tem conta não precisa do "Criar conta": os botões levam para o registrar
+        function montarBotoes() {
+            if (sessionStorage.ID_USUARIO != undefined) {
+                div_botoes_topo.innerHTML = `
+                    <a class="botao" href="registrar.html">Registrar progresso</a>
+                    <a class="botao botao-contorno" href="jogos.html">Explorar jogos</a>`;
+
+                div_chamada_final.innerHTML = `
+                    <div>
+                        <span class="texto-acima-do-titulo">Continue de onde parou</span>
+                        <h2>Jogou hoje? <span class="texto-azul">Salve seu progresso.</span></h2>
+                        <p class="texto-suave">Registre as horas e os bosses que você venceu.</p>
+                    </div>
+                    <a class="botao" href="registrar.html">Registrar progresso</a>`;
             }
         }
 
@@ -316,6 +333,7 @@
 
         mostrarRecomendacoes();
         buscarIndicadores();
+        montarBotoes();
         montarMenu();
     </script>
 

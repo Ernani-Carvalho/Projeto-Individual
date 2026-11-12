@@ -51,7 +51,7 @@ function atualizarBossDerrotado(idUsuario, idBoss, tentativas, dificuldade) {
 // jogos do jogador, do que tem mais horas para o que tem menos
 function listarJogos(idUsuario) {
     var instrucaoSql = `
-        SELECT jogo.nome, progresso.horas, progresso.status
+        SELECT jogo.id, jogo.nome, progresso.horas, progresso.status
         FROM progresso
         JOIN jogo ON progresso.fk_jogo = jogo.id
         WHERE progresso.fk_usuario = ${idUsuario}
@@ -63,7 +63,7 @@ function listarJogos(idUsuario) {
 
 function listarBosses(idUsuario) {
     var instrucaoSql = `
-        SELECT boss.nome AS boss, jogo.nome AS jogo, boss_derrotado.tentativas, boss_derrotado.dificuldade
+        SELECT boss.id, boss.nome AS boss, jogo.nome AS jogo, boss_derrotado.tentativas, boss_derrotado.dificuldade
         FROM boss_derrotado
         JOIN boss ON boss_derrotado.fk_boss = boss.id
         JOIN jogo ON boss.fk_jogo = jogo.id

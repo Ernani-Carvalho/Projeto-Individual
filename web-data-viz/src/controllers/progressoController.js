@@ -1,17 +1,22 @@
 var progressoModel = require("../models/progressoModel");
 
-// se o jogador já tem esse jogo, atualiza as horas e o status; se não tem, cria a linha
-function registrarJogo(req, res) {
+// salva o jogo e, se idBoss for diferente de 0, salva o boss também
+// em cada parte: se a linha já existe vira UPDATE, se não existe vira INSERT
+function registrar(req, res) {
     var idUsuario = req.body.idUsuarioServer;
     var idJogo = req.body.idJogoServer;
     var horas = req.body.horasServer;
     var status = req.body.statusServer;
+    var idBoss = req.body.idBossServer;
+    var tentativas = req.body.tentativasServer;
+    var dificuldade = req.body.dificuldadeServer;
 
-    if (idUsuario == undefined || idJogo == undefined || horas == undefined || status == undefined) {
+    if (idUsuario == undefined || idJogo == undefined || horas == undefined || status == undefined || idBoss == undefined) {
         res.status(400).send("Algum dado está undefined!");
         return;
     }
 
+    // 1º o jogo
     progressoModel.buscarProgresso(idUsuario, idJogo)
         .then(function (resultado) {
             if (resultado.length > 0) {
@@ -20,30 +25,17 @@ function registrarJogo(req, res) {
                 return progressoModel.inserirProgresso(idUsuario, idJogo, horas, status);
             }
         })
+        // 2º o boss, só se algum foi escolhido
         .then(function () {
-            res.status(200).send("Progresso salvo!");
+            if (idBoss == 0) {
+                return;
+            }
+            return progressoModel.buscarBossDerrotado(idUsuario, idBoss);
         })
-        .catch(function (erro) {
-            console.log(erro);
-            console.log("Houve um erro ao salvar o progresso: ", erro.sqlMessage);
-            res.status(500).json(erro.sqlMessage);
-        });
-}
-
-// mesma ideia para o boss: atualiza se já existe, cria se não existe
-function registrarBoss(req, res) {
-    var idUsuario = req.body.idUsuarioServer;
-    var idBoss = req.body.idBossServer;
-    var tentativas = req.body.tentativasServer;
-    var dificuldade = req.body.dificuldadeServer;
-
-    if (idUsuario == undefined || idBoss == undefined || tentativas == undefined || dificuldade == undefined) {
-        res.status(400).send("Algum dado está undefined!");
-        return;
-    }
-
-    progressoModel.buscarBossDerrotado(idUsuario, idBoss)
         .then(function (resultado) {
+            if (idBoss == 0) {
+                return;
+            }
             if (resultado.length > 0) {
                 return progressoModel.atualizarBossDerrotado(idUsuario, idBoss, tentativas, dificuldade);
             } else {
@@ -51,11 +43,11 @@ function registrarBoss(req, res) {
             }
         })
         .then(function () {
-            res.status(200).send("Boss salvo!");
+            res.status(200).send("Progresso salvo!");
         })
         .catch(function (erro) {
             console.log(erro);
-            console.log("Houve um erro ao salvar o boss: ", erro.sqlMessage);
+            console.log("Houve um erro ao salvar o progresso: ", erro.sqlMessage);
             res.status(500).json(erro.sqlMessage);
         });
 }
@@ -83,8 +75,7 @@ function listarBosses(req, res) {
 }
 
 module.exports = {
-    registrarJogo,
-    registrarBoss,
+    registrar,
     listarJogos,
     listarBosses
 };

@@ -3,12 +3,9 @@ var router = express.Router();
 
 var progressoController = require("../controllers/progressoController");
 
-router.post("/jogo", function (req, res) {
-    progressoController.registrarJogo(req, res);
-});
-
-router.post("/boss", function (req, res) {
-    progressoController.registrarBoss(req, res);
+// salva as horas e o status do jogo e, se tiver boss escolhido, o boss também
+router.post("/registrar", function (req, res) {
+    progressoController.registrar(req, res);
 });
 
 router.get("/jogos/:idUsuario", function (req, res) {

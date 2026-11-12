@@ -24,24 +24,9 @@ function contarJogos() {
     return database.executar(instrucaoSql);
 }
 
-// os 4 jogos com mais horas somando todos os jogadores
-function buscarRanking() {
-    var instrucaoSql = `
-        SELECT jogo.nome, jogo.imagem, SUM(progresso.horas) AS horas
-        FROM progresso
-        JOIN jogo ON progresso.fk_jogo = jogo.id
-        GROUP BY jogo.id, jogo.nome, jogo.imagem
-        ORDER BY horas DESC
-        LIMIT 4;
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
 module.exports = {
     contarJogadores,
     somarHoras,
     contarBossesDerrotados,
-    contarJogos,
-    buscarRanking
+    contarJogos
 };

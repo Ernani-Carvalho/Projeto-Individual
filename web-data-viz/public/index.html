@@ -64,16 +64,6 @@
 
     <div class="bloco">
         <div class="coluna-central">
-            <span class="texto-acima-do-titulo">Ranking dos jogadores</span>
-            <h2 class="titulo-secao">Os mais jogados</h2>
-            <p class="subtitulo">Os jogos com mais horas registradas somando todos os jogadores.</p>
-            <div class="aviso-sem-dados" id="div_aviso_ranking">O ranking aparece aqui quando os jogadores começarem a registrar horas.</div>
-            <div class="ranking" id="div_ranking"></div>
-        </div>
-    </div>
-
-    <div class="bloco">
-        <div class="coluna-central">
             <span class="texto-acima-do-titulo">Como funciona</span>
             <h2 class="titulo-secao">Três motivos para entrar</h2>
             <div class="tres-colunas">
@@ -279,7 +269,7 @@
             }
         }
 
-        // números gerais e ranking, somando todos os jogadores
+        // números gerais, somando todos os jogadores
         function buscarIndicadores() {
             fetch("/indicadores/gerais").then(function (resposta) {
                 if (resposta.ok) {
@@ -288,30 +278,11 @@
                         span_total_horas.innerHTML = json.horas;
                         span_total_bosses.innerHTML = json.bosses;
                         span_total_jogos.innerHTML = json.jogos;
-                        mostrarRanking(json.ranking);
                     });
                 }
             }).catch(function (erro) {
                 console.log(erro);
             });
-        }
-
-        function mostrarRanking(ranking) {
-            if (ranking.length == 0) {
-                return;
-            }
-
-            div_aviso_ranking.style.display = "none";
-            div_ranking.innerHTML = "";
-
-            for (let i = 0; i < ranking.length; i++) {
-                div_ranking.innerHTML += `
-                    <div class="ranking-jogo">
-                        <img src="assets/jogos/${ranking[i].imagem}" alt="Capa de ${ranking[i].nome}">
-                        <h3>${i + 1}º ${ranking[i].nome}</h3>
-                        <p class="texto-azul">${ranking[i].horas} horas</p>
-                    </div>`;
-            }
         }
 
         mostrarRecomendacoes();

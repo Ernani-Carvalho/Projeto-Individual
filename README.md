@@ -35,8 +35,8 @@ O **FirstRun** é o lugar para guardar essa trajetória. Você registra os jogos
 
 ## O que dá para fazer
 
-- 🏠 **Conhecer o mundo indie:** os jogos mais jogados, a história dos indies, curiosidades e um indie para cada tipo de jogador.
-- 🎮 **Explorar o catálogo:** cada jogo com seus bosses e a média de tentativas dos jogadores.
+- 🏠 **Conhecer o mundo indie:** os maiores jogos indie, a história dos indies, curiosidades e um indie para cada tipo de jogador.
+- 🎮 **Explorar o catálogo:** cada jogo com a filosofia, quem criou, o país de origem e todos os bosses.
 - 📝 **Registrar o progresso:** horas jogadas, status (jogando, zerado ou pausado), bosses derrotados, tentativas e a dificuldade de 1 a 5 que você deu para cada um.
 - 👤 **Ver o seu perfil:** total de horas, horas de cada jogo e todos os bosses que você já venceu.
 - 📊 **Acompanhar a dashboard:** gráficos e indicadores feitos com os seus dados.

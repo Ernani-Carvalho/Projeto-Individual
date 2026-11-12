@@ -142,7 +142,6 @@ INSERT INTO boss (nome, fk_jogo) VALUES
 ('Crust King Khann', 2),
 ('Seth', 2),
 ('Nyleth', 2),
-('Pale Stag', 2),
 ('Clover Dancers', 2),
 ('Pinstress', 2),
 ('Gurr the Outcast', 2),

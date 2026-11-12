@@ -16,7 +16,7 @@ Quem joga indie passa por muitos jogos e não tem um lugar para guardar o que j�
 - ver o perfil com o resumo;
 - acompanhar tudo numa dashboard com gráficos (Chart.js) e indicadores.
 
-Só existe um tipo de usuário: o jogador. O perfil e a dashboard mostram só os dados de quem está logado. A página inicial mostra números de todos os jogadores, e a página de cada jogo mostra a média de tentativas de todos em cada boss.
+Só existe um tipo de usuário: o jogador. O perfil e a dashboard mostram só os dados de quem está logado. A página inicial mostra números de todos os jogadores. As páginas dos jogos são só informativas (texto e imagens fixos).
 
 O projeto é da faculdade e não vai para produção.
 
@@ -133,7 +133,7 @@ Tudo que for novo segue o mesmo caminho: página, `fetch`, rota, controller, mod
 | Arquivo | Rotas | Situação |
 | --- | --- | --- |
 | `usuarios.js` | `POST /usuarios/cadastrar`, `POST /usuarios/autenticar` | Pronto |
-| `jogos.js` | `GET /jogos/medias/:idJogo` (média de tentativas) e `GET /jogos/bosses/:idJogo` (bosses do jogo, para o registrar) | Pronto |
+| `jogos.js` | `GET /jogos/bosses/:idJogo` (bosses do jogo, para o registrar) | Pronto |
 | `progressos.js` | `POST /progressos/registrar` (salva horas e status do jogo e, se `idBossServer` não for 0, o boss junto), `GET /progressos/jogos/:idUsuario`, `GET /progressos/bosses/:idUsuario` (as duas devolvem o `id` do jogo e do boss) | Pronto |
 | `indicadores.js` | `GET /indicadores/gerais` (números gerais da home: jogadores, horas, bosses derrotados e jogos) | Pronto. Os da dashboard faltam (confirmar comigo) |
 
@@ -156,7 +156,7 @@ A página faz `fetch` para uma rota com o `ID_USUARIO`. O model faz as contas no
 - `jogo.imagem` é só o nome do arquivo: a capa fica em `assets/jogos/` e o cenário em `assets/cenarios/`.
 - Filosofia, criador, país, ficha e imagens dos bosses não ficam no banco. Eles ficam escritos direto na página de cada jogo, em `public/jogos/`.
 - As tabelas `jogo` e `boss` existem porque `progresso` e `boss_derrotado` dependem delas.
-- O id de cada jogo e a ordem dos bosses precisam ser iguais no script e nas páginas: o parágrafo da média de cada boss tem o id dele no banco (`p_media_1`, `p_media_2`...).
+- O id de cada jogo precisa ser igual no script e no vetor `jogos` do `registrar.html`. Os bosses do registrar vêm do banco, então a ordem deles não depende das páginas.
 - Cada boss aparece uma vez só. Outra forma ou versão mais forte do mesmo boss não entra (por exemplo, Absolute Radiance).
 - `progresso` e `boss_derrotado` têm `UNIQUE` para o jogador ter uma linha só por jogo e por boss. Registrar de novo vira `UPDATE`.
 - `CHECK`: horas maior ou igual a 0, status `jogando`, `zerado` ou `pausado`, tentativas maior ou igual a 1 e dificuldade de 1 a 5.
@@ -171,7 +171,6 @@ Contas do site:
 
 - total de horas: `SUM(horas)`;
 - jogo mais jogado: `ORDER BY horas DESC LIMIT 1`;
-- média de tentativas de cada boss: `ROUND(AVG(tentativas))`;
 - conclusão de cada jogo: bosses derrotados ÷ total de bosses × 100, com `.toFixed()`;
 - comparação com a média: (valor do jogador − média de todos) ÷ média × 100.
 
@@ -200,7 +199,7 @@ O `home.css` também tem a parte geral (cores, cabeçalho, botões), então toda
 Como as coisas funcionam:
 
 - O texto fixo fica no HTML ou num vetor no `<script>` da página. O que vem do banco é montado com `for` e `innerHTML +=` depois do `fetch`.
-- Só usa `fetch` o que muda conforme os jogadores usam o site. Na página de cada jogo, isso é só a média de tentativas.
+- Só usa `fetch` o que muda conforme os jogadores usam o site. As páginas dos jogos não usam `fetch`: mostram só o nome e a imagem de cada boss.
 - O catálogo e as páginas dos jogos são HTML fixo, com links normais (`<a href>`). Nada de `sessionStorage` ou `window.location` para abrir um jogo.
 - Jogo novo = uma página nova em `public/jogos/`, um cartão no `jogos.html`, as imagens em `assets/` e as linhas no script do banco.
 - Fundo padrão: a imagem `fundo-de-capas.jpg` presa na tela. Quando entrar um jogo novo, essa imagem precisa ser refeita.

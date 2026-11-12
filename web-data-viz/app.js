@@ -24,6 +24,7 @@ var empresasRouter = require("./src/routes/empresas");
 var jogosRouter = require("./src/routes/jogos");
 var progressosRouter = require("./src/routes/progressos");
 var indicadoresRouter = require("./src/routes/indicadores");
+var dashboardsRouter = require("./src/routes/dashboards");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +41,7 @@ app.use("/empresas", empresasRouter);
 app.use("/jogos", jogosRouter);
 app.use("/progressos", progressosRouter);
 app.use("/indicadores", indicadoresRouter);
+app.use("/dashboards", dashboardsRouter);
 
 app.listen(PORTA_APP, function () {
     console.log(`

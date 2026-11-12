@@ -190,7 +190,7 @@ Todas em `web-data-viz/public/`.
 | Jogos | `jogos/hollow-knight.html`, `jogos/hades.html` e as outras (uma por jogo) | `jogos.css` | Prontas |
 | Login | `login.html` | `login.css` | Pronta |
 | Cadastro | `cadastro.html` | `login.css` | Pronta |
-| Sobre mim | `sobre.html` | `sobre.css` | Estrutura pronta, faltam os meus textos (`[PREENCHER]`) e a foto |
+| Sobre mim | `sobre.html` | `sobre.css` | Estrutura pronta, só a base: faltam os meus textos e a foto |
 | Perfil | `perfil.html` | `perfil.css` | Pronta (o login vem para cá) |
 | Registrar | `registrar.html` (no lugar do antigo `simulador.html`) | `perfil.css` | Pronta |
 | Dashboard | `dashboard/dashboard.html` | `perfil.css` + `dashboard.css` | Pronta |
@@ -334,7 +334,7 @@ O professor disse: "você pode usar IA, mas não pode terceirizar o entendimento
 - Não mude a arquitetura e não traga tecnologia de fora.
 - Faça só o que eu pedi.
 - Quando tiver mais de um jeito de fazer e a escolha for minha, pergunte.
-- Não invente nada sobre mim (história, valores, dificuldades, pessoas). Onde precisar, deixe `[PREENCHER]`.
+- Não invente nada sobre mim (história, valores, dificuldades, pessoas). Onde precisar, deixe o espaço vazio (sem `[PREENCHER]`), que eu preencho depois.
 - Não faça commit nem push. Isso é comigo.
 
 ### Diário de Prompts

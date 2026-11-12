@@ -19,87 +19,71 @@
 
     <img class="fundo-de-capas" src="../assets/fundo/fundo-de-capas.jpg" alt="">
 
-    <div class="cabecalho">
-        <div class="coluna-central">
+    <div class="layout-dashboard">
+
+        <!-- menu lateral, fixo na esquerda -->
+        <div class="menu-lateral">
             <a class="logo" href="../index.html"><img src="../assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
 
-            <nav class="menu">
-                <a href="../index.html">Início</a>
-                <a href="../jogos.html">Jogos</a>
-                <a href="../sobre.html">Sobre mim</a>
+            <nav class="links-menu-lateral">
+                <a href="../index.html"><img src="../assets/icones/menu/inicio.svg" alt="">Início</a>
+                <a class="pagina-atual" href="dashboard.html"><img src="../assets/icones/menu/dashboard.svg" alt="">Dashboard</a>
+                <a href="../registrar.html"><img src="../assets/icones/menu/registrar.svg" alt="">Registrar</a>
+                <a href="../jogos.html"><img src="../assets/icones/menu/jogos.svg" alt="">Jogos</a>
+                <a href="../sobre.html"><img src="../assets/icones/menu/sobre.svg" alt="">Sobre mim</a>
             </nav>
 
-            <div class="menu-usuario">
-                <a href="../registrar.html">Registrar</a>
-                <a href="../perfil.html">Perfil</a>
-                <a class="pagina-atual" href="dashboard.html">Dashboard</a>
-                <a onclick="limparSessao()">Sair</a>
-            </div>
+            <a class="sair" onclick="limparSessao()"><img src="../assets/icones/menu/sair.svg" alt="">Sair</a>
         </div>
-    </div>
 
-    <div class="bloco">
-        <div class="coluna-central">
+        <!-- conteúdo: indicadores em cima e gráficos embaixo -->
+        <div class="conteudo-dashboard">
             <span class="texto-acima-do-titulo">Seus números</span>
             <h1 class="titulo-secao">Dashboard</h1>
             <p class="subtitulo">Olá, <span id="b_usuario"></span>! Aqui está o seu progresso em todos os jogos que você registrou.</p>
 
-            <!-- indicadores -->
-            <div class="numeros-gerais">
+            <div class="indicadores">
                 <div class="caixa-numero">
+                    <div class="titulo-numero"><img src="../assets/icones/cards/horas.svg" alt="">Horas jogadas</div>
                     <span class="numero-grande" id="span_total_horas">0</span>
-                    <span class="texto-suave">horas jogadas</span>
                 </div>
                 <div class="caixa-numero">
+                    <div class="titulo-numero"><img src="../assets/icones/cards/jogos.svg" alt="">Jogos registrados</div>
                     <span class="numero-grande" id="span_total_jogos">0</span>
-                    <span class="texto-suave">jogos registrados</span>
                 </div>
                 <div class="caixa-numero">
+                    <div class="titulo-numero"><img src="../assets/icones/cards/bosses.svg" alt="">Bosses derrotados</div>
                     <span class="numero-grande" id="span_total_bosses">0</span>
-                    <span class="texto-suave">bosses derrotados</span>
                 </div>
                 <div class="caixa-numero">
-                    <span class="numero-grande" id="span_comparacao">-</span>
-                    <span class="texto-suave" id="span_texto_comparacao">comparado à média dos jogadores</span>
+                    <div class="titulo-numero"><img src="../assets/icones/cards/trofeu.svg" alt="">Jogo mais jogado</div>
+                    <span class="numero-texto" id="span_jogo_mais_jogado">-</span>
+                    <span class="texto-suave" id="span_horas_mais_jogado"></span>
+                </div>
+                <div class="caixa-numero">
+                    <div class="titulo-numero"><img src="../assets/icones/cards/caveira.svg" alt="">Boss mais difícil</div>
+                    <span class="numero-texto" id="span_boss_mais_dificil">-</span>
+                    <span class="texto-suave" id="span_detalhe_boss"></span>
                 </div>
             </div>
 
-            <div class="duas-colunas">
-                <div class="painel destaque">
-                    <div id="div_jogo_mais_jogado">
-                        <h2>Jogo mais jogado</h2>
-                        <p class="texto-suave">Você ainda não registrou nenhum jogo.</p>
-                    </div>
-                </div>
-                <div class="painel destaque">
-                    <div id="div_boss_mais_dificil">
-                        <h2>Boss mais difícil</h2>
-                        <p class="texto-suave">Você ainda não registrou nenhum boss.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- gráficos -->
-            <div class="painel">
-                <h2>Horas por jogo</h2>
-                <div class="area-grafico">
-                    <canvas id="canvas_horas"></canvas>
-                </div>
-            </div>
-
-            <div class="duas-colunas">
-                <div class="painel">
-                    <h2>Conclusão de cada jogo</h2>
-                    <p class="texto-suave">Porcentagem de bosses derrotados em cada jogo.</p>
+            <div class="graficos">
+                <div class="painel grafico-largo">
+                    <h2><img src="../assets/icones/cards/grafico-barras.svg" alt="">Horas por jogo</h2>
                     <div class="area-grafico">
-                        <canvas id="canvas_conclusao"></canvas>
+                        <canvas id="canvas_horas"></canvas>
                     </div>
                 </div>
                 <div class="painel">
-                    <h2>Bosses por dificuldade</h2>
-                    <p class="texto-suave">A nota que você deu para cada boss derrotado.</p>
+                    <h2><img src="../assets/icones/cards/grafico-pizza.svg" alt="">Bosses por dificuldade</h2>
                     <div class="area-grafico">
                         <canvas id="canvas_dificuldade"></canvas>
+                    </div>
+                </div>
+                <div class="painel grafico-inteiro">
+                    <h2><img src="../assets/icones/cards/alvo.svg" alt="">Conclusão de cada jogo (% de bosses derrotados)</h2>
+                    <div class="area-grafico">
+                        <canvas id="canvas_conclusao"></canvas>
                     </div>
                 </div>
             </div>
@@ -110,90 +94,15 @@
         let nomesDificuldade = ["Fácil", "Média", "Difícil", "Muito difícil", "Insana"];
         let coresDificuldade = ["#7fc493", "#d8c35e", "#e48a52", "#dd5f6a", "#b77ce0"];
 
-        // cores e fonte padrão de todos os gráficos, para combinar com o tema escuro
+        // cor do texto dos gráficos, para aparecer no fundo escuro
         Chart.defaults.color = "#9aa8c4";
-        Chart.defaults.borderColor = "#27375a";
-        Chart.defaults.font.family = "Alegreya Sans";
 
-        // horas do jogador, usadas na comparação com a média
-        let minhasHoras = 0;
-
-        // ----- indicadores
-        function buscarTotais() {
-            fetch(`/dashboards/totais/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        // o SUM vem do banco como texto, por isso o Number()
-                        minhasHoras = Number(json[0].total_horas);
-                        span_total_horas.innerHTML = minhasHoras;
-                        span_total_jogos.innerHTML = json[0].total_jogos;
-                        buscarMedia();
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // usa a rota da home: horas de todos os jogadores e quantos jogadores existem
-        function buscarMedia() {
-            fetch("/indicadores/gerais").then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        mostrarComparacao(Number(json.horas), json.jogadores);
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // comparação = (minhas horas − média) ÷ média × 100
-        function mostrarComparacao(horasDeTodos, jogadores) {
-            let media = horasDeTodos / jogadores;
-
-            if (media == 0) {
-                return;
-            }
-
-            let comparacao = (minhasHoras - media) / media * 100;
-
-            if (comparacao >= 0) {
-                span_comparacao.innerHTML = `+${comparacao.toFixed(0)}%`;
-                span_texto_comparacao.innerHTML = `de horas acima da média (${media.toFixed(1)}h por jogador)`;
-            } else {
-                span_comparacao.innerHTML = `${comparacao.toFixed(0)}%`;
-                span_texto_comparacao.innerHTML = `de horas abaixo da média (${media.toFixed(1)}h por jogador)`;
-            }
-        }
-
-        function buscarBossMaisDificil() {
-            fetch(`/dashboards/boss-mais-dificil/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        if (json.length > 0) {
-                            div_boss_mais_dificil.innerHTML = `
-                                <h2>Boss mais difícil</h2>
-                                <h3>${json[0].boss}</h3>
-                                <p class="texto-suave">${json[0].jogo} · ${json[0].tentativas} tentativas</p>
-                                <span class="etiqueta nivel-${json[0].dificuldade}">${nomesDificuldade[json[0].dificuldade - 1]}</span>`;
-                        }
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // ----- gráfico de horas por jogo (bar)
-        // os jogos vêm do mais jogado para o menos jogado, então o primeiro é o jogo mais jogado
+        // ----- horas: preenche 3 indicadores e o gráfico de barras
         function buscarHoras() {
             fetch(`/dashboards/horas/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(json => {
-                        if (json.length > 0) {
-                            mostrarJogoMaisJogado(json[0]);
-                        }
+                        mostrarTotais(json);
                         plotarHoras(json);
                     });
                 }
@@ -202,18 +111,24 @@
             });
         }
 
-        function mostrarJogoMaisJogado(jogo) {
-            div_jogo_mais_jogado.innerHTML = `
-                <h2>Jogo mais jogado</h2>
-                <div class="jogo-destaque">
-                    <img src="../assets/jogos/${jogo.imagem}" alt="Capa de ${jogo.jogo}">
-                    <div>
-                        <h3>${jogo.jogo}</h3>
-                        <p class="texto-azul">${jogo.horas} horas</p>
-                    </div>
-                </div>`;
+        // soma as horas com for, conta os jogos e mostra o primeiro (o banco já manda do mais jogado para o menos)
+        function mostrarTotais(jogos) {
+            let totalHoras = 0;
+
+            for (let i = 0; i < jogos.length; i++) {
+                totalHoras += jogos[i].horas;
+            }
+
+            span_total_horas.innerHTML = totalHoras;
+            span_total_jogos.innerHTML = jogos.length;
+
+            if (jogos.length > 0) {
+                span_jogo_mais_jogado.innerHTML = jogos[0].jogo;
+                span_horas_mais_jogado.innerHTML = `${jogos[0].horas} horas`;
+            }
         }
 
+        // gráfico de barras: um nome e um valor de horas para cada jogo
         function plotarHoras(jogos) {
             let labels = [];
             let dados = {
@@ -221,7 +136,8 @@
                 datasets: [{
                     label: "Horas",
                     data: [],
-                    backgroundColor: "#4db6ff"
+                    backgroundColor: "#4db6ff",
+                    borderRadius: 6
                 }]
             };
 
@@ -240,49 +156,7 @@
             new Chart(canvas_horas, config);
         }
 
-        // ----- gráfico de conclusão (bar, de 0 a 100%)
-        function buscarConclusao() {
-            fetch(`/dashboards/conclusao/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        plotarConclusao(json);
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // conclusão = bosses derrotados ÷ total de bosses × 100
-        function plotarConclusao(jogos) {
-            let labels = [];
-            let dados = {
-                labels: labels,
-                datasets: [{
-                    label: "% de bosses derrotados",
-                    data: [],
-                    backgroundColor: "#ffcc40"
-                }]
-            };
-
-            for (let i = 0; i < jogos.length; i++) {
-                let porcentagem = jogos[i].bosses_derrotados / jogos[i].total_bosses * 100;
-                labels.push(jogos[i].jogo);
-                dados.datasets[0].data.push(Number(porcentagem.toFixed(1)));
-            }
-
-            let config = {
-                type: "bar",
-                data: dados,
-                // o eixo y vai sempre de 0 a 100, porque é porcentagem
-                options: { maintainAspectRatio: false, scales: { y: { min: 0, max: 100 } } }
-            };
-
-            new Chart(canvas_conclusao, config);
-        }
-
-        // ----- gráfico de bosses por dificuldade (doughnut)
-        // a soma das quantidades também é o total de bosses derrotados
+        // ----- dificuldade: gráfico de rosca e o total de bosses derrotados
         function buscarDificuldades() {
             fetch(`/dashboards/dificuldades/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
                 if (resposta.ok) {
@@ -295,6 +169,7 @@
             });
         }
 
+        // cada fatia é um nível de dificuldade, com a cor do nível
         function plotarDificuldades(niveis) {
             let totalBosses = 0;
             let labels = [];
@@ -327,14 +202,71 @@
             new Chart(canvas_dificuldade, config);
         }
 
+        // ----- conclusão: gráfico de barras de 0 a 100%
+        function buscarConclusao() {
+            fetch(`/dashboards/conclusao/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        plotarConclusao(json);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
+        // conclusão = bosses derrotados ÷ total de bosses × 100
+        function plotarConclusao(jogos) {
+            let labels = [];
+            let dados = {
+                labels: labels,
+                datasets: [{
+                    label: "% de bosses derrotados",
+                    data: [],
+                    backgroundColor: "#ffcc40",
+                    borderRadius: 6
+                }]
+            };
+
+            for (let i = 0; i < jogos.length; i++) {
+                let porcentagem = jogos[i].bosses_derrotados / jogos[i].total_bosses * 100;
+                labels.push(jogos[i].jogo);
+                dados.datasets[0].data.push(porcentagem.toFixed(1));
+            }
+
+            let config = {
+                type: "bar",
+                data: dados,
+                // o eixo y vai até 100, porque é porcentagem
+                options: { maintainAspectRatio: false, scales: { y: { max: 100 } } }
+            };
+
+            new Chart(canvas_conclusao, config);
+        }
+
+        // ----- boss mais difícil: maior dificuldade e, no empate, mais tentativas
+        function buscarBossMaisDificil() {
+            fetch(`/dashboards/boss-mais-dificil/${sessionStorage.ID_USUARIO}`).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(json => {
+                        if (json.length > 0) {
+                            span_boss_mais_dificil.innerHTML = json[0].boss;
+                            span_detalhe_boss.innerHTML = `${json[0].jogo} · ${nomesDificuldade[json[0].dificuldade - 1]} · ${json[0].tentativas} tentativas`;
+                        }
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+            });
+        }
+
         function carregarDashboard() {
             // sem ninguém logado, o validarSessao (do sessao.js) volta para o login
             validarSessao();
-            buscarTotais();
-            buscarBossMaisDificil();
             buscarHoras();
-            buscarConclusao();
             buscarDificuldades();
+            buscarConclusao();
+            buscarBossMaisDificil();
         }
 
         carregarDashboard();

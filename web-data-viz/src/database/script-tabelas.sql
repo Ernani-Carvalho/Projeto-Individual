@@ -310,25 +310,28 @@ LEFT JOIN boss_derrotado ON boss_derrotado.fk_boss = boss.id
 	AND boss_derrotado.fk_usuario = progresso.fk_usuario
 GROUP BY progresso.fk_usuario, jogo.id, jogo.nome;
 
--- selects da dashboard, usando as views
+-- selects da dashboard, usando as views (um para cada rota)
 -- o 1 é o id do jogador, no model vira ${idUsuario}
 
--- totais do jogador: horas e jogos
-SELECT IFNULL(SUM(horas), 0) AS total_horas, COUNT(jogo) AS total_jogos
-FROM vw_progresso
-WHERE fk_usuario = 1;
-
--- totais do jogador: bosses derrotados
-SELECT COUNT(boss) AS total_bosses
-FROM vw_boss_derrotado
-WHERE fk_usuario = 1;
-
--- jogo mais jogado
-SELECT jogo, imagem, horas
+-- horas de cada jogo, do mais jogado para o menos jogado
+-- a página soma as horas, conta os jogos e pega o primeiro como jogo mais jogado
+SELECT jogo, horas
 FROM vw_progresso
 WHERE fk_usuario = 1
-ORDER BY horas DESC
-LIMIT 1;
+ORDER BY horas DESC;
+
+-- conclusão de cada jogo (a porcentagem é feita na página)
+SELECT jogo, total_bosses, bosses_derrotados
+FROM vw_conclusao
+WHERE fk_usuario = 1
+ORDER BY jogo;
+
+-- bosses por dificuldade (a soma das quantidades é o total de bosses derrotados)
+SELECT dificuldade, COUNT(boss) AS quantidade
+FROM vw_boss_derrotado
+WHERE fk_usuario = 1
+GROUP BY dificuldade
+ORDER BY dificuldade;
 
 -- boss mais difícil: maior dificuldade, no empate mais tentativas
 SELECT boss, jogo, dificuldade, tentativas
@@ -336,30 +339,3 @@ FROM vw_boss_derrotado
 WHERE fk_usuario = 1
 ORDER BY dificuldade DESC, tentativas DESC
 LIMIT 1;
-
--- gráfico de horas por jogo
-SELECT jogo, horas
-FROM vw_progresso
-WHERE fk_usuario = 1
-ORDER BY horas DESC;
-
--- gráfico de conclusão de cada jogo (a porcentagem é feita na página)
-SELECT jogo, total_bosses, bosses_derrotados
-FROM vw_conclusao
-WHERE fk_usuario = 1
-ORDER BY jogo;
-
--- gráfico de bosses por dificuldade
-SELECT dificuldade, COUNT(boss) AS quantidade
-FROM vw_boss_derrotado
-WHERE fk_usuario = 1
-GROUP BY dificuldade
-ORDER BY dificuldade;
-
--- comparação com a média: horas de todos os jogadores e quantos jogadores existem
--- média = horas de todos ÷ jogadores (a conta é feita na página)
-SELECT IFNULL(SUM(horas), 0) AS horas_de_todos
-FROM progresso;
-
-SELECT COUNT(id) AS total_jogadores
-FROM usuario;

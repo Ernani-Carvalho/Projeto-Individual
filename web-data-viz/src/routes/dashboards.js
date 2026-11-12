@@ -5,10 +5,6 @@ var dashboardController = require("../controllers/dashboardController");
 
 // uma rota para cada parte da dashboard; o :idUsuario é o jogador logado
 
-router.get("/totais/:idUsuario", function (req, res) {
-    dashboardController.buscarTotais(req, res);
-});
-
 router.get("/horas/:idUsuario", function (req, res) {
     dashboardController.buscarHorasPorJogo(req, res);
 });

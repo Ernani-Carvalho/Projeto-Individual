@@ -2,21 +2,11 @@ var database = require("../database/config");
 
 // as consultas usam as views do script (vw_progresso, vw_boss_derrotado e vw_conclusao)
 
-// total de horas e quantidade de jogos do jogador
-function buscarTotais(idUsuario) {
-    var instrucaoSql = `
-        SELECT IFNULL(SUM(horas), 0) AS total_horas, COUNT(jogo) AS total_jogos
-        FROM vw_progresso
-        WHERE fk_usuario = ${idUsuario};
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
-
-// horas de cada jogo, do mais jogado para o menos jogado (o primeiro é o jogo mais jogado)
+// horas de cada jogo, do mais jogado para o menos jogado
+// a página soma as horas, conta os jogos e pega o primeiro como jogo mais jogado
 function buscarHorasPorJogo(idUsuario) {
     var instrucaoSql = `
-        SELECT jogo, imagem, horas
+        SELECT jogo, horas
         FROM vw_progresso
         WHERE fk_usuario = ${idUsuario}
         ORDER BY horas DESC;
@@ -64,7 +54,6 @@ function buscarBossMaisDificil(idUsuario) {
 }
 
 module.exports = {
-    buscarTotais,
     buscarHorasPorJogo,
     buscarConclusao,
     buscarDificuldades,

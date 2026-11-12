@@ -60,8 +60,9 @@ Git:
 Site, dentro de `web-data-viz`:
 
 - `npm install` na primeira vez ou quando o `package.json` mudar.
-- `npm start` para ligar. O site abre em `http://localhost:3333`.
+- `npm start` para ligar. O site abre em `http://localhost:3334` (o `APP_PORT` do `.env.dev` é 3334 porque o VirtualBox ocupa a 3333).
 - `Ctrl + C` para desligar.
+- Depois de mudar qualquer arquivo em `src/` ou o `app.js`, a API precisa ser desligada e ligada de novo. Mudanças em `public/` só pedem recarregar a página.
 
 Nunca rode `npm audit fix`. As versões foram travadas pela faculdade.
 
@@ -71,7 +72,7 @@ Banco, na VM:
 - A rede da VM fica em NAT, com redirecionamento de porta TCP: 3307 na minha máquina vai para 3306 na VM. Uso 3307 para não bater com o MySQL da minha máquina.
 - Eu me conecto em `127.0.0.1`, porta `3307`. O IP da VM não é usado.
 - No terminal: `mysql -u usuario -p -h 127.0.0.1 -P 3307`.
-- No `.env.dev`: `DB_HOST` = `127.0.0.1` e `DB_PORT` = `3307`. Nome do banco, usuário e senha quem preenche sou eu. A IA nunca escreve esses dados.
+- No `.env.dev`: `DB_HOST` = `127.0.0.1`, `DB_PORT` = `3307`, `DB_DATABASE` = `firstrun` e o usuário e a senha do banco. O `.env.dev` vai para o GitHub, porque os professores precisam ver.
 - O script fica em `web-data-viz/src/database/script-tabelas.sql`. Se o banco já existir, ele precisa ser apagado antes de rodar o script de novo.
 - A mesma VM tem o banco do projeto em grupo. Os usuários deste projeto só recebem `GRANT` no banco `firstrun`.
 - A API só precisa de `SELECT`, `INSERT` e `UPDATE`. O usuário dela não usa `DELETE`.
@@ -133,7 +134,7 @@ Tudo que for novo segue o mesmo caminho: página, `fetch`, rota, controller, mod
 | `usuarios.js` | `POST /usuarios/cadastrar`, `POST /usuarios/autenticar` | Pronto |
 | `jogos.js` | `GET /jogos/medias/:idJogo` (média de tentativas) e `GET /jogos/bosses/:idJogo` (bosses do jogo, para o registrar) | Pronto |
 | `progressos.js` | `POST /progressos/jogo`, `POST /progressos/boss`, `GET /progressos/jogos/:idUsuario`, `GET /progressos/bosses/:idUsuario` | Pronto |
-| `indicadores.js` | `GET /indicadores/gerais` (números e ranking da home) | Pronto. Os da dashboard faltam (confirmar comigo) |
+| `indicadores.js` | `GET /indicadores/gerais` (números gerais da home: jogadores, horas, bosses derrotados e jogos) | Pronto. Os da dashboard faltam (confirmar comigo) |
 
 Arquivos seguem o padrão: rota no plural (`jogos.js`), controller e model no singular (`jogoController.js`, `jogoModel.js`). Rota nova entra no `app.js` em dois lugares: o `require` e o `app.use`. Busca usa `router.get` e gravação usa `router.post`. Antes de criar, olhe os arquivos de usuário e de jogo.
 
@@ -345,6 +346,5 @@ No fim de cada tarefa, a IA adiciona uma entrada no `DIARIO-DE-PROMPTS.md` usand
 - Pode criar arquivos novos no mesmo padrão. No front, nada de arquivo `.js` novo.
 - Em arquivos da web-data-viz que já existem, peça confirmação antes de mudar, a não ser que eu tenha pedido.
 - Não apague, renomeie ou mova arquivos sem me perguntar.
-- Nunca escreva senha, usuário ou dados de acesso de verdade em arquivo nenhum.
 - Não instale pacotes novos, não rode `npm audit fix` e não mexa na `node_modules`.
 - Na dúvida, pergunte.

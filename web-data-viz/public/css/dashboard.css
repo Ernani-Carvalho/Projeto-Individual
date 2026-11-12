@@ -1,0 +1,30 @@
+/* dashboard (cores e cartões vêm do home.css; painel, etiqueta e duas colunas vêm do perfil.css) */
+
+/* jogo mais jogado e boss mais difícil */
+.destaque h3 {
+    font-size: 30px;
+}
+
+.destaque .etiqueta {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.jogo-destaque {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.jogo-destaque img {
+    width: 90px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* a div em volta do canvas define a altura do gráfico */
+.area-grafico {
+    height: 320px;
+    margin-top: 12px;
+}

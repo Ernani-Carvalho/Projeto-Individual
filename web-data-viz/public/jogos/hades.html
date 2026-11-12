@@ -69,42 +69,34 @@
             </div>
 
             <h2 class="titulo-secao titulo-bosses">Bosses</h2>
-            <p class="subtitulo">Média de tentativas de todos os jogadores em cada luta.</p>
             <div class="lista-bosses">
                 <div class="cartao-boss">
                     <img src="../assets/bosses/megaera.png" alt="Megaera">
                     <h3>Megaera</h3>
-                    <p class="texto-suave" id="p_media_76">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/alecto.png" alt="Alecto">
                     <h3>Alecto</h3>
-                    <p class="texto-suave" id="p_media_77">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/tisiphone.png" alt="Tisiphone">
                     <h3>Tisiphone</h3>
-                    <p class="texto-suave" id="p_media_78">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/bone-hydra.png" alt="Lernaean Bone Hydra">
                     <h3>Lernaean Bone Hydra</h3>
-                    <p class="texto-suave" id="p_media_79">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/theseus-asterius.png" alt="Theseus e Asterius">
                     <h3>Theseus e Asterius</h3>
-                    <p class="texto-suave" id="p_media_80">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/hades.png" alt="Hades">
                     <h3>Hades</h3>
-                    <p class="texto-suave" id="p_media_81">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/charon.png" alt="Charon">
                     <h3>Charon</h3>
-                    <p class="texto-suave" id="p_media_82">Ninguém registrou ainda</p>
                 </div>
             </div>
         </div>
@@ -122,27 +114,6 @@
             }
         }
 
-        // busca no banco a média de tentativas dos bosses deste jogo (o 3 é o id do jogo)
-        function buscarMedias() {
-            fetch("/jogos/medias/3").then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        mostrarMedias(json);
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // cada boss tem um parágrafo com o id dele no banco (p_media_1, p_media_2...)
-        function mostrarMedias(medias) {
-            for (let i = 0; i < medias.length; i++) {
-                document.getElementById(`p_media_${medias[i].id}`).innerHTML = `Média: ${medias[i].media_tentativas} tentativas`;
-            }
-        }
-
-        buscarMedias();
         montarMenu();
     </script>
 

@@ -69,92 +69,74 @@
             </div>
 
             <h2 class="titulo-secao titulo-bosses">Bosses</h2>
-            <p class="subtitulo">Média de tentativas de todos os jogadores em cada luta.</p>
             <div class="lista-bosses">
                 <div class="cartao-boss">
                     <img src="../assets/bosses/yingzhao.png" alt="General Yingzhao">
                     <h3>General Yingzhao</h3>
-                    <p class="texto-suave" id="p_media_167">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/goumang.png" alt="Goumang">
                     <h3>Goumang</h3>
-                    <p class="texto-suave" id="p_media_168">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/xingtian.png" alt="Xingtian">
                     <h3>Xingtian</h3>
-                    <p class="texto-suave" id="p_media_169">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/yanlao.png" alt="Yanlao">
                     <h3>Yanlao</h3>
-                    <p class="texto-suave" id="p_media_170">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/kanghui.png" alt="Kanghui">
                     <h3>Kanghui</h3>
-                    <p class="texto-suave" id="p_media_171">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/jiequan.png" alt="Jiequan">
                     <h3>Jiequan</h3>
-                    <p class="texto-suave" id="p_media_172">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/lady-ethereal.png" alt="Lady Ethereal">
                     <h3>Lady Ethereal</h3>
-                    <p class="texto-suave" id="p_media_173">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/ji.png" alt="Ji">
                     <h3>Ji</h3>
-                    <p class="texto-suave" id="p_media_174">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/fengs.png" alt="Fengs">
                     <h3>Fengs</h3>
-                    <p class="texto-suave" id="p_media_175">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/eigong.png" alt="Eigong">
                     <h3>Eigong</h3>
-                    <p class="texto-suave" id="p_media_176">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/red-tiger-elite.png" alt="Red Tiger Elites">
                     <h3>Red Tiger Elites</h3>
-                    <p class="texto-suave" id="p_media_177">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/celestial-sentinel.png" alt="Celestial Sentinels">
                     <h3>Celestial Sentinels</h3>
-                    <p class="texto-suave" id="p_media_178">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/celestial-spectre.png" alt="Celestial Spectres">
                     <h3>Celestial Spectres</h3>
-                    <p class="texto-suave" id="p_media_179">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/celestial-enforcer.png" alt="Celestial Enforcers">
                     <h3>Celestial Enforcers</h3>
-                    <p class="texto-suave" id="p_media_180">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/yinyue.png" alt="Yinyue">
                     <h3>Yinyue</h3>
-                    <p class="texto-suave" id="p_media_181">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/cixing.png" alt="Cixing">
                     <h3>Cixing</h3>
-                    <p class="texto-suave" id="p_media_182">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/tianshou.png" alt="Tianshou">
                     <h3>Tianshou</h3>
-                    <p class="texto-suave" id="p_media_183">Ninguém registrou ainda</p>
                 </div>
             </div>
         </div>
@@ -172,27 +154,6 @@
             }
         }
 
-        // busca no banco a média de tentativas dos bosses deste jogo (o 10 é o id do jogo)
-        function buscarMedias() {
-            fetch("/jogos/medias/10").then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        mostrarMedias(json);
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // cada boss tem um parágrafo com o id dele no banco (p_media_1, p_media_2...)
-        function mostrarMedias(medias) {
-            for (let i = 0; i < medias.length; i++) {
-                document.getElementById(`p_media_${medias[i].id}`).innerHTML = `Média: ${medias[i].media_tentativas} tentativas`;
-            }
-        }
-
-        buscarMedias();
         montarMenu();
     </script>
 

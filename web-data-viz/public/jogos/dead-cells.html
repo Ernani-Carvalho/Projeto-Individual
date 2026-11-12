@@ -68,57 +68,46 @@
             </div>
 
             <h2 class="titulo-secao titulo-bosses">Bosses</h2>
-            <p class="subtitulo">Média de tentativas de todos os jogadores em cada luta.</p>
             <div class="lista-bosses">
                 <div class="cartao-boss">
                     <img src="../assets/bosses/concierge.png" alt="The Concierge">
                     <h3>The Concierge</h3>
-                    <p class="texto-suave" id="p_media_110">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/conjunctivius.png" alt="Conjunctivius">
                     <h3>Conjunctivius</h3>
-                    <p class="texto-suave" id="p_media_111">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/mama-tick.png" alt="Mama Tick">
                     <h3>Mama Tick</h3>
-                    <p class="texto-suave" id="p_media_112">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/time-keeper.png" alt="The Time Keeper">
                     <h3>The Time Keeper</h3>
-                    <p class="texto-suave" id="p_media_113">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/giant.png" alt="The Giant">
                     <h3>The Giant</h3>
-                    <p class="texto-suave" id="p_media_114">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/scarecrow.png" alt="The Scarecrow">
                     <h3>The Scarecrow</h3>
-                    <p class="texto-suave" id="p_media_115">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/hand-of-the-king.png" alt="The Hand of the King">
                     <h3>The Hand of the King</h3>
-                    <p class="texto-suave" id="p_media_116">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/servants.png" alt="The Servants">
                     <h3>The Servants</h3>
-                    <p class="texto-suave" id="p_media_117">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/the-queen.png" alt="The Queen">
                     <h3>The Queen</h3>
-                    <p class="texto-suave" id="p_media_118">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/collector-dc.png" alt="The Collector">
                     <h3>The Collector</h3>
-                    <p class="texto-suave" id="p_media_119">Ninguém registrou ainda</p>
                 </div>
             </div>
         </div>
@@ -136,27 +125,6 @@
             }
         }
 
-        // busca no banco a média de tentativas dos bosses deste jogo (o 6 é o id do jogo)
-        function buscarMedias() {
-            fetch("/jogos/medias/6").then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        mostrarMedias(json);
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // cada boss tem um parágrafo com o id dele no banco (p_media_1, p_media_2...)
-        function mostrarMedias(medias) {
-            for (let i = 0; i < medias.length; i++) {
-                document.getElementById(`p_media_${medias[i].id}`).innerHTML = `Média: ${medias[i].media_tentativas} tentativas`;
-            }
-        }
-
-        buscarMedias();
         montarMenu();
     </script>
 

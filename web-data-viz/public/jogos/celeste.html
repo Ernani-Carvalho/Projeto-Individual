@@ -67,17 +67,14 @@
             </div>
 
             <h2 class="titulo-secao titulo-bosses">Bosses</h2>
-            <p class="subtitulo">Média de tentativas de todos os jogadores em cada luta.</p>
             <div class="lista-bosses">
                 <div class="cartao-boss">
                     <img src="../assets/bosses/mr-oshiro.png" alt="Mr. Oshiro">
                     <h3>Mr. Oshiro</h3>
-                    <p class="texto-suave" id="p_media_108">Ninguém registrou ainda</p>
                 </div>
                 <div class="cartao-boss">
                     <img src="../assets/bosses/badeline.png" alt="Badeline">
                     <h3>Badeline</h3>
-                    <p class="texto-suave" id="p_media_109">Ninguém registrou ainda</p>
                 </div>
             </div>
         </div>
@@ -95,27 +92,6 @@
             }
         }
 
-        // busca no banco a média de tentativas dos bosses deste jogo (o 5 é o id do jogo)
-        function buscarMedias() {
-            fetch("/jogos/medias/5").then(function (resposta) {
-                if (resposta.ok) {
-                    resposta.json().then(json => {
-                        mostrarMedias(json);
-                    });
-                }
-            }).catch(function (erro) {
-                console.log(erro);
-            });
-        }
-
-        // cada boss tem um parágrafo com o id dele no banco (p_media_1, p_media_2...)
-        function mostrarMedias(medias) {
-            for (let i = 0; i < medias.length; i++) {
-                document.getElementById(`p_media_${medias[i].id}`).innerHTML = `Média: ${medias[i].media_tentativas} tentativas`;
-            }
-        }
-
-        buscarMedias();
         montarMenu();
     </script>
 

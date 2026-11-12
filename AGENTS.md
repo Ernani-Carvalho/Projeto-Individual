@@ -102,13 +102,12 @@ Imagens em `public/assets/`:
 | `bosses/` | Imagem de cada boss, em PNG |
 | `fundo/` | `fundo-de-capas.jpg`, a imagem com as capas de todos os jogos inclinadas |
 | `login/` | Fundo do painel do login e do cadastro |
-| `icones/` | Ícones de perfil, dashboard e controle |
+| `icones/` | Ícones de perfil, dashboard e controle (PNG, da home); `menu/` tem os ícones azuis dos menus e `cards/` os ícones amarelos dos cartões (SVG da Lucide, licença livre, já com a cor do site) |
 | `logo/` | Logo e favicon |
-| `logos-jogos/` | Logo de cada jogo (PNG transparente da Steam), com o mesmo nome de arquivo da capa. Usada no banner do registrar |
 
 O site sempre usa arquivos locais, nunca link de imagem da internet.
 
-Os arquivos de aquário, empresa, medida e aviso são do AquaTech, o exemplo da faculdade, e servem de modelo. Eu já apaguei as imagens do AquaTech de propósito, porque o simulador, o `estilo.css` e a dashboard antiga não vão ser usados. Não restaure esses arquivos, e também não apague outros sem me perguntar.
+Os arquivos do AquaTech (o exemplo da faculdade: aquário, empresa, medida, aviso, `estilo.css`, `alerta.js` e as páginas antigas da dashboard) foram apagados de propósito. Não restaure esses arquivos, e não apague outros sem me perguntar.
 
 ### Caminho de uma requisição
 
@@ -136,13 +135,13 @@ Tudo que for novo segue o mesmo caminho: página, `fetch`, rota, controller, mod
 | `jogos.js` | `GET /jogos/bosses/:idJogo` (bosses do jogo, para o registrar) | Pronto |
 | `progressos.js` | `POST /progressos/registrar` (salva horas e status do jogo e, se `idBossServer` não for 0, o boss junto), `GET /progressos/jogos/:idUsuario`, `GET /progressos/bosses/:idUsuario` (as duas devolvem o `id` do jogo e do boss) | Pronto |
 | `indicadores.js` | `GET /indicadores/gerais` (números gerais da home: jogadores, horas, bosses derrotados e jogos) | Pronto |
-| `dashboards.js` | `GET /dashboards/totais/:idUsuario`, `/horas/:idUsuario`, `/conclusao/:idUsuario`, `/dificuldades/:idUsuario` e `/boss-mais-dificil/:idUsuario` (um `SELECT` em uma view cada) | Pronto |
+| `dashboards.js` | `GET /dashboards/horas/:idUsuario`, `/conclusao/:idUsuario`, `/dificuldades/:idUsuario` e `/boss-mais-dificil/:idUsuario` (um `SELECT` em uma view cada) | Pronto |
 
 Arquivos seguem o padrão: rota no plural (`jogos.js`), controller e model no singular (`jogoController.js`, `jogoModel.js`). Rota nova entra no `app.js` em dois lugares: o `require` e o `app.use`. Busca usa `router.get` e gravação usa `router.post`. Antes de criar, olhe os arquivos de usuário e de jogo.
 
 ### Dados da dashboard
 
-A página faz `fetch` para uma rota com o `ID_USUARIO`. O model faz as contas no `SELECT` (`SUM`, `COUNT`, `AVG` e `GROUP BY`). A página percorre o JSON com `for`, faz o que faltar (como porcentagens) e monta os gráficos com Chart.js. Os selects usam as views `vw_progresso`, `vw_boss_derrotado` e `vw_conclusao`, criadas no fim do `script-tabelas.sql`. Cada parte da dashboard tem a sua rota (sem `Promise.all`). A comparação com a média usa a rota `/indicadores/gerais` da home.
+A página faz `fetch` para uma rota com o `ID_USUARIO`. O model faz as contas no `SELECT` (`SUM`, `COUNT`, `AVG` e `GROUP BY`). A página percorre o JSON com `for`, faz o que faltar (como porcentagens) e monta os gráficos com Chart.js. Os selects usam as views `vw_progresso`, `vw_boss_derrotado` e `vw_conclusao`, criadas no fim do `script-tabelas.sql`. Cada parte da dashboard tem a sua rota (sem `Promise.all`). O total de horas, o número de jogos e o jogo mais jogado saem da lista de horas, com `for` na página; o total de bosses sai da soma das quantidades por dificuldade.
 
 ## Banco de dados
 
@@ -172,10 +171,9 @@ Contas do site:
 
 - total de horas: `SUM(horas)`;
 - jogo mais jogado: `ORDER BY horas DESC LIMIT 1`;
-- conclusão de cada jogo: bosses derrotados ÷ total de bosses × 100, com `.toFixed()`;
-- comparação com a média: (valor do jogador − média de todos) ÷ média × 100.
+- conclusão de cada jogo: bosses derrotados ÷ total de bosses × 100, com `.toFixed()`.
 
-Indicadores da dashboard: total de horas, jogos registrados, bosses derrotados, comparação com a média de horas, jogo mais jogado e boss mais difícil. Gráficos: horas por jogo (`bar`), conclusão de cada jogo (`bar`, de 0 a 100%) e bosses por dificuldade (`doughnut`).
+Indicadores da dashboard (cada um com o título e o ícone em cima e o valor embaixo): total de horas, jogos registrados, bosses derrotados, jogo mais jogado e boss mais difícil. Gráficos: horas por jogo (`bar`), conclusão de cada jogo (`bar`, de 0 a 100%) e bosses por dificuldade (`doughnut`).
 
 Se mudar uma tabela, o DER em `docs/` também precisa ser refeito.
 
@@ -193,9 +191,9 @@ Todas em `web-data-viz/public/`.
 | Sobre mim | `sobre.html` | `sobre.css` | Estrutura pronta, só a base: faltam os meus textos e a foto |
 | Perfil | `perfil.html` | `perfil.css` | Pronta (o login vem para cá) |
 | Registrar | `registrar.html` (no lugar do antigo `simulador.html`) | `perfil.css` | Pronta |
-| Dashboard | `dashboard/dashboard.html` | `perfil.css` + `dashboard.css` | Pronta |
+| Dashboard | `dashboard/dashboard.html` (menu lateral fixo na esquerda no lugar do cabeçalho) | `perfil.css` + `dashboard.css` | Pronta |
 
-O `home.css` também tem a parte geral (cores, cabeçalho, botões), então todas as páginas carregam ele. O `estilo.css` é do AquaTech e não é usado nas minhas páginas.
+O `home.css` também tem a parte geral (cores, cabeçalho, botões, painéis e a aparência de todos os cartões: borda, cantos arredondados e sombra), então todas as páginas carregam ele. Os links dos menus têm um ícone antes do texto.
 
 Como as coisas funcionam:
 
@@ -246,6 +244,10 @@ Variáveis no `:root` do `home.css`:
 | `--texto-suave` | `#9aa8c4` | Texto secundário |
 | `--azul` | `#4db6ff` | Títulos, links e detalhes |
 | `--amarelo` | `#ffcc40` | Botões e rótulos |
+| `--azul-escuro` | `#173a5c` | Fundo do que está escolhido e da página atual no menu lateral |
+| `--sombra` | sombra escura | Cartões, painéis e cabeçalho |
+| `--brilho-azul` | borda e brilho azuis | Hover dos cartões clicáveis e opção escolhida |
+| `--raio` | `12px` | Cantos arredondados dos cartões |
 
 As cores de dificuldade de 1 a 5, quando forem usadas: `#7fc493`, `#d8c35e`, `#e48a52`, `#dd5f6a` e `#b77ce0`.
 

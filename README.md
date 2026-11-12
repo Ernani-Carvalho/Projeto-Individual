@@ -45,11 +45,11 @@ O **FirstRun** é o lugar para guardar essa trajetória. Você registra os jogos
 
 A dashboard transforma o seu progresso em números:
 
-- total de horas jogadas, jogos cadastrados e bosses derrotados;
+- total de horas jogadas, jogos registrados e bosses derrotados;
 - o jogo mais jogado e o boss mais difícil;
-- porcentagem de conclusão de cada jogo;
-- gráficos de horas por jogo e de jogos por status;
-- comparação do seu progresso com a média dos jogadores.
+- gráfico de horas por jogo;
+- gráfico de conclusão de cada jogo (porcentagem de bosses derrotados);
+- gráfico de bosses por dificuldade.
 
 ## Tecnologias
 

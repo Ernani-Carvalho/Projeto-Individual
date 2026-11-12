@@ -43,3 +43,36 @@ Onde eu anoto cada vez que usei IA no projeto.
 - Pedi: atualizar o DER, depois das mudanças no script do banco.
 - Ela fez: atualizou as tabelas do DER.
 
+
+## 06/11/2026 - documento de passagem e AGENTS.md
+
+- IA: Claude Code
+- Pedi: um documento com tudo o que foi feito no projeto neste chat, principalmente na API, para continuar em outro chat, e tirar do AGENTS.md o que não faz sentido na faculdade, como a regra da senha no `.env.dev`.
+- Ela fez: criou o documento "FirstRun: resumo de tudo o que foi feito (para continuar em outro chat)" com estado atual, API, banco, páginas, imagens, histórico, regras e próximos passos. No AGENTS.md, tirou as regras sobre não escrever senha, avisou que o `.env.dev` vai para o GitHub, trocou a porta para 3334 e explicou que a API precisa ser reiniciada depois de mudanças em `src/`.
+
+## 11/11/2026 - resumo salvo no projeto
+
+- IA: Claude Code
+- Pedi: deixar o documento com o que foi feito disponível para baixar, porque não achei ele no meu PC.
+- Ela fez: explicou que o documento estava salvo só no claude.ai e criou uma cópia em Markdown, o `RESUMO-PARA-OUTRO-CHAT.md`, na raiz do projeto.
+
+## 11/11/2026 - rotas da API, uma por vez
+
+- IA: Claude Code
+- Pedi: Com base nos documentos da API web-data-viz, crie as rotas necessárias para o projeto funcionar de ponta a ponta.
+  Como quero que você trabalhe:
+  Crie uma rota por vez e espere eu confirmar que entendi antes de passar para a próxima.
+  Em cada rota, explique o caminho completo que ela percorre no projeto e o papel de cada arquivo envolvido.
+  Siga o mesmo padrão e a mesma estrutura que a web-data-viz já usa.
+- Ela fez: [PREENCHER]
+
+## 11/11/2026 - lacunas e inconsistências do projeto
+
+- IA: Claude Code
+- Pedi: Analise meu projeto individual e identifique as lacunas e inconsistências, tanto na ideia do projeto quanto no código.
+  Não altere nenhum arquivo. Só liste o que encontrar, para eu analisar e decidir o que é pertinente.
+  Para cada item da lista, informe:
+  Onde está: o arquivo e o trecho, ou a parte da ideia.
+  Qual é o problema: a lacuna ou a inconsistência.
+  Separe a lista em duas partes: Ideia e Código.
+- Ela fez: [PREENCHER]

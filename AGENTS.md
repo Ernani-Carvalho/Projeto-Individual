@@ -200,7 +200,7 @@ Como as coisas funcionam:
 
 - O texto fixo fica no HTML ou num vetor no `<script>` da página. O que vem do banco é montado com `for` e `innerHTML +=` depois do `fetch`.
 - Só usa `fetch` o que muda conforme os jogadores usam o site. As páginas dos jogos não usam `fetch`: mostram só o nome e a imagem de cada boss.
-- O catálogo e as páginas dos jogos são HTML fixo, com links normais (`<a href>`). Nada de `sessionStorage` ou `window.location` para abrir um jogo.
+- As páginas dos jogos são HTML fixo. O catálogo monta os cartões com `for` a partir de um vetor, por causa da busca (`oninput`, `.toLowerCase()` e `.includes()`). Os cartões são links normais (`<a href>`). Nada de `sessionStorage` ou `window.location` para abrir um jogo.
 - Jogo novo = uma página nova em `public/jogos/`, um cartão no `jogos.html`, as imagens em `assets/` e as linhas no script do banco.
 - Fundo padrão: a imagem `fundo-de-capas.jpg` presa na tela. Quando entrar um jogo novo, essa imagem precisa ser refeita.
 - Fundo do catálogo: cada cartão tem o cenário escondido com `opacity: 0`, e o `:hover` do cartão mostra ele.

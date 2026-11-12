@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FirstRun | Sobre mim</title>
+    <link rel="icon" href="assets/logo/favicon-chama.png">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700;800&display=swap">
+    <script src="js/sessao.js"></script>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/sobre.css">
+</head>
+
+<body>
+
+    <img class="fundo-de-capas" src="assets/fundo/fundo-de-capas.jpg" alt="">
+
+    <div class="cabecalho">
+        <div class="coluna-central">
+            <a class="logo" href="index.html"><img src="assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
+
+            <nav class="menu">
+                <a href="index.html">Início</a>
+                <a href="jogos.html">Jogos</a>
+                <a class="pagina-atual" href="sobre.html">Sobre mim</a>
+            </nav>
+
+            <div class="menu-usuario" id="div_menu_usuario">
+                <a href="login.html">Entrar</a>
+                <a href="cadastro.html">Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco">
+        <div class="coluna-central">
+
+            <div class="apresentacao">
+                <!-- trocar pela foto: <img class="foto" src="assets/sobre/foto.jpg" alt="Foto do Ernani"> -->
+                <span class="foto">E</span>
+                <div>
+                    <span class="texto-acima-do-titulo">Sobre mim</span>
+                    <h1 class="titulo-secao">Ernani P. Carvalho</h1>
+                    <p class="subtitulo">Estudante do 1º semestre de Análise e Desenvolvimento de Sistemas na SPTech. O FirstRun é o meu projeto individual de Pesquisa e Inovação.</p>
+                </div>
+            </div>
+
+            <div class="tres-colunas">
+                <div class="cartao-motivo">
+                    <h3>Quem sou eu</h3>
+                    <p class="texto-suave">[PREENCHER: quem você é, de onde vem e o que gosta de fazer]</p>
+                </div>
+                <div class="cartao-motivo">
+                    <h3>Como começou</h3>
+                    <p class="texto-suave">[PREENCHER: quando começou o seu interesse por jogos indie e qual foi o primeiro]</p>
+                </div>
+                <div class="cartao-motivo">
+                    <h3>Meus valores no projeto</h3>
+                    <p class="texto-suave">[PREENCHER: o que foi importante para você ao fazer o site]</p>
+                </div>
+            </div>
+
+            <div class="duas-colunas-sobre">
+                <div class="cartao-motivo">
+                    <span class="texto-acima-do-titulo">O mais difícil</span>
+                    <h3>Maior dificuldade</h3>
+                    <p class="texto-suave">[PREENCHER: o que foi mais difícil durante o projeto]</p>
+                </div>
+                <div class="cartao-motivo">
+                    <span class="texto-acima-do-titulo">O que eu consegui</span>
+                    <h3>Maior superação</h3>
+                    <p class="texto-suave">[PREENCHER: o que você conseguiu superar]</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="bloco bloco-escuro">
+        <div class="coluna-central dedicatoria">
+            <span class="texto-acima-do-titulo">Dedicatória</span>
+            <h2 class="titulo-secao">[PREENCHER: a quem você é grato]</h2>
+            <p class="texto-suave">[PREENCHER: texto da dedicatória]</p>
+        </div>
+    </div>
+
+    <script>
+        // se tiver alguém logado, troca "Entrar" e "Criar conta" pelos links da conta
+        function montarMenu() {
+            if (sessionStorage.ID_USUARIO != undefined) {
+                div_menu_usuario.innerHTML = `
+                    <a href="registrar.html">Registrar</a>
+                    <a href="perfil.html">Perfil</a>
+                    <a>Dashboard</a>
+                    <a onclick="limparSessao()">Sair</a>`;
+            }
+        }
+
+        montarMenu();
+    </script>
+
+</body>
+
+</html>

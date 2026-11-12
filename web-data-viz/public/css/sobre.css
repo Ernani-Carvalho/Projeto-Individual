@@ -1,0 +1,45 @@
+/* sobre mim (as cores, o cabeçalho e os cartões vêm do home.css) */
+
+/* foto (por enquanto a inicial) de um lado e o nome do outro */
+.apresentacao {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0; /* não deixa o círculo ser espremido pelo texto */
+    border-radius: 50%;
+    object-fit: cover; /* quando virar foto, preenche o círculo sem esticar */
+    background-color: var(--amarelo);
+    color: var(--preto);
+    font-size: 80px;
+    font-weight: 800;
+}
+
+.apresentacao .subtitulo {
+    max-width: 640px;
+    margin-top: 10px;
+}
+
+.duas-colunas-sobre {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.dedicatoria {
+    text-align: center;
+}
+
+.dedicatoria p {
+    max-width: 720px;
+    margin: 16px auto 0;
+    font-size: 20px;
+}

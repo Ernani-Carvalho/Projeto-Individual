@@ -21,16 +21,16 @@
             <a class="logo" href="index.html"><img src="assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
 
             <nav class="menu">
-                <a href="index.html">Início</a>
-                <a href="jogos.html">Jogos</a>
-                <a href="sobre.html">Sobre mim</a>
+                <a href="index.html"><img src="assets/icones/menu/inicio.svg" alt="">Início</a>
+                <a href="jogos.html"><img src="assets/icones/menu/jogos.svg" alt="">Jogos</a>
+                <a href="sobre.html"><img src="assets/icones/menu/sobre.svg" alt="">Sobre mim</a>
             </nav>
 
             <div class="menu-usuario">
-                <a class="pagina-atual" href="registrar.html">Registrar</a>
-                <a href="perfil.html">Perfil</a>
-                <a href="dashboard/dashboard.html">Dashboard</a>
-                <a onclick="limparSessao()">Sair</a>
+                <a class="pagina-atual" href="registrar.html"><img src="assets/icones/menu/registrar.svg" alt="">Registrar</a>
+                <a href="perfil.html"><img src="assets/icones/menu/perfil.svg" alt="">Perfil</a>
+                <a href="dashboard/dashboard.html"><img src="assets/icones/menu/dashboard.svg" alt="">Dashboard</a>
+                <a onclick="limparSessao()"><img src="assets/icones/menu/sair.svg" alt="">Sair</a>
             </div>
         </div>
     </div>
@@ -46,32 +46,33 @@
                 <div class="opcoes-jogos" id="div_jogos"></div>
             </div>
 
-            <!-- cenário e logo do jogo escolhido -->
-            <div class="banner-jogo" id="div_banner"></div>
-
             <div class="painel">
+                <h2><span class="numero-passo">2</span> Seu progresso em <span class="jogo-escolhido" id="span_jogo"></span></h2>
+                <p class="texto-suave" id="p_situacao"></p>
+
                 <div class="duas-colunas">
-                    <div>
-                        <h2><span class="numero-passo">2</span> Horas e status</h2>
-                        <div class="campo">
-                            <label for="ipt_horas">Total de horas neste jogo</label>
-                            <input type="number" id="ipt_horas" placeholder="Ex.: 25">
-                        </div>
+                    <div class="campo">
+                        <label for="ipt_horas">Total de horas neste jogo</label>
+                        <input type="number" id="ipt_horas" placeholder="Ex.: 25">
+                    </div>
+                    <div class="campo">
                         <label>Como está o jogo?</label>
                         <div class="opcoes" id="div_status"></div>
                     </div>
+                </div>
 
-                    <div>
-                        <h2><span class="numero-passo">3</span> Boss derrotado <span class="texto-suave texto-opcional">(opcional)</span></h2>
-                        <p class="texto-suave">Clique no boss que você venceu. Os que têm ✓ você já registrou.</p>
-                        <div class="opcoes lista-bosses" id="div_bosses"></div>
+                <div class="parte-do-painel">
+                    <h3>Boss derrotado <span class="texto-suave">(opcional)</span></h3>
+                    <p class="texto-suave">Clique no boss que você venceu. Os que têm ✓ você já registrou.</p>
+                    <div class="opcoes" id="div_bosses"></div>
 
-                        <!-- só aparece depois que um boss é escolhido -->
-                        <div id="div_detalhes_boss" style="display: none">
-                            <div class="campo">
-                                <label for="ipt_tentativas">Quantas tentativas até vencer?</label>
-                                <input type="number" id="ipt_tentativas" placeholder="Ex.: 3">
-                            </div>
+                    <!-- só aparece depois que um boss é escolhido -->
+                    <div class="duas-colunas" id="div_detalhes_boss" style="display: none">
+                        <div class="campo">
+                            <label for="ipt_tentativas">Quantas tentativas até vencer?</label>
+                            <input type="number" id="ipt_tentativas" placeholder="Ex.: 3">
+                        </div>
+                        <div class="campo">
                             <label>Quão difícil foi para você?</label>
                             <div class="opcoes" id="div_dificuldade"></div>
                         </div>
@@ -85,8 +86,7 @@
     </div>
 
     <script>
-        // o id é o mesmo da tabela jogo no banco
-        // arquivo é o nome das imagens: capa (jogos/), cenário (cenarios/) e logo (logos-jogos/)
+        // o id é o mesmo da tabela jogo no banco; arquivo é o nome da capa em assets/jogos
         let jogos = [
             { id: 1, nome: "Hollow Knight", arquivo: "hollow-knight" },
             { id: 2, nome: "Hollow Knight: Silksong", arquivo: "silksong" },
@@ -102,7 +102,7 @@
         let opcoesStatus = ["jogando", "zerado", "pausado"];
         let nomesDificuldade = ["Fácil", "Média", "Difícil", "Muito difícil", "Insana"];
 
-        // o que está escolhido (a página já abre com o Hollow Knight; bossEscolhido 0 = nenhum)
+        // o que está escolhido (a página abre com o Hollow Knight; bossEscolhido 0 = nenhum)
         let jogoEscolhido = 1;
         let statusEscolhido = "jogando";
         let bossEscolhido = 0;
@@ -126,7 +126,8 @@
 
                 div_jogos.innerHTML += `
                     <button class="${classe}" onclick="escolherJogo(${jogos[i].id})">
-                        <img src="assets/jogos/${jogos[i].arquivo}.jpg" alt="${jogos[i].nome}">
+                        <img src="assets/jogos/${jogos[i].arquivo}.jpg" alt="">
+                        ${jogos[i].nome}
                     </button>`;
             }
         }
@@ -139,17 +140,16 @@
             buscarBosses();
         }
 
-        // mostra o cenário e a logo do jogo escolhido e as horas que o jogador já salvou nele
-        // também coloca no campo as horas e o status salvos (ou deixa vazio se for a primeira vez)
+        // escreve o nome do jogo escolhido e coloca nos campos as horas e o status já salvos
+        // (se for a primeira vez, os campos ficam vazios)
         function preencherJogo() {
-            let jogo = jogos[0];
             for (let i = 0; i < jogos.length; i++) {
                 if (jogos[i].id == jogoEscolhido) {
-                    jogo = jogos[i];
+                    span_jogo.innerHTML = jogos[i].nome;
                 }
             }
 
-            let textoHoras = "Primeira vez registrando este jogo";
+            p_situacao.innerHTML = "Primeira vez registrando este jogo.";
             ipt_horas.value = "";
             statusEscolhido = "jogando";
 
@@ -157,14 +157,9 @@
                 if (meusJogos[i].id == jogoEscolhido) {
                     ipt_horas.value = meusJogos[i].horas;
                     statusEscolhido = meusJogos[i].status;
-                    textoHoras = `Você já registrou ${meusJogos[i].horas} horas · ${meusJogos[i].status}`;
+                    p_situacao.innerHTML = `Você já registrou ${meusJogos[i].horas} horas · ${meusJogos[i].status}`;
                 }
             }
-
-            div_banner.innerHTML = `
-                <img class="banner-cenario" src="assets/cenarios/${jogo.arquivo}.jpg" alt="">
-                <img class="banner-logo" src="assets/logos-jogos/${jogo.arquivo}.png" alt="${jogo.nome}">
-                <span class="banner-texto">${textoHoras}</span>`;
 
             montarStatus();
         }
@@ -188,7 +183,8 @@
             montarStatus();
         }
 
-        // ----- passo 3: boss e dificuldade
+        // ----- boss e dificuldade
+        // busca no banco os bosses do jogo escolhido
         function buscarBosses() {
             fetch(`/jogos/bosses/${jogoEscolhido}`).then(function (resposta) {
                 if (resposta.ok) {
@@ -214,6 +210,7 @@
             return -1;
         }
 
+        // boss já vencido ganha ✓ e a classe opcao-vencida; o escolhido ganha opcao-escolhida
         function montarBosses() {
             div_bosses.innerHTML = "";
 
@@ -241,7 +238,7 @@
                 div_detalhes_boss.style.display = "none";
             } else {
                 bossEscolhido = idBoss;
-                div_detalhes_boss.style.display = "block";
+                div_detalhes_boss.style.display = "grid";
 
                 let posicao = posicaoMeuBoss(idBoss);
                 if (posicao != -1) {
@@ -341,12 +338,8 @@
                 })
             }).then(function (resposta) {
                 if (resposta.ok) {
-                    if (bossEscolhido == 0) {
-                        p_mensagem.innerHTML = "Jogo salvo!";
-                    } else {
-                        p_mensagem.innerHTML = "Jogo e boss salvos!";
-                    }
-                    // busca de novo para o banner e o ✓ mostrarem o que acabou de ser salvo
+                    p_mensagem.innerHTML = "Progresso salvo!";
+                    // busca de novo para os campos e o ✓ mostrarem o que acabou de ser salvo
                     buscarMeusJogos();
                     buscarMeusBosses();
                 } else if (resposta.status == 400) {

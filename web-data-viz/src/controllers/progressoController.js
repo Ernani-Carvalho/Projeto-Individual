@@ -1,7 +1,28 @@
 var progressoModel = require("../models/progressoModel");
 
+// se o jogador já tem esse jogo, atualiza (UPDATE); se não tem, cria a linha (INSERT)
+function salvarJogo(idUsuario, idJogo, horas, status) {
+    return progressoModel.buscarProgresso(idUsuario, idJogo)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                return progressoModel.atualizarProgresso(idUsuario, idJogo, horas, status);
+            }
+            return progressoModel.inserirProgresso(idUsuario, idJogo, horas, status);
+        });
+}
+
+// mesma ideia para o boss
+function salvarBoss(idUsuario, idBoss, tentativas, dificuldade) {
+    return progressoModel.buscarBossDerrotado(idUsuario, idBoss)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                return progressoModel.atualizarBossDerrotado(idUsuario, idBoss, tentativas, dificuldade);
+            }
+            return progressoModel.inserirBossDerrotado(idUsuario, idBoss, tentativas, dificuldade);
+        });
+}
+
 // salva o jogo e, se idBoss for diferente de 0, salva o boss também
-// em cada parte: se a linha já existe vira UPDATE, se não existe vira INSERT
 function registrar(req, res) {
     var idUsuario = req.body.idUsuarioServer;
     var idJogo = req.body.idJogoServer;
@@ -34,30 +55,11 @@ function registrar(req, res) {
         return;
     }
 
-    // 1º o jogo
-    progressoModel.buscarProgresso(idUsuario, idJogo)
-        .then(function (resultado) {
-            if (resultado.length > 0) {
-                return progressoModel.atualizarProgresso(idUsuario, idJogo, horas, status);
-            } else {
-                return progressoModel.inserirProgresso(idUsuario, idJogo, horas, status);
-            }
-        })
-        // 2º o boss, só se algum foi escolhido
+    // 1º salva o jogo; 2º salva o boss, só se algum foi escolhido
+    salvarJogo(idUsuario, idJogo, horas, status)
         .then(function () {
-            if (idBoss == 0) {
-                return;
-            }
-            return progressoModel.buscarBossDerrotado(idUsuario, idBoss);
-        })
-        .then(function (resultado) {
-            if (idBoss == 0) {
-                return;
-            }
-            if (resultado.length > 0) {
-                return progressoModel.atualizarBossDerrotado(idUsuario, idBoss, tentativas, dificuldade);
-            } else {
-                return progressoModel.inserirBossDerrotado(idUsuario, idBoss, tentativas, dificuldade);
+            if (idBoss != 0) {
+                return salvarBoss(idUsuario, idBoss, tentativas, dificuldade);
             }
         })
         .then(function () {

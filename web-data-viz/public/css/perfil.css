@@ -1,25 +1,4 @@
-/* perfil e registrar (as cores, o cabeçalho e os campos vêm do home.css) */
-
-/* caixa com fundo para cada parte da página */
-.painel {
-    margin-top: 28px;
-    padding: 24px;
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    background-color: var(--fundo-cartao);
-}
-
-.painel h2 {
-    margin: 0 0 16px;
-    color: var(--azul);
-    font-size: 26px;
-}
-
-.duas-colunas {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-}
+/* perfil, registrar e dashboard (cores, cartões, painéis e campos vêm do home.css) */
 
 .mensagem {
     margin-top: 12px;
@@ -74,6 +53,7 @@
     color: var(--preto);
     font-size: 48px;
     font-weight: 800;
+    box-shadow: 0 0 24px rgba(255, 204, 64, 0.35);
 }
 
 .jogo-horas {
@@ -105,7 +85,7 @@
     align-items: center;
     margin-bottom: 8px;
     padding: 10px 14px;
-    border-radius: 6px;
+    border-radius: 8px;
     background-color: var(--fundo-cartao-claro);
 }
 
@@ -115,7 +95,7 @@
     display: inline-block;
     width: 36px;
     height: 36px;
-    margin-right: 8px;
+    flex-shrink: 0;
     border-radius: 50%;
     background-color: var(--amarelo);
     color: var(--preto);
@@ -123,29 +103,30 @@
     line-height: 36px;
 }
 
-/* inline: fica na mesma linha do título (o home.css joga o span do h2 para baixo) */
-.texto-opcional {
-    display: inline;
-    font-size: 18px;
-    text-transform: none;
+/* nome do jogo escolhido, ao lado do título do passo 2 */
+.jogo-escolhido {
+    color: var(--amarelo);
 }
 
-/* capas dos jogos, as 10 numa linha só */
+/* capas dos jogos, as 10 numa linha só, com o nome embaixo */
 .opcoes-jogos {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
 }
 
 .opcao-jogo {
-    padding: 0;
+    padding: 0 0 8px;
     overflow: hidden;
-    border: 3px solid var(--borda);
-    border-radius: 8px;
+    border: 2px solid var(--borda);
+    border-radius: 10px;
     background-color: var(--fundo);
+    color: var(--texto-suave);
+    font-family: var(--fonte-texto);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.2;
     cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.3s, border-color 0.3s;
 }
 
 .opcao-jogo img {
@@ -153,61 +134,18 @@
     width: 100%;
     aspect-ratio: 2 / 3;
     object-fit: cover;
+    margin-bottom: 8px;
 }
 
-/* o jogo escolhido e o que está com o mouse em cima ficam acesos */
-.opcao-jogo:hover,
-.opcao-jogo.opcao-escolhida {
-    opacity: 1;
+/* subtítulo de cada parte dentro do painel (boss derrotado, detalhes) */
+.parte-do-painel {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borda);
 }
 
-/* faixa com o cenário do jogo escolhido e a logo por cima */
-.banner-jogo {
-    position: relative;
-    height: 240px;
-    margin-top: 28px;
-    overflow: hidden;
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    background-color: var(--preto);
-}
-
-.banner-cenario {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.55;
-}
-
-/* position: absolute coloca a logo e o texto em cima do cenário */
-.banner-logo {
-    position: absolute;
-    top: 30px;
-    left: 40px;
-    max-width: 380px;
-    max-height: 150px;
-}
-
-.banner-texto {
-    position: absolute;
-    bottom: 20px;
-    left: 40px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background-color: var(--preto);
-    color: var(--amarelo);
-    font-weight: 700;
-}
-
-/* a lista de bosses tem altura máxima e rola por dentro quando o jogo tem muitos */
-.lista-bosses {
-    max-height: 260px;
-    overflow-y: auto;
-}
-
-.botao-registrar {
-    width: 100%;
-    margin-top: 12px;
+.parte-do-painel h3 {
+    margin: 0 0 4px;
     font-size: 20px;
 }
 
@@ -216,7 +154,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 6px 0 16px;
+    margin: 8px 0 16px;
 }
 
 .opcao {
@@ -231,8 +169,13 @@
     cursor: pointer;
 }
 
-.opcao-jogo:hover,
-.opcao:hover {
+.opcao,
+.opcao-jogo {
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.opcao:hover,
+.opcao-jogo:hover {
     border-color: var(--azul);
 }
 
@@ -241,8 +184,16 @@
     color: var(--amarelo);
 }
 
-/* o que está escolhido fica com a borda azul e um fundo azul escuro */
+/* o que está escolhido fica com a borda azul, fundo azul escuro e brilho */
 .opcao-escolhida {
     border-color: var(--azul);
-    background-color: #173a5c;
+    background-color: var(--azul-escuro);
+    color: var(--texto);
+    box-shadow: var(--brilho-azul);
+}
+
+.botao-registrar {
+    width: 100%;
+    margin-top: 12px;
+    font-size: 20px;
 }

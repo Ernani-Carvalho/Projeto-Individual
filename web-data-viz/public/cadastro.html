@@ -157,8 +157,13 @@
                     setTimeout(function () {
                         window.location = "login.html";
                     }, 2000);
+                } else if (resposta.status == 409) {
+                    // 409 = o email já existe; o texto vem do controller
+                    resposta.text().then(texto => {
+                        div_mensagem_erro.innerHTML = texto;
+                    });
                 } else {
-                    div_mensagem_erro.innerHTML = "Não foi possível criar a conta. Esse email já pode estar cadastrado.";
+                    div_mensagem_erro.innerHTML = "Não foi possível criar a conta. Tente de novo.";
                 }
             }).catch(function (erro) {
                 console.log(erro);

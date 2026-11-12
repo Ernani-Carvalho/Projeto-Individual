@@ -22,7 +22,17 @@ function cadastrar(nome, email, senha) {
     return database.executar(instrucaoSql);
 }
 
+// usado no cadastro, para não deixar dois jogadores com o mesmo email
+function buscarPorEmail(email) {
+    var instrucaoSql = `
+        SELECT id FROM usuario WHERE email = '${email}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    buscarPorEmail
 };

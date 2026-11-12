@@ -56,11 +56,18 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else {
 
-        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha)
+        // primeiro confere se o email já existe; se não existir, faz o cadastro
+        usuarioModel.buscarPorEmail(email)
             .then(
                 function (resultado) {
-                    res.json(resultado);
+                    if (resultado.length > 0) {
+                        res.status(409).send("Este email já está cadastrado.");
+                    } else {
+                        return usuarioModel.cadastrar(nome, email, senha)
+                            .then(function (resultadoCadastro) {
+                                res.json(resultadoCadastro);
+                            });
+                    }
                 }
             ).catch(
                 function (erro) {

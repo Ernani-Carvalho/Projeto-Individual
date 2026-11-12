@@ -124,7 +124,7 @@ Usando o login como exemplo:
 
 As páginas logadas (`perfil.html` e `registrar.html`) carregam o `js/sessao.js` e chamam `validarSessao()` ao abrir, que coloca o nome do jogador no elemento `b_usuario` (no perfil, dentro da caixa do topo). O "Sair" chama `limparSessao()`.
 
-Nas outras páginas, o `<div class="menu-usuario" id="div_menu_usuario">` começa com "Entrar" e "Criar conta". A função `montarMenu()`, escrita no script de cada página, troca esses links por Registrar, Perfil, Dashboard e Sair quando existe `sessionStorage.ID_USUARIO`. O Dashboard ainda é só texto, sem link.
+Nas outras páginas, o `<div class="menu-usuario" id="div_menu_usuario">` começa com "Entrar" e "Criar conta". A função `montarMenu()`, escrita no script de cada página, troca esses links por Registrar, Perfil, Dashboard e Sair quando existe `sessionStorage.ID_USUARIO`.
 
 Tudo que for novo segue o mesmo caminho: página, `fetch`, rota, controller, model e banco.
 
@@ -135,13 +135,14 @@ Tudo que for novo segue o mesmo caminho: página, `fetch`, rota, controller, mod
 | `usuarios.js` | `POST /usuarios/cadastrar`, `POST /usuarios/autenticar` | Pronto |
 | `jogos.js` | `GET /jogos/bosses/:idJogo` (bosses do jogo, para o registrar) | Pronto |
 | `progressos.js` | `POST /progressos/registrar` (salva horas e status do jogo e, se `idBossServer` não for 0, o boss junto), `GET /progressos/jogos/:idUsuario`, `GET /progressos/bosses/:idUsuario` (as duas devolvem o `id` do jogo e do boss) | Pronto |
-| `indicadores.js` | `GET /indicadores/gerais` (números gerais da home: jogadores, horas, bosses derrotados e jogos) | Pronto. Os da dashboard faltam (confirmar comigo) |
+| `indicadores.js` | `GET /indicadores/gerais` (números gerais da home: jogadores, horas, bosses derrotados e jogos) | Pronto |
+| `dashboards.js` | `GET /dashboards/totais/:idUsuario`, `/horas/:idUsuario`, `/conclusao/:idUsuario`, `/dificuldades/:idUsuario` e `/boss-mais-dificil/:idUsuario` (um `SELECT` em uma view cada) | Pronto |
 
 Arquivos seguem o padrão: rota no plural (`jogos.js`), controller e model no singular (`jogoController.js`, `jogoModel.js`). Rota nova entra no `app.js` em dois lugares: o `require` e o `app.use`. Busca usa `router.get` e gravação usa `router.post`. Antes de criar, olhe os arquivos de usuário e de jogo.
 
 ### Dados da dashboard
 
-A página faz `fetch` para uma rota com o `ID_USUARIO`. O model faz as contas no `SELECT` (`SUM`, `COUNT`, `AVG` e `GROUP BY`). A página percorre o JSON com `for`, faz o que faltar (como porcentagens) e monta os gráficos com Chart.js. Os selects de cada parte já estão no fim do `script-tabelas.sql`.
+A página faz `fetch` para uma rota com o `ID_USUARIO`. O model faz as contas no `SELECT` (`SUM`, `COUNT`, `AVG` e `GROUP BY`). A página percorre o JSON com `for`, faz o que faltar (como porcentagens) e monta os gráficos com Chart.js. Os selects usam as views `vw_progresso`, `vw_boss_derrotado` e `vw_conclusao`, criadas no fim do `script-tabelas.sql`. Cada parte da dashboard tem a sua rota (sem `Promise.all`). A comparação com a média usa a rota `/indicadores/gerais` da home.
 
 ## Banco de dados
 
@@ -174,7 +175,7 @@ Contas do site:
 - conclusão de cada jogo: bosses derrotados ÷ total de bosses × 100, com `.toFixed()`;
 - comparação com a média: (valor do jogador − média de todos) ÷ média × 100.
 
-Indicadores da dashboard: total de horas, jogos cadastrados, bosses derrotados, jogo mais jogado, boss mais difícil, conclusão de cada jogo, jogos por status e comparação com a média.
+Indicadores da dashboard: total de horas, jogos registrados, bosses derrotados, comparação com a média de horas, jogo mais jogado e boss mais difícil. Gráficos: horas por jogo (`bar`), conclusão de cada jogo (`bar`, de 0 a 100%) e bosses por dificuldade (`doughnut`).
 
 Se mudar uma tabela, o DER em `docs/` também precisa ser refeito.
 
@@ -192,7 +193,7 @@ Todas em `web-data-viz/public/`.
 | Sobre mim | `sobre.html` | `sobre.css` | Estrutura pronta, faltam os meus textos (`[PREENCHER]`) e a foto |
 | Perfil | `perfil.html` | `perfil.css` | Pronta (o login vem para cá) |
 | Registrar | `registrar.html` (no lugar do antigo `simulador.html`) | `perfil.css` | Pronta |
-| Dashboard | `dashboard/dashboard.html` | `dashboard.css` | Falta (hoje é o arquivo do AquaTech) |
+| Dashboard | `dashboard/dashboard.html` | `perfil.css` + `dashboard.css` | Pronta |
 
 O `home.css` também tem a parte geral (cores, cabeçalho, botões), então todas as páginas carregam ele. O `estilo.css` é do AquaTech e não é usado nas minhas páginas.
 
@@ -216,16 +217,16 @@ Ainda sobre o que falta fazer, o protótipo em `testes/prototipo/` mostra a idei
 - ordenar: `ORDER BY` no banco (`.sort()` é proibido);
 - maior valor: `for` com `if`;
 - tabelas: `div`s com Grid ou Flexbox (`<table>` é proibido);
-- gráficos: Chart.js no formato da web-data-viz, `bar` para horas e `doughnut` para conclusão e status.
+- gráficos: Chart.js no formato da web-data-viz (`labels`, `dados` com `datasets`, `config` e `new Chart(canvas, config)`): `bar` para horas e conclusão e `doughnut` para dificuldade.
 
 Se algo não der para fazer com o que eu sei, fale claramente e sugira o mais parecido.
 
 ### Ordem de construção
 
 1. Home, login e cadastro, catálogo e páginas dos jogos (feito).
-2. Sobre mim.
+2. Sobre mim (estrutura feita, faltam os textos).
 3. Registrar progresso e perfil (feito).
-4. Dashboard com Chart.js e os indicadores.
+4. Dashboard com Chart.js e os indicadores (feito).
 5. Apresentação.
 
 ### Visual

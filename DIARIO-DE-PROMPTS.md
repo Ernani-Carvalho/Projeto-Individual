@@ -64,7 +64,7 @@ Onde eu anoto cada vez que usei IA no projeto.
   Crie uma rota por vez e espere eu confirmar que entendi antes de passar para a próxima.
   Em cada rota, explique o caminho completo que ela percorre no projeto e o papel de cada arquivo envolvido.
   Siga o mesmo padrão e a mesma estrutura que a web-data-viz já usa.
-- Ela fez: [PREENCHER]
+- Ela fez:
 
 ## 11/11/2026 - lacunas e inconsistências do projeto
 
@@ -75,4 +75,4 @@ Onde eu anoto cada vez que usei IA no projeto.
   Onde está: o arquivo e o trecho, ou a parte da ideia.
   Qual é o problema: a lacuna ou a inconsistência.
   Separe a lista em duas partes: Ideia e Código.
-- Ela fez: [PREENCHER]
+- Ela fez:

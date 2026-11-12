@@ -349,6 +349,11 @@
                     // busca de novo para o banner e o ✓ mostrarem o que acabou de ser salvo
                     buscarMeusJogos();
                     buscarMeusBosses();
+                } else if (resposta.status == 400) {
+                    // 400 = algum dado errado; o texto vem do controller
+                    resposta.text().then(texto => {
+                        p_mensagem.innerHTML = texto;
+                    });
                 } else {
                     p_mensagem.innerHTML = "Não foi possível salvar.";
                 }

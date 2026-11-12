@@ -189,7 +189,7 @@ Todas em `web-data-viz/public/`.
 | Jogos | `jogos/hollow-knight.html`, `jogos/hades.html` e as outras (uma por jogo) | `jogos.css` | Prontas |
 | Login | `login.html` | `login.css` | Pronta |
 | Cadastro | `cadastro.html` | `login.css` | Pronta |
-| Sobre mim | `sobre.html` | `sobre.css` | Falta (textos meus, `[PREENCHER]`) |
+| Sobre mim | `sobre.html` | `sobre.css` | Estrutura pronta, faltam os meus textos (`[PREENCHER]`) e a foto |
 | Perfil | `perfil.html` | `perfil.css` | Pronta (o login vem para cá) |
 | Registrar | `registrar.html` (no lugar do antigo `simulador.html`) | `perfil.css` | Pronta |
 | Dashboard | `dashboard/dashboard.html` | `dashboard.css` | Falta (hoje é o arquivo do AquaTech) |

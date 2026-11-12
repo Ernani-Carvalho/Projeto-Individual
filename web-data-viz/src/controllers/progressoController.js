@@ -16,6 +16,24 @@ function registrar(req, res) {
         return;
     }
 
+    // as mesmas regras do CHECK do banco, conferidas antes de chegar nele
+    if (horas < 0) {
+        res.status(400).send("As horas precisam ser 0 ou mais.");
+        return;
+    }
+    if (status != "jogando" && status != "zerado" && status != "pausado") {
+        res.status(400).send("O status precisa ser jogando, zerado ou pausado.");
+        return;
+    }
+    if (idBoss != 0 && tentativas < 1) {
+        res.status(400).send("As tentativas precisam ser 1 ou mais.");
+        return;
+    }
+    if (idBoss != 0 && (dificuldade < 1 || dificuldade > 5)) {
+        res.status(400).send("A dificuldade precisa ser de 1 a 5.");
+        return;
+    }
+
     // 1º o jogo
     progressoModel.buscarProgresso(idUsuario, idJogo)
         .then(function (resultado) {

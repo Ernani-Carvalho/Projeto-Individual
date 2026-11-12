@@ -39,58 +39,13 @@
             <h1 class="titulo-secao">Jogos</h1>
             <p class="subtitulo">Escolha um jogo para conhecer a filosofia, quem criou e os bosses.</p>
 
-            <div class="lista-jogos">
-                <a class="cartao-jogo" href="jogos/hollow-knight.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/hollow-knight.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/hollow-knight.jpg" alt="Capa de Hollow Knight">
-                    <h3>Hollow Knight</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/silksong.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/silksong.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/silksong.jpg" alt="Capa de Hollow Knight: Silksong">
-                    <h3>Hollow Knight: Silksong</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/hades.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/hades.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/hades.jpg" alt="Capa de Hades">
-                    <h3>Hades</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/cuphead.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/cuphead.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/cuphead.jpg" alt="Capa de Cuphead">
-                    <h3>Cuphead</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/celeste.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/celeste.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/celeste.jpg" alt="Capa de Celeste">
-                    <h3>Celeste</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/dead-cells.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/dead-cells.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/dead-cells.jpg" alt="Capa de Dead Cells">
-                    <h3>Dead Cells</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/undertale.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/undertale.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/undertale.jpg" alt="Capa de Undertale">
-                    <h3>Undertale</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/blasphemous.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/blasphemous.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/blasphemous.jpg" alt="Capa de Blasphemous">
-                    <h3>Blasphemous</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/ori.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/ori.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/ori.jpg" alt="Capa de Ori and the Blind Forest">
-                    <h3>Ori and the Blind Forest</h3>
-                </a>
-                <a class="cartao-jogo" href="jogos/nine-sols.html">
-                    <img class="cenario-do-jogo" src="assets/cenarios/nine-sols.jpg" alt="">
-                    <img class="capa-do-jogo" src="assets/jogos/nine-sols.jpg" alt="Capa de Nine Sols">
-                    <h3>Nine Sols</h3>
-                </a>
+            <div class="campo busca">
+                <label for="ipt_busca">Buscar jogo</label>
+                <input type="text" id="ipt_busca" placeholder="Digite o nome do jogo" oninput="mostrarJogos()">
             </div>
+
+            <div class="lista-jogos" id="div_lista_jogos"></div>
+            <p class="texto-suave" id="p_sem_resultado"></p>
         </div>
     </div>
 
@@ -107,6 +62,46 @@
             }
         }
 
+        // arquivo é o nome da página (jogos/), da capa e do cenário
+        let jogos = [
+            { nome: "Hollow Knight", arquivo: "hollow-knight" },
+            { nome: "Hollow Knight: Silksong", arquivo: "silksong" },
+            { nome: "Hades", arquivo: "hades" },
+            { nome: "Cuphead", arquivo: "cuphead" },
+            { nome: "Celeste", arquivo: "celeste" },
+            { nome: "Dead Cells", arquivo: "dead-cells" },
+            { nome: "Undertale", arquivo: "undertale" },
+            { nome: "Blasphemous", arquivo: "blasphemous" },
+            { nome: "Ori and the Blind Forest", arquivo: "ori" },
+            { nome: "Nine Sols", arquivo: "nine-sols" }
+        ];
+
+        // monta os cartões; com algo digitado na busca, só entram os jogos que têm esse texto no nome
+        function mostrarJogos() {
+            let busca = ipt_busca.value.trim().toLowerCase();
+            let encontrados = 0;
+
+            div_lista_jogos.innerHTML = "";
+            p_sem_resultado.innerHTML = "";
+
+            for (let i = 0; i < jogos.length; i++) {
+                if (jogos[i].nome.toLowerCase().includes(busca)) {
+                    encontrados++;
+                    div_lista_jogos.innerHTML += `
+                        <a class="cartao-jogo" href="jogos/${jogos[i].arquivo}.html">
+                            <img class="cenario-do-jogo" src="assets/cenarios/${jogos[i].arquivo}.jpg" alt="">
+                            <img class="capa-do-jogo" src="assets/jogos/${jogos[i].arquivo}.jpg" alt="Capa de ${jogos[i].nome}">
+                            <h3>${jogos[i].nome}</h3>
+                        </a>`;
+                }
+            }
+
+            if (encontrados == 0) {
+                p_sem_resultado.innerHTML = "Nenhum jogo encontrado com esse nome.";
+            }
+        }
+
+        mostrarJogos();
         montarMenu();
     </script>
 

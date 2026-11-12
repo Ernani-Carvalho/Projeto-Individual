@@ -1,5 +1,11 @@
 /* catálogo e página do jogo (as cores, o cabeçalho e os títulos vêm do home.css) */
 
+/* campo de busca do catálogo */
+.busca {
+    max-width: 420px;
+    margin-top: 24px;
+}
+
 /* catálogo: 5 jogos por linha */
 .lista-jogos {
     display: grid;

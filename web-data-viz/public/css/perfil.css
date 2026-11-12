@@ -123,23 +123,29 @@
     line-height: 36px;
 }
 
-/* capas dos jogos, 5 por linha */
+/* inline: fica na mesma linha do título (o home.css joga o span do h2 para baixo) */
+.texto-opcional {
+    display: inline;
+    font-size: 18px;
+    text-transform: none;
+}
+
+/* capas dos jogos, as 10 numa linha só */
 .opcoes-jogos {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
 }
 
 .opcao-jogo {
-    padding: 0 0 10px;
+    padding: 0;
     overflow: hidden;
-    border: 2px solid var(--borda);
+    border: 3px solid var(--borda);
     border-radius: 8px;
     background-color: var(--fundo);
-    color: var(--texto);
-    font-family: var(--fonte-texto);
-    font-weight: 700;
     cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s, border-color 0.3s;
 }
 
 .opcao-jogo img {
@@ -147,7 +153,62 @@
     width: 100%;
     aspect-ratio: 2 / 3;
     object-fit: cover;
-    margin-bottom: 8px;
+}
+
+/* o jogo escolhido e o que está com o mouse em cima ficam acesos */
+.opcao-jogo:hover,
+.opcao-jogo.opcao-escolhida {
+    opacity: 1;
+}
+
+/* faixa com o cenário do jogo escolhido e a logo por cima */
+.banner-jogo {
+    position: relative;
+    height: 240px;
+    margin-top: 28px;
+    overflow: hidden;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background-color: var(--preto);
+}
+
+.banner-cenario {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+}
+
+/* position: absolute coloca a logo e o texto em cima do cenário */
+.banner-logo {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    max-width: 380px;
+    max-height: 150px;
+}
+
+.banner-texto {
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background-color: var(--preto);
+    color: var(--amarelo);
+    font-weight: 700;
+}
+
+/* a lista de bosses tem altura máxima e rola por dentro quando o jogo tem muitos */
+.lista-bosses {
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.botao-registrar {
+    width: 100%;
+    margin-top: 12px;
+    font-size: 20px;
 }
 
 /* botões de status, boss e dificuldade */
@@ -173,6 +234,11 @@
 .opcao-jogo:hover,
 .opcao:hover {
     border-color: var(--azul);
+}
+
+/* boss que o jogador já venceu: texto amarelo, junto com o ✓ */
+.opcao-vencida {
+    color: var(--amarelo);
 }
 
 /* o que está escolhido fica com a borda azul e um fundo azul escuro */

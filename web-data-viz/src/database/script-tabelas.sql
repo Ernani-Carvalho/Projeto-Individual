@@ -268,56 +268,39 @@ INSERT INTO boss (nome, fk_jogo) VALUES
 ('Cixing', 10),
 ('Tianshou', 10);
 
--- selects da dashboard
--- o 1 é o id do jogador, no model vira ${idUsuario}
+-- views da dashboard
+-- uma view é um SELECT guardado com nome: depois dá para fazer SELECT nela como se fosse uma tabela
+-- assim os selects da dashboard ficam curtos, sem JOIN
 
--- jogo mais jogado
-SELECT jogo.nome, jogo.imagem, progresso.horas
-FROM progresso
-JOIN jogo ON progresso.fk_jogo = jogo.id
-WHERE progresso.fk_usuario = 1
-ORDER BY progresso.horas DESC
-LIMIT 1;
-
--- total de horas, de jogos e de zerados
+-- jogos de cada jogador, com o nome e a imagem do jogo
+CREATE VIEW vw_progresso AS
 SELECT
-	IFNULL(SUM(horas), 0) AS total_horas,
-	COUNT(id) AS total_jogos,
-	IFNULL(SUM(CASE WHEN status = 'zerado' THEN 1 ELSE 0 END), 0) AS jogos_zerados
+	progresso.fk_usuario,
+	jogo.nome AS jogo,
+	jogo.imagem,
+	progresso.horas,
+	progresso.status
 FROM progresso
-WHERE fk_usuario = 1;
+JOIN jogo ON progresso.fk_jogo = jogo.id;
 
--- bosses derrotados e tentativas
+-- bosses que cada jogador derrotou, com o nome do boss e do jogo
+CREATE VIEW vw_boss_derrotado AS
 SELECT
-	COUNT(id) AS total_bosses,
-	IFNULL(SUM(tentativas), 0) AS total_tentativas
-FROM boss_derrotado
-WHERE fk_usuario = 1;
-
--- horas por jogo
-SELECT jogo.nome, progresso.horas
-FROM progresso
-JOIN jogo ON progresso.fk_jogo = jogo.id
-WHERE progresso.fk_usuario = 1
-ORDER BY progresso.horas DESC;
-
--- boss mais difícil: maior dificuldade, no empate mais tentativas
-SELECT
+	boss_derrotado.fk_usuario,
 	boss.nome AS boss,
 	jogo.nome AS jogo,
-	boss_derrotado.dificuldade,
-	boss_derrotado.tentativas
+	boss_derrotado.tentativas,
+	boss_derrotado.dificuldade
 FROM boss_derrotado
 JOIN boss ON boss_derrotado.fk_boss = boss.id
-JOIN jogo ON boss.fk_jogo = jogo.id
-WHERE boss_derrotado.fk_usuario = 1
-ORDER BY boss_derrotado.dificuldade DESC, boss_derrotado.tentativas DESC
-LIMIT 1;
+JOIN jogo ON boss.fk_jogo = jogo.id;
 
--- conclusão de cada jogo (a porcentagem é feita na página)
+-- para cada jogo do jogador: total de bosses do jogo e quantos ele já derrotou
 -- left join para contar também os bosses não derrotados
+CREATE VIEW vw_conclusao AS
 SELECT
-	jogo.nome,
+	progresso.fk_usuario,
+	jogo.nome AS jogo,
 	COUNT(boss.id) AS total_bosses,
 	COUNT(boss_derrotado.id) AS bosses_derrotados
 FROM progresso
@@ -325,24 +308,58 @@ JOIN jogo ON progresso.fk_jogo = jogo.id
 JOIN boss ON boss.fk_jogo = jogo.id
 LEFT JOIN boss_derrotado ON boss_derrotado.fk_boss = boss.id
 	AND boss_derrotado.fk_usuario = progresso.fk_usuario
-WHERE progresso.fk_usuario = 1
-GROUP BY jogo.id, jogo.nome
-ORDER BY jogo.nome;
+GROUP BY progresso.fk_usuario, jogo.id, jogo.nome;
 
--- jogos por status
-SELECT status, COUNT(id) AS quantidade
-FROM progresso
+-- selects da dashboard, usando as views
+-- o 1 é o id do jogador, no model vira ${idUsuario}
+
+-- totais do jogador: horas e jogos
+SELECT IFNULL(SUM(horas), 0) AS total_horas, COUNT(jogo) AS total_jogos
+FROM vw_progresso
+WHERE fk_usuario = 1;
+
+-- totais do jogador: bosses derrotados
+SELECT COUNT(boss) AS total_bosses
+FROM vw_boss_derrotado
+WHERE fk_usuario = 1;
+
+-- jogo mais jogado
+SELECT jogo, imagem, horas
+FROM vw_progresso
 WHERE fk_usuario = 1
-GROUP BY status;
+ORDER BY horas DESC
+LIMIT 1;
 
--- totais de todos os jogadores, para comparar com a média
-SELECT COUNT(id) AS total_jogadores
-FROM usuario;
+-- boss mais difícil: maior dificuldade, no empate mais tentativas
+SELECT boss, jogo, dificuldade, tentativas
+FROM vw_boss_derrotado
+WHERE fk_usuario = 1
+ORDER BY dificuldade DESC, tentativas DESC
+LIMIT 1;
 
+-- gráfico de horas por jogo
+SELECT jogo, horas
+FROM vw_progresso
+WHERE fk_usuario = 1
+ORDER BY horas DESC;
+
+-- gráfico de conclusão de cada jogo (a porcentagem é feita na página)
+SELECT jogo, total_bosses, bosses_derrotados
+FROM vw_conclusao
+WHERE fk_usuario = 1
+ORDER BY jogo;
+
+-- gráfico de bosses por dificuldade
+SELECT dificuldade, COUNT(boss) AS quantidade
+FROM vw_boss_derrotado
+WHERE fk_usuario = 1
+GROUP BY dificuldade
+ORDER BY dificuldade;
+
+-- comparação com a média: horas de todos os jogadores e quantos jogadores existem
+-- média = horas de todos ÷ jogadores (a conta é feita na página)
 SELECT IFNULL(SUM(horas), 0) AS horas_de_todos
 FROM progresso;
 
-SELECT
-	COUNT(id) AS bosses_de_todos,
-	IFNULL(SUM(tentativas), 0) AS tentativas_de_todos
-FROM boss_derrotado;
+SELECT COUNT(id) AS total_jogadores
+FROM usuario;

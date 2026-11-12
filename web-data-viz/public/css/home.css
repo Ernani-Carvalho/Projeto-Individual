@@ -1,4 +1,4 @@
-/* cores e fontes */
+/* cores, sombra e arredondamento usados no site todo */
 :root {
     --preto: #0a0f1d;
     --fundo: #0d1526;
@@ -8,7 +8,11 @@
     --texto: #eef2f8;
     --texto-suave: #9aa8c4;
     --azul: #4db6ff;
+    --azul-escuro: #173a5c;
     --amarelo: #ffcc40;
+    --sombra: 0 8px 24px rgba(0, 0, 0, 0.35);
+    --brilho-azul: 0 0 0 1px #4db6ff, 0 8px 28px rgba(77, 182, 255, 0.25);
+    --raio: 12px;
     --fonte-texto: "Alegreya Sans", "Segoe UI", sans-serif;
 }
 
@@ -86,11 +90,14 @@ a {
     z-index: 10;
     background-color: var(--preto);
     border-bottom: 1px solid var(--borda);
+    box-shadow: var(--sombra);
 }
 
 .cabecalho .coluna-central,
 .menu,
-.menu-usuario {
+.menu-usuario,
+.menu a,
+.menu-usuario a {
     display: flex;
     align-items: center;
 }
@@ -104,14 +111,15 @@ a {
     height: 50px;
 }
 
-/* o menu ocupa o espaço que sobra e empurra "Entrar" e "Criar conta" para a direita */
+/* o menu ocupa o espaço que sobra e empurra os links da conta para a direita */
 .menu {
     flex: 1;
 }
 
-/* a borda invisível existe para o texto não pular quando ela fica azul */
-.cabecalho nav a,
+/* cada link tem um ícone e o texto; a borda invisível existe para o texto não pular quando ela fica azul */
+.menu a,
 .menu-usuario a {
+    gap: 8px;
     padding: 22px 12px;
     border-bottom: 3px solid transparent;
     color: var(--texto-suave);
@@ -120,9 +128,16 @@ a {
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
+    transition: color 0.3s, border-color 0.3s;
 }
 
-.cabecalho nav a:hover,
+.menu img,
+.menu-usuario img {
+    width: 18px;
+    height: 18px;
+}
+
+.menu a:hover,
 .menu-usuario a:hover,
 .cabecalho .pagina-atual {
     color: var(--texto);
@@ -134,7 +149,7 @@ a {
     display: inline-block;
     padding: 12px 26px;
     border: 2px solid var(--amarelo);
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: var(--amarelo);
     color: var(--preto);
     font-family: var(--fonte-texto);
@@ -143,6 +158,7 @@ a {
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
 }
 
 .botao-contorno {
@@ -150,6 +166,14 @@ a {
     border-color: var(--texto);
     background-color: transparent;
     color: var(--texto);
+}
+
+/* passando o mouse, o botão fica azul e ganha um brilho */
+.botao:hover {
+    border-color: var(--azul);
+    background-color: var(--azul);
+    color: var(--preto);
+    box-shadow: 0 0 20px rgba(77, 182, 255, 0.4);
 }
 
 /* campos de formulário (login, cadastro e registrar) */
@@ -165,9 +189,9 @@ a {
 
 .campo input {
     width: 100%;
-    padding: 9px 14px;
+    padding: 10px 14px;
     border: 1px solid var(--borda);
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: var(--fundo-cartao-claro);
     color: var(--texto);
     font-family: var(--fonte-texto);
@@ -175,10 +199,16 @@ a {
 }
 
 /* textos */
+/* o rótulo acima dos títulos é uma etiqueta amarela com fundo transparente */
 .texto-acima-do-titulo {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    background-color: rgba(255, 204, 64, 0.12);
     color: var(--amarelo);
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
     text-transform: uppercase;
 }
 
@@ -219,21 +249,78 @@ a {
     background-color: rgba(8, 13, 25, 0.6);
 }
 
-/* todos os cartões têm a mesma aparência */
+/* todos os cartões do site têm a mesma aparência: fundo, borda, cantos arredondados e sombra */
 .caixa-numero,
 .cartao-motivo,
 .cartao-ideia,
 .cartao-evento,
 .curiosidade,
 .cartao-recomendacao,
-.cartao-destaque {
+.cartao-destaque,
+.painel,
+.topo-jogo,
+.texto-jogo,
+.cartao-boss,
+.cartao-jogo,
+.caixa-login {
     padding: 24px;
     border: 1px solid var(--borda);
-    border-radius: 8px;
+    border-radius: var(--raio);
     background-color: var(--fundo-cartao);
+    box-shadow: var(--sombra);
 }
 
-/* grades de 3 e de 4 colunas iguais */
+/* os cartões que são links ganham borda azul e brilho ao passar o mouse */
+.cartao-recomendacao,
+.cartao-jogo {
+    text-decoration: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.cartao-recomendacao:hover,
+.cartao-jogo:hover {
+    border-color: var(--azul);
+    box-shadow: var(--brilho-azul);
+}
+
+/* caixa de número: ícone e título em cima, valor embaixo */
+.titulo-numero {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-suave);
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.titulo-numero img,
+.painel h2 img {
+    width: 24px;
+    height: 24px;
+}
+
+.caixa-numero .numero-grande {
+    margin-top: 6px;
+}
+
+/* caixa com fundo para cada parte das páginas da conta */
+.painel {
+    margin-top: 28px;
+}
+
+.painel h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px;
+    color: var(--azul);
+    font-size: 26px;
+}
+
+/* grades de 2, 3 e 4 colunas iguais */
+.duas-colunas,
+.duas-colunas-destaque,
 .tres-colunas,
 .numeros-gerais,
 .curiosidades {
@@ -243,21 +330,34 @@ a {
     margin-top: 28px;
 }
 
+.duas-colunas,
+.duas-colunas-destaque {
+    grid-template-columns: 1fr 1fr;
+}
+
+.duas-colunas {
+    margin-top: 0;
+}
+
 .numeros-gerais,
 .curiosidades {
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin-top: 64px;
 }
 
-/* topo da página */
+/* topo da página inicial */
 .topo-pagina-inicial {
     padding-top: 100px;
+    animation: aparecer 1s; /* o topo vai aparecendo aos poucos (a animação está no fim do arquivo) */
 }
 
 .topo-pagina-inicial h1 {
     margin-top: 14px;
     font-size: 110px;
     line-height: 0.9;
+}
+
+.topo-pagina-inicial .numeros-gerais {
+    margin-top: 64px;
 }
 
 .texto-do-topo {
@@ -286,6 +386,10 @@ a {
     margin-bottom: 14px;
 }
 
+.curiosidades {
+    margin-top: 64px;
+}
+
 /* linha do tempo: uma linha azul na esquerda e os cartões um embaixo do outro */
 .titulo-linha-do-tempo {
     margin: 64px 0 32px;
@@ -309,19 +413,14 @@ a {
     height: 129px;
     flex-shrink: 0; /* não deixa a capa ser espremida pelo texto */
     object-fit: cover;
+    border-radius: 6px;
 }
 
 /* maiores jogos indie: dois cartões lado a lado, com o cenário em cima e o texto embaixo */
-.duas-colunas-destaque {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 28px;
-}
-
-.cartao-destaque {
+.cartao-destaque,
+.cartao-recomendacao {
     padding: 0;
-    overflow: hidden; /* corta o canto do cenário para acompanhar a borda arredondada */
+    overflow: hidden; /* corta o canto da imagem para acompanhar a borda arredondada */
 }
 
 .cartao-destaque img {
@@ -342,8 +441,6 @@ a {
 /* um indie para cada tipo de jogador: capa na esquerda e texto na direita */
 .cartao-recomendacao {
     display: flex;
-    padding: 0;
-    overflow: hidden; /* corta o canto da capa para acompanhar a borda arredondada */
 }
 
 .capa-jogo {
@@ -386,30 +483,7 @@ a {
     font-size: 56px;
 }
 
-/* efeitos */
-/* transition = a mudança acontece aos poucos (0.3 segundo) em vez de pular */
-.botao,
-.cartao-recomendacao {
-    transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-}
-
-/* o cartão de recomendação vai ser clicável: mãozinha e borda azul ao passar o mouse */
-.cartao-recomendacao {
-    text-decoration: none;
-}
-
-.cartao-recomendacao:hover {
-    border-color: var(--azul);
-}
-
-/* passando o mouse, o botão troca de cor */
-.botao:hover {
-    border-color: var(--azul);
-    background-color: var(--azul);
-    color: var(--preto);
-}
-
-/* @keyframes cria a animação: o topo começa invisível e vai aparecendo */
+/* @keyframes cria a animação: começa invisível e vai aparecendo */
 @keyframes aparecer {
     from {
         opacity: 0;
@@ -417,8 +491,4 @@ a {
     to {
         opacity: 1;
     }
-}
-
-.topo-pagina-inicial {
-    animation: aparecer 1s;
 }

@@ -21,14 +21,14 @@
             <a class="logo" href="index.html"><img src="assets/logo/logo-cabecalho.png" alt="FirstRun"></a>
 
             <nav class="menu">
-                <a href="index.html">Início</a>
-                <a href="jogos.html">Jogos</a>
-                <a href="sobre.html">Sobre mim</a>
+                <a href="index.html"><img src="assets/icones/menu/inicio.svg" alt="">Início</a>
+                <a href="jogos.html"><img src="assets/icones/menu/jogos.svg" alt="">Jogos</a>
+                <a href="sobre.html"><img src="assets/icones/menu/sobre.svg" alt="">Sobre mim</a>
             </nav>
 
             <div class="menu-usuario" id="div_menu_usuario">
-                <a class="pagina-atual" href="login.html">Entrar</a>
-                <a href="cadastro.html">Criar conta</a>
+                <a class="pagina-atual" href="login.html"><img src="assets/icones/menu/entrar.svg" alt="">Entrar</a>
+                <a href="cadastro.html"><img src="assets/icones/menu/criar-conta.svg" alt="">Criar conta</a>
             </div>
         </div>
     </div>
@@ -67,10 +67,10 @@
         function montarMenu() {
             if (sessionStorage.ID_USUARIO != undefined) {
                 div_menu_usuario.innerHTML = `
-                    <a href="registrar.html">Registrar</a>
-                    <a href="perfil.html">Perfil</a>
-                    <a href="dashboard/dashboard.html">Dashboard</a>
-                    <a onclick="limparSessao()">Sair</a>`;
+                    <a href="registrar.html"><img src="assets/icones/menu/registrar.svg" alt="">Registrar</a>
+                    <a href="perfil.html"><img src="assets/icones/menu/perfil.svg" alt="">Perfil</a>
+                    <a href="dashboard/dashboard.html"><img src="assets/icones/menu/dashboard.svg" alt="">Dashboard</a>
+                    <a onclick="limparSessao()"><img src="assets/icones/menu/sair.svg" alt="">Sair</a>`;
             }
         }
 

@@ -5,15 +5,13 @@ body {
     overflow: hidden;
 }
 
-/* a caixa: boas-vindas de um lado e formulário do outro */
+/* a caixa: boas-vindas de um lado e formulário do outro (borda e sombra vêm do home.css) */
 .caixa-login {
     display: flex;
     max-width: 1000px;
     margin: 32px auto 0;
+    padding: 0;
     overflow: hidden; /* corta o que passar dos cantos arredondados */
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    background-color: var(--fundo-cartao);
 }
 
 /* as imagens já vêm com a parte do texto escurecida */

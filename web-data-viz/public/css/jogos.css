@@ -1,9 +1,21 @@
-/* catálogo e página do jogo (as cores, o cabeçalho e os títulos vêm do home.css) */
+/* catálogo e página do jogo (cores, cabeçalho e aparência dos cartões vêm do home.css) */
 
-/* campo de busca do catálogo */
+/* campo de busca do catálogo, com a lupa dentro */
 .busca {
+    position: relative;
     max-width: 420px;
     margin-top: 24px;
+}
+
+.busca img {
+    position: absolute;
+    left: 14px;
+    bottom: 13px;
+    width: 20px;
+}
+
+.busca input {
+    padding-left: 44px; /* espaço para a lupa não ficar em cima do texto */
 }
 
 /* catálogo: 5 jogos por linha */
@@ -16,16 +28,8 @@
 
 .cartao-jogo {
     display: block;
+    padding: 0;
     overflow: hidden;
-    text-decoration: none;
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    background-color: var(--fundo-cartao);
-    transition: border-color 0.3s;
-}
-
-.cartao-jogo:hover {
-    border-color: var(--azul);
 }
 
 .capa-do-jogo {
@@ -66,10 +70,6 @@
 .topo-jogo {
     display: flex;
     gap: 32px;
-    padding: 24px;
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    background-color: var(--fundo-cartao);
 }
 
 .capa-grande {
@@ -77,7 +77,8 @@
     aspect-ratio: 2 / 3;
     flex-shrink: 0; /* não deixa a capa ser espremida pelo texto */
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 8px;
+    box-shadow: var(--sombra);
 }
 
 .lema-jogo {
@@ -92,10 +93,6 @@
 
 .texto-jogo {
     margin-top: 20px;
-    padding: 24px;
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    background-color: var(--fundo-cartao);
 }
 
 .texto-jogo h2 {
@@ -122,9 +119,6 @@
 
 .cartao-boss {
     padding: 16px;
-    border: 1px solid var(--borda);
-    border-radius: 8px;
-    background-color: var(--fundo-cartao);
     text-align: center;
 }
 

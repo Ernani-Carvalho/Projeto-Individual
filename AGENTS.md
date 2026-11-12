@@ -104,6 +104,7 @@ Imagens em `public/assets/`:
 | `login/` | Fundo do painel do login e do cadastro |
 | `icones/` | Ícones de perfil, dashboard e controle |
 | `logo/` | Logo e favicon |
+| `logos-jogos/` | Logo de cada jogo (PNG transparente da Steam), com o mesmo nome de arquivo da capa. Usada no banner do registrar |
 
 O site sempre usa arquivos locais, nunca link de imagem da internet.
 
@@ -133,7 +134,7 @@ Tudo que for novo segue o mesmo caminho: página, `fetch`, rota, controller, mod
 | --- | --- | --- |
 | `usuarios.js` | `POST /usuarios/cadastrar`, `POST /usuarios/autenticar` | Pronto |
 | `jogos.js` | `GET /jogos/medias/:idJogo` (média de tentativas) e `GET /jogos/bosses/:idJogo` (bosses do jogo, para o registrar) | Pronto |
-| `progressos.js` | `POST /progressos/jogo`, `POST /progressos/boss`, `GET /progressos/jogos/:idUsuario`, `GET /progressos/bosses/:idUsuario` | Pronto |
+| `progressos.js` | `POST /progressos/registrar` (salva horas e status do jogo e, se `idBossServer` não for 0, o boss junto), `GET /progressos/jogos/:idUsuario`, `GET /progressos/bosses/:idUsuario` (as duas devolvem o `id` do jogo e do boss) | Pronto |
 | `indicadores.js` | `GET /indicadores/gerais` (números gerais da home: jogadores, horas, bosses derrotados e jogos) | Pronto. Os da dashboard faltam (confirmar comigo) |
 
 Arquivos seguem o padrão: rota no plural (`jogos.js`), controller e model no singular (`jogoController.js`, `jogoModel.js`). Rota nova entra no `app.js` em dois lugares: o `require` e o `app.use`. Busca usa `router.get` e gravação usa `router.post`. Antes de criar, olhe os arquivos de usuário e de jogo.
@@ -211,7 +212,7 @@ Ainda sobre o que falta fazer, o protótipo em `testes/prototipo/` mostra a idei
 
 - trocar conteúdo: botões com `onclick` que trocam o `innerHTML` a partir de um vetor;
 - busca: `oninput`, `for`, `.toLowerCase()` e `.includes()`;
-- escolhas no Registrar (jogo, status, boss e dificuldade): botões com `onclick` que guardam a escolha numa variável e montam os botões de novo marcando o escolhido com a classe `opcao-escolhida` (sem `onchange` e sem `radio`). Já está feito assim no `registrar.html`;
+- escolhas no Registrar (jogo, status, boss e dificuldade): botões com `onclick` que guardam a escolha numa variável e montam os botões de novo marcando o escolhido com a classe `opcao-escolhida` (sem `onchange` e sem `radio`). Já está feito assim no `registrar.html`, que tem um botão só ("Registrar") para o jogo e o boss, preenche os campos com o que o jogador já salvou e marca com ✓ os bosses já vencidos;
 - mostrar e esconder: `style.display`;
 - ordenar: `ORDER BY` no banco (`.sort()` é proibido);
 - maior valor: `for` com `if`;
@@ -271,7 +272,7 @@ JavaScript:
 
 HTML: `nav`, `main`, `div`, `span`, `h1` a `h6`, `p`, `br`, `ul`, `a`, `img`, `input`, `label`, `select`, `option`, `button`, `onclick` e `oninput`. O cabeçalho é uma `div` com a classe `cabecalho`, e as partes da página também são `div`.
 
-SQL: `CREATE DATABASE`, `CREATE TABLE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `ALTER TABLE`, `PRIMARY KEY`, `FOREIGN KEY`, `CONSTRAINT`, `CHECK`, `UNIQUE`, `DEFAULT`, `AUTO_INCREMENT`, `JOIN`, `LEFT JOIN`, `WHERE`, `LIKE`, `ORDER BY`, `LIMIT`, `AS`, `CASE`, `IFNULL`, `CONCAT`, `COUNT`, `SUM`, `AVG`, `ROUND`, `GROUP BY`, `CREATE USER` e `GRANT`.
+SQL: `CREATE DATABASE`, `CREATE TABLE`, `INSERT`, `SELECT`, `UPDATE`, `DELETE`, `ALTER TABLE`, `PRIMARY KEY`, `FOREIGN KEY`, `CONSTRAINT`, `CHECK`, `UNIQUE`, `DEFAULT`, `AUTO_INCREMENT`, `JOIN`, `LEFT JOIN`, `WHERE`, `LIKE`, `ORDER BY`, `LIMIT`, `AS`, `CASE`, `IFNULL`, `CONCAT`, `COUNT`, `SUM`, `AVG`, `ROUND`, `GROUP BY`, `CREATE VIEW`, `CREATE USER` e `GRANT`.
 
 ## O que não pode usar
 

@@ -150,15 +150,15 @@ A página faz `fetch` para uma rota com o `ID_USUARIO`. O model faz as contas no
 | `usuario` | `id`, `nome`, `email` (unique), `senha` |
 | `jogo` | `id`, `nome`, `imagem` |
 | `boss` | `id`, `nome`, `fk_jogo` |
-| `progresso` | `id`, `fk_usuario`, `fk_jogo`, `horas`, `status` |
-| `boss_derrotado` | `id`, `fk_usuario`, `fk_boss`, `tentativas`, `dificuldade` |
+| `progresso` | `fk_usuario`, `fk_jogo` (chave primária composta), `horas`, `status` |
+| `boss_derrotado` | `fk_usuario`, `fk_boss` (chave primária composta), `tentativas`, `dificuldade` |
 
 - `jogo.imagem` é só o nome do arquivo: a capa fica em `assets/jogos/` e o cenário em `assets/cenarios/`.
 - Filosofia, criador, país, ficha e imagens dos bosses não ficam no banco. Eles ficam escritos direto na página de cada jogo, em `public/jogos/`.
 - As tabelas `jogo` e `boss` existem porque `progresso` e `boss_derrotado` dependem delas.
 - O id de cada jogo precisa ser igual no script e no vetor `jogos` do `registrar.html`. Os bosses do registrar vêm do banco, então a ordem deles não depende das páginas.
 - Cada boss aparece uma vez só. Outra forma ou versão mais forte do mesmo boss não entra (por exemplo, Absolute Radiance).
-- `progresso` e `boss_derrotado` têm `UNIQUE` para o jogador ter uma linha só por jogo e por boss. Registrar de novo vira `UPDATE`.
+- `progresso` e `boss_derrotado` são tabelas associativas: não têm `id` próprio, a chave primária é a dupla de chaves estrangeiras. Assim o jogador tem uma linha só por jogo e por boss, e registrar de novo vira `UPDATE`. No DER, as ligações delas são identificadoras (linha cheia); a de `boss` com `jogo` é não identificadora (tracejada), porque o boss tem `id` próprio.
 - `CHECK`: horas maior ou igual a 0, status `jogando`, `zerado` ou `pausado`, tentativas maior ou igual a 1 e dificuldade de 1 a 5.
 
 Relacionamentos:

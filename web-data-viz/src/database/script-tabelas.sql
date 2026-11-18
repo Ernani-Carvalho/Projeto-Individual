@@ -29,33 +29,32 @@ CREATE TABLE boss (
 	CONSTRAINT fk_boss_jogo FOREIGN KEY (fk_jogo) REFERENCES jogo(id)
 );
 
--- horas e status de cada jogador em cada jogo
--- unique: uma linha só por jogador em cada jogo
+-- horas e status de cada jogador em cada jogo (tabela associativa: usuario N:N jogo)
+-- a chave primária é a dupla (fk_usuario, fk_jogo): uma linha só por jogador em cada jogo
 CREATE TABLE progresso (
-	id         INT PRIMARY KEY AUTO_INCREMENT,
 	fk_usuario INT,
 	fk_jogo    INT,
 	horas      INT DEFAULT 0,
 	status     VARCHAR(10) DEFAULT 'jogando',
+	CONSTRAINT pk_progresso PRIMARY KEY (fk_usuario, fk_jogo),
 	CONSTRAINT fk_progresso_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
 	CONSTRAINT fk_progresso_jogo FOREIGN KEY (fk_jogo) REFERENCES jogo(id),
-	CONSTRAINT uq_progresso UNIQUE (fk_usuario, fk_jogo),
 	CONSTRAINT chk_progresso_horas CHECK (horas >= 0),
 	CONSTRAINT chk_progresso_status CHECK (
 		status = 'jogando' OR status = 'zerado' OR status = 'pausado'
 	)
 );
 
--- bosses que cada jogador derrotou
+-- bosses que cada jogador derrotou (tabela associativa: usuario N:N boss)
+-- a chave primária é a dupla (fk_usuario, fk_boss): uma linha só por jogador em cada boss
 CREATE TABLE boss_derrotado (
-	id          INT PRIMARY KEY AUTO_INCREMENT,
 	fk_usuario  INT,
 	fk_boss     INT,
 	tentativas  INT,
 	dificuldade INT,
+	CONSTRAINT pk_boss_derrotado PRIMARY KEY (fk_usuario, fk_boss),
 	CONSTRAINT fk_derrotado_usuario FOREIGN KEY (fk_usuario) REFERENCES usuario(id),
 	CONSTRAINT fk_derrotado_boss FOREIGN KEY (fk_boss) REFERENCES boss(id),
-	CONSTRAINT uq_boss_derrotado UNIQUE (fk_usuario, fk_boss),
 	CONSTRAINT chk_derrotado_tentativas CHECK (tentativas >= 1),
 	CONSTRAINT chk_derrotado_dificuldade CHECK (dificuldade >= 1 AND dificuldade <= 5)
 );
@@ -302,7 +301,7 @@ SELECT
 	progresso.fk_usuario,
 	jogo.nome AS jogo,
 	COUNT(boss.id) AS total_bosses,
-	COUNT(boss_derrotado.id) AS bosses_derrotados
+	COUNT(boss_derrotado.fk_boss) AS bosses_derrotados
 FROM progresso
 JOIN jogo ON progresso.fk_jogo = jogo.id
 JOIN boss ON boss.fk_jogo = jogo.id

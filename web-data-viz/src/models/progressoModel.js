@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function buscarProgresso(idUsuario, idJogo) {
     var instrucaoSql = `
-        SELECT id FROM progresso WHERE fk_usuario = ${idUsuario} AND fk_jogo = ${idJogo};
+        SELECT fk_jogo FROM progresso WHERE fk_usuario = ${idUsuario} AND fk_jogo = ${idJogo};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -26,7 +26,7 @@ function atualizarProgresso(idUsuario, idJogo, horas, status) {
 
 function buscarBossDerrotado(idUsuario, idBoss) {
     var instrucaoSql = `
-        SELECT id FROM boss_derrotado WHERE fk_usuario = ${idUsuario} AND fk_boss = ${idBoss};
+        SELECT fk_boss FROM boss_derrotado WHERE fk_usuario = ${idUsuario} AND fk_boss = ${idBoss};
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

@@ -13,7 +13,7 @@ function somarHoras() {
 }
 
 function contarBossesDerrotados() {
-    var instrucaoSql = `SELECT COUNT(id) AS total FROM boss_derrotado;`;
+    var instrucaoSql = `SELECT COUNT(fk_boss) AS total FROM boss_derrotado;`;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
